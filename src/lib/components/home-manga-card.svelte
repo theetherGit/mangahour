@@ -73,7 +73,7 @@
                         <Button variant="secondary" class="flex items-center gap-x-1 w-full {isFavorite ? 'bg-rose-800 hover:bg-rose-200 hover:text-rose-800 ease-in-out': ''}" on:click={(e) => {
 							addToFavorites(e)
 						}}>
-                            <Heart class="h-5" />
+                            <Heart class="h-4" />
                             {isFavorite ? 'Your' : 'Add to'} Favorites
                         </Button>
                         <Button variant="secondary" class="w-full">
