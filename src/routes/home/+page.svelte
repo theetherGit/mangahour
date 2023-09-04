@@ -6,10 +6,12 @@
     import * as Tabs from "$lib/components/ui/tabs";
     import { Input } from "$lib/components/ui/input";
     import { Button } from "$lib/components/ui/button";
-    import {HomePageMangaViewCard, TopChaptersListViewCard} from "$lib/components";
+    import {HomePageMangaViewCard, TopChaptersListViewCard, TopMangaListViewCard} from "$lib/components";
 
 
     export let data: PageServerData;
+
+    $: newMangaList = data.home.latest;
     if (browser) console.log(data.home)
 </script>
 
@@ -46,7 +48,8 @@
                 </Card.Content>
             </Card.Root>
         </div>
-        <div class="pb-2 relative overflow-y-clip">
+        <div class="pb-2 space-y-4">
+
             <Card.Root>
                 <Card.Header class="text-center font-bold pt-3">
                     Top Chapters
@@ -66,6 +69,26 @@
                         </Tabs.Content>
                         <Tabs.Content value="week">
                             <TopChaptersListViewCard mangaList={data.home.topChaptersWeekly}/>
+                        </Tabs.Content>
+                    </Tabs.Root>
+                </Card.Content>
+            </Card.Root>
+
+            <Card.Root>
+                <Card.Header class="text-center font-bold pt-3">
+                    Top Manga
+                </Card.Header>
+                <Card.Content>
+                    <Tabs.Root value="readCount">
+                        <Tabs.List class="grid w-full grid-cols-2">
+                            <Tabs.Trigger value="readCount">By Reads</Tabs.Trigger>
+                            <Tabs.Trigger value="bookmarks">By Bookmarks</Tabs.Trigger>
+                        </Tabs.List>
+                        <Tabs.Content value="readCount">
+                            <TopMangaListViewCard mangaList={data.home.topMangaByViews}/>
+                        </Tabs.Content>
+                        <Tabs.Content value="bookmarks">
+                            <TopMangaListViewCard typeOfView="bookmarks" mangaList={data.home.topMangaByBookmarks}/>
                         </Tabs.Content>
                     </Tabs.Root>
                 </Card.Content>
