@@ -1,5 +1,6 @@
 <script lang="ts">
     import {onMount} from "svelte";
+    import {slide} from "svelte/transition";
     import * as Card from "$lib/components/ui/card";
     import {Clock3, Heart} from "lucide-svelte";
     import { Badge } from "$lib/components/ui/badge";
@@ -41,7 +42,7 @@
 
 </script>
 
-<div class="group">
+<div class="group" transition:slide={{axis: 'y'}}>
     <Card.Root class="group-hover:scale-105 transition-all duration-300 {mainBorder}">
         <Card.Content class="pt-3 px-2.5">
             <div class="grid grid-cols-3 gap-x-2">
