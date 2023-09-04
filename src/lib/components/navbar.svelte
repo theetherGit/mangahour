@@ -13,7 +13,6 @@
 
 	let path;
 	$: if (browser) {
-		console.log($page.url)
 		path = $page.url.pathname;
 	}
 

@@ -7,7 +7,8 @@
 </script>
 <div class="pt-2 space-y-4">
     {#each mangaList as manga}
-        <Card.Root>
+        <div class="group">
+            <Card.Root class="group-hover:scale-105 transition-all duration-300 ">
             <Card.Content class="pt-2 pb-1.5 px-2.5">
                 <div class="grid grid-cols-3">
                     <div class="col-span-1">
@@ -49,5 +50,6 @@
                 </div>
             </Card.Content>
         </Card.Root>
+        </div>
     {/each}
 </div>

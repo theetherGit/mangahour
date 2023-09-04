@@ -17,7 +17,6 @@
     onMount(async () => {
         haveReadHistory = await db.lastReadMangaChapter.get( manga.id.toString());
         isFavorite = await db.favouriteManga.get(manga.id.toString())
-        console.log(isFavorite)
     });
 
     $: chapterNumbers = newChapters.chapters.map(chapter => parseInt(chapter.chapter_number));

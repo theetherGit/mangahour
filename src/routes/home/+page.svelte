@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Squirrel, Eye } from "lucide-svelte";
-    import {browser} from "$app/environment";
+    import { Squirrel, ArrowDownToLine, Loader, ShieldCheck } from "lucide-svelte";
     import type {PageServerData} from "./$types";
     import * as Card from "$lib/components/ui/card";
     import * as Tabs from "$lib/components/ui/tabs";
@@ -10,14 +9,32 @@
 
 
     export let data: PageServerData;
+    let loadingMoreLatestManga = false;
 
-    $: newMangaList = data.home.latest;
-    if (browser) console.log(data.home)
+    let latestMangaList = data.home.latest;
+    let currentMangaList = latestMangaList.slice(0, 30);
+    let remainingMangaList = latestMangaList.slice(30);
+
+    const loadMoreLatestManga = async () => {
+        loadingMoreLatestManga = true
+        if (latestMangaList.length < 150) {
+            const moreMangaResponse = await fetch('/show-more?page=2')
+            if (moreMangaResponse.ok) {
+                const moreMangaResponseJson = await moreMangaResponse.json()
+                latestMangaList = [...latestMangaList, ...moreMangaResponseJson.data]
+            }
+        }
+        if (remainingMangaList !== 0) {
+            currentMangaList = [...currentMangaList, ...latestMangaList.slice(currentMangaList.length, currentMangaList.length + 30)]
+            remainingMangaList = latestMangaList.slice(currentMangaList.length);
+        }
+        loadingMoreLatestManga = false
+    };
 </script>
 
 <section id="main">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4">
-        <div class="col-span-3 md:col-span-2 space-y-4">
+        <div class="col-span-3 md:col-span-2 space-y-4 pb-4">
             <Input
                     type="search"
                     placeholder="Search Manga..."
@@ -37,9 +54,9 @@
                     </Card.Title>
                 </Card.Header>
                 <Card.Content>
-                    {#if data.home.latest}
+                    {#if currentMangaList}
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            {#each data.home.latest as manga}
+                            {#each currentMangaList as manga}
                                 {@const newChapters = JSON.parse(manga['new_chapters'])}
                                 <HomePageMangaViewCard {manga} {newChapters}/>
                             {/each}
@@ -47,6 +64,16 @@
                     {/if}
                 </Card.Content>
             </Card.Root>
+            <Button class="w-full flex items-center space-x-2" disabled="{currentMangaList.length === latestMangaList.length}" on:click={() => {loadMoreLatestManga()}}>
+                {#if loadingMoreLatestManga}
+                    <Loader class="w-4 mr-2 animate-spin"/>
+                {:else if currentMangaList.length === latestMangaList.length}
+                    <ShieldCheck class="w-4 mr-2 text-red-950"/>
+                {:else}
+                    <ArrowDownToLine class="w-4 mr-2" />
+                {/if}
+                {currentMangaList.length === latestMangaList.length ? 'The End' : 'Load More'}
+            </Button>
         </div>
         <div class="pb-2 space-y-4">
 
