@@ -1,11 +1,12 @@
 <script lang="ts">
-    import { Squirrel } from "lucide-svelte";
+    import { Squirrel, Eye } from "lucide-svelte";
     import {browser} from "$app/environment";
     import type {PageServerData} from "./$types";
     import * as Card from "$lib/components/ui/card";
+    import * as Tabs from "$lib/components/ui/tabs";
     import { Input } from "$lib/components/ui/input";
     import { Button } from "$lib/components/ui/button";
-    import {HomePageMangaViewCard} from "$lib/components";
+    import {HomePageMangaViewCard, TopChaptersListViewCard} from "$lib/components";
 
 
     export let data: PageServerData;
@@ -13,7 +14,7 @@
 </script>
 
 <section id="main">
-    <div class="grid grid-cols-3">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4">
         <div class="col-span-3 md:col-span-2 space-y-4">
             <Input
                     type="search"
@@ -45,8 +46,30 @@
                 </Card.Content>
             </Card.Root>
         </div>
-        <div class="">
-
+        <div class="pb-2 relative overflow-y-clip">
+            <Card.Root>
+                <Card.Header class="text-center font-bold pt-3">
+                    Top Chapters
+                </Card.Header>
+                <Card.Content>
+                    <Tabs.Root value="today">
+                        <Tabs.List class="grid w-full grid-cols-3">
+                            <Tabs.Trigger value="halfDay">6 Hours</Tabs.Trigger>
+                            <Tabs.Trigger value="today">Today</Tabs.Trigger>
+                            <Tabs.Trigger value="week">This week</Tabs.Trigger>
+                        </Tabs.List>
+                        <Tabs.Content value="today">
+                            <TopChaptersListViewCard mangaList={data.home.topChaptersToday}/>
+                        </Tabs.Content>
+                        <Tabs.Content value="halfDay">
+                            <TopChaptersListViewCard mangaList={data.home.topChaptersLastSixHours}/>
+                        </Tabs.Content>
+                        <Tabs.Content value="week">
+                            <TopChaptersListViewCard mangaList={data.home.topChaptersWeekly}/>
+                        </Tabs.Content>
+                    </Tabs.Root>
+                </Card.Content>
+            </Card.Root>
         </div>
     </div>
 
