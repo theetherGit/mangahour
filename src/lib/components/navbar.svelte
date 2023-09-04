@@ -4,15 +4,16 @@
 	import {browser} from "$app/environment";
 	let show = false;
 	let navItems = [
-		{ title: 'Home', link: '/' },
-		{ title: 'All Mangas', link: '/manga' },
-		{ title: 'Hot Mangas', link: '/hot-mangas' },
-		{ title: 'Blog', link: '/blog' },
-		{ title: 'About', link: '/about' }
+		{ title: 'Home', link: '/home', active: '/' },
+		{ title: 'All Mangas', link: '/manga', active: 'manga' },
+		{ title: 'Hot Mangas', link: '/hot-mangas', active: 'hot-mangas' },
+		{ title: 'Blog', link: '/blog', active: 'blog' },
+		{ title: 'About', link: '/about', active: 'about' }
 	];
 
 	let path;
 	$: if (browser) {
+		console.log($page.url)
 		path = $page.url.pathname;
 	}
 
@@ -80,7 +81,7 @@
 								<li>
 										<a
 											href={item.link}
-											class:active={item.link === path}
+											class:active={$page.url.pathname.includes(item.link)}
 											class="block transition hover:text-primary md:px-4"
 										>
 											<span>{item.title}</span>
