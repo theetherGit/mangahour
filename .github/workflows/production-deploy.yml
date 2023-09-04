@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          secrets: |
+            BASE_API
+            BASE_STORAGE_ENDPOINT
+        env:
+          BASE_API: ${{ secrets.BASE_API}}
+          BASE_STORAGE_ENDPOINT: ${{ secrets.BASE_STORAGE_ENDPOINT}}

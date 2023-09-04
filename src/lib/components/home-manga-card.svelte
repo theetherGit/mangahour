@@ -53,7 +53,7 @@
                             <Badge class="bg-green-700/80 text-foreground hover:bg-green-500">New</Badge>
                         </div>
                     {/if}
-                    <img loading="lazy" class="rounded-lg w-full h-full" src="/images?type=covers&id=manga_{manga.id}&slug={manga.cover}" alt="Read {manga.title}"/>
+                    <img loading="lazy" class="rounded-lg w-[122px] h-[173px]" src="/images?type=covers&id=manga_{manga.id}&slug={manga.cover}" alt="Read {manga.title}"/>
                 </div>
                 <div class="col-span-2">
                     <div class="flex items-center gap-x-1 pb-1 border-b">
