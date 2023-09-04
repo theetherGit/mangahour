@@ -51,7 +51,7 @@
                             <Badge class="bg-green-700/80 text-foreground group-hover:bg-green-500">New</Badge>
                         </div>
                     {/if}
-                    <img loading="lazy" class="rounded-lg w-[122px] h-[173px]" src="/images?type=covers&id=manga_{manga.id}&slug={manga.cover}" alt="Read {manga.title}"/>
+                    <img loading="lazy" class="rounded-lg w-[122px] h-[173px]" src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.cover}" alt="Read {manga.title}"/>
                 </div>
                 <div class="col-span-2">
                     <a href="/manga/{manga.id}/{manga.slug}">

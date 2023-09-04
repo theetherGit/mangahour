@@ -12,7 +12,7 @@
             <Card.Content class="pt-2 pb-1.5 px-2.5">
                 <div class="grid grid-cols-3">
                     <div class="col-span-1">
-                        <img class="w-20 bg-cover rounded-lg" src="/images?type=covers&id=manga_{manga.id}&slug={manga.cover}" alt="Read {manga.manga_title}"/>
+                        <img class="w-20 bg-cover rounded-lg" src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.cover}" alt="Read {manga.manga_title}"/>
                     </div>
                     <div class="col-span-2" >
                         <a href="/manga/{manga.id}/{manga.slug}">
