@@ -7,7 +7,7 @@
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
 		{ title: 'Hot Mangas', link: '/hot-mangas', active: 'hot-mangas' },
-		{ title: 'Blog', link: '/blog', active: 'blog' },
+		{ title: 'Favourites', link: '/favourite', active: 'favourite' },
 		{ title: 'About', link: '/about', active: 'about' }
 	];
 

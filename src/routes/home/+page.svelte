@@ -33,7 +33,7 @@
 </script>
 
 <section id="main">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 relative">
         <div class="col-span-3 md:col-span-2 space-y-4 pb-4">
             <Input
                     type="search"
@@ -76,10 +76,9 @@
             </Button>
         </div>
         <div class="pb-2 space-y-4">
-
             <Card.Root>
                 <Card.Header class="text-center font-bold pt-3">
-                    Top Chapters
+                    Popular Manga Chapters
                 </Card.Header>
                 <Card.Content>
                     <Tabs.Root value="today">
@@ -103,7 +102,7 @@
 
             <Card.Root>
                 <Card.Header class="text-center font-bold pt-3">
-                    Top Manga
+                    Popular Manga
                 </Card.Header>
                 <Card.Content>
                     <Tabs.Root value="readCount">

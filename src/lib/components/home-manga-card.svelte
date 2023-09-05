@@ -6,16 +6,17 @@
     import { Badge } from "$lib/components/ui/badge";
     import { formatDistanceToNowStrict } from "date-fns";
     import {Button} from "$lib//components/ui/button";
-    import {db} from "$lib/db";
     import {invalidateAll} from "$app/navigation";
 
     export let manga;
     export let newChapters;
-
+    let db;
     let haveReadHistory;
     let isFavorite: any = false;
 
     onMount(async () => {
+        db = import('$lib/db');
+
         haveReadHistory = await db.lastReadMangaChapter.get( manga.id.toString());
         isFavorite = await db.favouriteManga.get(manga.id.toString())
     });
