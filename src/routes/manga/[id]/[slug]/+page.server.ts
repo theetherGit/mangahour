@@ -7,7 +7,9 @@ export const load: PageServerLoad = async ({ params }) => {
 	const slug = params.slug;
 	if (id && slug) {
 		return {
-			chapters: getMangaChapters(id, slug),
+			streamed: {
+				chapters: getMangaChapters(id, slug),
+			},
 			manga: getManga(id, slug)
 		};
 	} else throw redirect(302, '/home');
