@@ -1,7 +1,7 @@
 <script lang="ts">
-	import NoBgLogo from "$lib/images/noBgLogo.png";
-	import {page} from "$app/stores";
-	import {browser} from "$app/environment";
+	import NoBgLogo from '$lib/images/noBgLogo.png';
+	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
 	let show = false;
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
@@ -15,8 +15,6 @@
 	$: if (browser) {
 		path = $page.url.pathname;
 	}
-
-
 </script>
 
 <svelte:head>
@@ -69,7 +67,7 @@
 						</div>
 					</button>
 				</div>
-					<div
+				<div
 					class="{show
 						? 'block transition delay-75 duration-500 ease-in-out'
 						: 'hidden'} mx-6 mb-16 w-full flex-wrap items-center justify-end space-y-20 rounded-xl bg-accent p-6 shadow-lg md:flex-nowrap lg:m-0 lg:flex lg:w-7/12 lg:space-y-0 lg:bg-transparent lg:p-0 lg:shadow-none"
@@ -78,13 +76,13 @@
 						<ul class="space-y-6 text-lg font-medium tracking-wide lg:flex lg:space-y-0 lg:text-sm">
 							{#each navItems as item}
 								<li>
-										<a
-											href={item.link}
-											class:active={$page.url.pathname.includes(item.link)}
-											class="block transition hover:text-primary md:px-4"
-										>
-											<span>{item.title}</span>
-										</a>
+									<a
+										href={item.link}
+										class:active={$page.url.pathname.includes(item.link)}
+										class="block transition hover:text-primary md:px-4"
+									>
+										<span>{item.title}</span>
+									</a>
 								</li>
 							{/each}
 						</ul>

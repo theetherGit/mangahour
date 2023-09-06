@@ -13,7 +13,7 @@ export class MyMangaDB extends Dexie {
 	constructor() {
 		super('myMangaHistory.db');
 		this.version(1).stores({
-			lastReadMangaChapter: '&id, chapterNumber, chapterSlug, chapterId',
+			lastReadMangaChapter: '&id, mangaSlug, chapterSlug, chapterId',
 			favouriteManga: '&id, name, image, description, slug',
 			mangaChapterReadHistory: '&id, *chapters'
 		});
@@ -23,5 +23,5 @@ export class MyMangaDB extends Dexie {
 export const db = new MyMangaDB();
 
 db.open().catch(function (err) {
-	console.error (err.stack || err);
+	console.error(err.stack || err);
 });

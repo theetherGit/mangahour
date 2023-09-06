@@ -1,8 +1,8 @@
 export interface lastReadMangaChapter {
 	id: number; // Manga Id
-	chapterNumber: string;
-	chapterSlug: string
-	chapterId: string
+	mangaSlug: string;
+	chapterSlug: string;
+	chapterId: string;
 }
 
 export interface favouriteManga {
@@ -19,7 +19,7 @@ export interface mangaChapterReadHistory {
 }
 
 interface mangaChapterReadHistoryChapters {
-	id: string
-	slug: string
-	number: string
+	id: string;
+	slug: string;
+	number: string;
 }

@@ -1,6 +1,6 @@
 <script>
 	import '../app.postcss';
-	import {onNavigate} from "$app/navigation";
+	import { onNavigate } from '$app/navigation';
 	import Navbar from '$lib/components/navbar.svelte';
 
 	onNavigate((navigation) => {
