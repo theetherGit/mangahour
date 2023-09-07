@@ -1,6 +1,5 @@
 <script lang="ts">
     import type {PageServerData} from "./$types"
-    import {browser} from "$app/environment";
     import {Button} from "$lib/components/ui/button";
     import {ChapterDropDown} from "$lib//components"
     import {ArrowLeft, ArrowRight} from "lucide-svelte"
@@ -12,9 +11,7 @@
     $: nextChapter = data.nextChapter;
     $: prevChapter = data.prevChapter;
     $: params = $page.params;
-    if (browser){
-        console.log(data)
-    }
+
 </script>
 
 {#if chapter}

@@ -10,12 +10,10 @@
         const chapterResponse = await fetch(`/chapters?id=${id}&slug=${slug}`);
         if (chapterResponse.ok) {
             const chaptersResponseJson = await chapterResponse.json();
-            console.log(chaptersResponseJson)
             chapters = chaptersResponseJson.chapters
         }
     });
 
-    $: console.log(chapters);
 
     const fruits = [
         { value: "apple", label: "Apple" },

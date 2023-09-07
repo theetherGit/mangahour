@@ -50,9 +50,6 @@
 		isFavorite = await db.favouriteManga.get(currentManga.id.toString());
 		await invalidateAll();
 	};
-	if (browser) {
-		console.log(data);
-	}
 </script>
 
 <section id={currentManga.title} class="pb-5">
