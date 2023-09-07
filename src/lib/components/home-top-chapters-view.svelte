@@ -25,7 +25,7 @@
 								</div>
 							</a>
 							<div class="pt-2">
-								<a href="/manga/{manga.id}/{manga.slug}/{manga.chapter_id}/chapter-{manga.slug}">
+								<a href="/manga/{manga.manga_id}/{manga.manga_slug}/{manga.chapter_id}/chapter-{manga.slug}">
 									<Card.Root>
 										<Card.Content class="px-2.5 py-1">
 											<div class="flex items-center justify-between">

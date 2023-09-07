@@ -240,8 +240,8 @@
 							scrollbar-track-accent
 							">
 							{#each chapters as chapter}
-								{@const variantDecider = alreadyReadChapters?.chapters.includes(chapter.id)}
-								<Button variant="{variantDecider ? 'secondary' : 'default'}">Chapter {chapter.chapter_number}</Button>
+								{@const alreadyRead = alreadyReadChapters?.chapters.includes(chapter.id.toString())}
+								<Button href="/manga/{currentManga.id}/{currentManga.slug}/{chapter.id}/chapter-{chapter.slug}" variant="{alreadyRead ? 'secondary' : 'default'}">Chapter {chapter.chapter_number}</Button>
 							{/each}
 						</div>
 					{:catch error}
