@@ -1,9 +1,11 @@
 <script lang="ts">
+    import * as Card from '$lib/components/ui/card';
     import type {PageServerData} from "./$types"
     import {Button} from "$lib/components/ui/button";
     import {ChapterDropDown} from "$lib//components"
     import {ArrowLeft, ArrowRight} from "lucide-svelte"
     import {page} from "$app/stores";
+    import {browser} from "$app/environment";
 
     export let data: PageServerData;
 
@@ -11,7 +13,11 @@
     $: nextChapter = data.nextChapter;
     $: prevChapter = data.prevChapter;
     $: params = $page.params;
+    $: chapters = [];
 
+    $: if (browser) {
+        console.log(chapters)
+    }
 </script>
 
 {#if chapter}
@@ -21,13 +27,17 @@
             <div class="">
                 <h2 class="text-center pb-2 text-2xl lg:text-3xl font-semibold tracking-tight transition-colors">{chapter.manga_title}</h2>
             </div>
-            <div class="flex items-center justify-between mx-2">
+            <div class="flex items-center justify-between mx-2 gap-x-3">
                 {#if prevChapter!==null}
-                    <Button disabled={prevChapter===null} href="/manga/{params?.id}/{params?.slug}/{prevChapter?.id}/chapter-{prevChapter?.slug}" variant="secondary"><ArrowLeft class="w-4 mr-2"/> Previous</Button>
+                    <Button href="/manga/{params?.id}/{params?.slug}/{prevChapter?.id}/chapter-{prevChapter?.slug}" variant="secondary"><ArrowLeft class="w-4 mr-2"/> Previous</Button>
+                {:else}
+                    <Button variant="secondary"><ArrowLeft class="w-4 mr-2"/> Previous</Button>
                 {/if}
-                <ChapterDropDown id={params.id} slug={params?.slug} currentChapter={chapter.chapter_number} />
+                <ChapterDropDown bind:chapters id={params.id} slug={params?.slug} currentChapter={chapter.chapter_number} />
                 {#if nextChapter!==null}
-                    <Button disabled={nextChapter===null} href="/manga/{params?.id}/{params?.slug}/{nextChapter?.id}/chapter-{nextChapter?.slug}" variant="secondary">Next <ArrowRight class="w-4 ml-2"/></Button>
+                    <Button href="/manga/{params?.id}/{params?.slug}/{nextChapter?.id}/chapter-{nextChapter?.slug}" variant="secondary">Next <ArrowRight class="w-4 ml-2"/></Button>
+                {:else}
+                    <Button disabled={nextChapter===null} variant="secondary">Next <ArrowRight class="w-4 ml-2"/></Button>
                 {/if}
             </div>
         </div>
@@ -37,8 +47,21 @@
             {/each}
         </div>
     </div>
-    <div class="fixed right-0 hidden lg:block">
-        hi
+    <div class="fixed right-10 w-1/5 hidden lg:block">
+        <Card.Root>
+            <Card.Header>
+                <Card.Title class="text-center leading-normal">{chapter.manga_title}</Card.Title>
+                <Card.Description>
+                    <img class="rounded-lg mt-4" loading="lazy" src="/images?type=covers&id=manga_{chapter.manga_id}&slug={chapter.manga_cover}" alt="Read {chapter.manga_title}"/>
+                </Card.Description>
+            </Card.Header>
+            <Card.Content class="grid place-items-center gap-y-4">
+                {#if chapters.length}
+                    <Button variant="secondary" class="w-full flex items-center justify-between">Total Chapters <span>{chapters.length}</span></Button>
+                {/if}
+                <ChapterDropDown id={params.id} slug={params?.slug} currentChapter={chapter.chapter_number} />
+            </Card.Content>
+        </Card.Root>
     </div>
 </div>
 {/if}

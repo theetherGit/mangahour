@@ -5,7 +5,7 @@
     export let id;
     export let slug;
     export let currentChapter;
-    let chapters = [];
+    export let chapters = [];
     onMount(async () => {
         const chapterResponse = await fetch(`/chapters?id=${id}&slug=${slug}`);
         if (chapterResponse.ok) {
@@ -25,7 +25,7 @@
 </script>
 
 <Select.Root>
-    <Select.Trigger class="w-[180px]">
+    <Select.Trigger class="w-full">
         <Select.Value placeholder="Chapter {currentChapter}"/>
     </Select.Trigger>
     {#if chapters.length}
