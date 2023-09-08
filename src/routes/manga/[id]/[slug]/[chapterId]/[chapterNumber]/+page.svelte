@@ -138,6 +138,28 @@
 					/>
 				{/each}
 			</div>
+			<div class="flex items-center justify-between mx-2 gap-x-3 mt-5">
+				{#if prevChapter !== null}
+					<Button
+							href="/manga/{params?.id}/{params?.slug}/{prevChapter?.id}/chapter-{prevChapter?.slug}"
+							variant="secondary"><ArrowLeft class="w-4 mr-2" /> Previous</Button
+					>
+				{:else}
+					<Button disabled={prevChapter === null} variant="outline"
+					><ArrowLeft class="w-4 mr-2" /> Previous</Button
+					>
+				{/if}
+				{#if nextChapter !== null}
+					<Button
+							href="/manga/{params?.id}/{params?.slug}/{nextChapter?.id}/chapter-{nextChapter?.slug}"
+							variant="secondary">Next <ArrowRight class="w-4 ml-2" /></Button
+					>
+				{:else}
+					<Button disabled={nextChapter === null} variant="outline"
+					>Next <ArrowRight class="w-4 ml-2" /></Button
+					>
+				{/if}
+			</div>
 		</div>
 		<div class="fixed right-10 w-1/5 hidden lg:block">
 			<Card.Root>
