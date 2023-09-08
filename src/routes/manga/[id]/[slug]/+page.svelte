@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import * as Alert from "$lib/components/ui/alert";
+	import * as Alert from '$lib/components/ui/alert';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Badge } from '$lib/components/ui/badge';
@@ -13,7 +13,8 @@
 		StepForward,
 		BookOpen,
 		Star,
-		Heart, Terminal
+		Heart,
+		Terminal
 	} from 'lucide-svelte';
 	import type { PageServerData } from './$types';
 	import { browser } from '$app/environment';
@@ -29,12 +30,12 @@
 	onMount(async () => {
 		readHistory = await db.lastReadMangaChapter.get(currentManga.id.toString());
 		isFavorite = await db.favouriteManga.get(currentManga.id.toString());
-		alreadyReadChapters = await db.mangaChapterReadHistory.get(currentManga.id.toString())
+		alreadyReadChapters = await db.mangaChapterReadHistory.get(currentManga.id.toString());
 	});
 
 	const firstChapter = JSON.parse(currentManga.first_chapter);
 
-	const addToFavorites = async (e) => {
+	const addToFavorites = async (e: any) => {
 		e.preventDefault();
 		if (isFavorite) {
 			await db.favouriteManga.delete(currentManga.id.toString());
@@ -221,54 +222,54 @@
 	<div class="grid grid-cols-1 md:grid-cols-3">
 		<Card.Root class="mt-5 col-span-1 md:col-span-2">
 			<Card.Header>
-				<Card.Title class="text-center">
-					Chapter List
-				</Card.Title>
+				<Card.Title class="text-center">Chapter List</Card.Title>
 			</Card.Header>
 			<Card.Content>
-					{#await data.streamed.chapters}
-						<p class="text-center font-bold">
-							Loading....
-						</p>
-					{:then chapters}
-						<Input type="text" placeholder="Search chapter..." class="mb-2"/>
-						<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-h-96 gap-4
+				{#await data.streamed.chapters}
+					<p class="text-center font-bold">Loading....</p>
+				{:then chapters}
+					<Input type="text" placeholder="Search chapter..." class="mb-2" />
+					<div
+						class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-h-96 gap-4
 							overflow-y-scroll px-2 py-4 scrollbar-thin scrollbar-thumb-primary
 							scrollbar-track-accent
-							">
-							{#each chapters as chapter}
-								{@const alreadyRead = alreadyReadChapters?.chapters.includes(chapter.id.toString())}
-								<Button href="/manga/{currentManga.id}/{currentManga.slug}/{chapter.id}/chapter-{chapter.slug}" variant="{alreadyRead ? 'secondary' : 'default'}">Chapter {chapter.chapter_number}</Button>
-							{/each}
-						</div>
-					{:catch error}
-						<Alert.Root>
-							<Terminal class="h-4 w-4" />
-							<Alert.Title>Unable to load chapters.</Alert.Title>
-							<Alert.Description>
-								We are unable to fulfill your request for chapters. Please refresh right now.
-							</Alert.Description>
-						</Alert.Root>
-						Copy
-
-					{/await}
+							"
+					>
+						{#each chapters as chapter}
+							{@const alreadyRead = alreadyReadChapters?.chapters.includes(chapter.id.toString())}
+							<Button
+								href="/manga/{currentManga.id}/{currentManga.slug}/{chapter.id}/chapter-{chapter.slug}"
+								variant={alreadyRead ? 'secondary' : 'default'}
+								>Chapter {chapter.chapter_number}</Button
+							>
+						{/each}
+					</div>
+				{:catch error}
+					<Alert.Root>
+						<Terminal class="h-4 w-4" />
+						<Alert.Title>Unable to load chapters.</Alert.Title>
+						<Alert.Description>
+							We are unable to fulfill your request for chapters. Please refresh right now.
+						</Alert.Description>
+					</Alert.Root>
+					Copy
+				{/await}
 			</Card.Content>
 		</Card.Root>
 	</div>
 
-<!--	<div>-->
-<!--		{#await data.streamed.chapters}-->
-<!--			loading-->
-<!--		{:then value}-->
-<!--			{#each value as chap}-->
-<!--				{chap.slug}<br />-->
-<!--			{/each}-->
-<!--		{:catch error}-->
-<!--			{error.message}-->
-<!--		{/await}-->
-<!--	</div>-->
+	<!--	<div>-->
+	<!--		{#await data.streamed.chapters}-->
+	<!--			loading-->
+	<!--		{:then value}-->
+	<!--			{#each value as chap}-->
+	<!--				{chap.slug}<br />-->
+	<!--			{/each}-->
+	<!--		{:catch error}-->
+	<!--			{error.message}-->
+	<!--		{/await}-->
+	<!--	</div>-->
 </section>
 
 <style>
-
 </style>

@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	if (id && slug) {
 		return {
 			streamed: {
-				chapters: getMangaChapters(id, slug),
+				chapters: getMangaChapters(id, slug)
 			},
 			manga: getManga(id, slug)
 		};
