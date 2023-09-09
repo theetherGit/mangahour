@@ -63,7 +63,7 @@
 {#if chapter}
 	<div class="grid lg:grid-cols-4 py-4 justify-items-center">
 		<div class="lg:col-span-3">
-			<div class="mb-5 space-y-5">
+			<div class="mb-5">
 				{#if chapters.length}
 					<div class="" transition:slide={{ axis: 'y', duration: 500 }}>
 						<Card.Root class="lg:hidden">
@@ -111,15 +111,7 @@
 						</Card.Root>
 					</div>
 				{/if}
-				<div class="w-fit mx-auto">
-					<a href="/manga/{params.id}/{params.slug}">
-						<h2
-							class="hidden text-primary/90 lg:block text-center pb-2 text-xl lg:text-3xl font-semibold tracking-tight transition-colors"
-						>
-							{chapter.manga_title}
-						</h2>
-					</a>
-				</div>
+
 				<div class="flex items-center justify-between mx-2 gap-x-3">
 					{#if prevChapter !== null}
 						<Button
