@@ -33,6 +33,13 @@
 				chapters: [params.chapterId.toString()]
 			});
 		}
+		db.lastReadMangaChapter.put({
+			id: params.id,
+			mangaSlug: params.slug,
+			chapterId: params.chapterId,
+			chapterSlug: params.chapterNumber,
+			chapterNumber: data.chapter.chapter_number.toString()
+		})
 	});
 
 	const addToFavorites = async (e: any) => {

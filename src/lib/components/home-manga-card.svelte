@@ -18,6 +18,7 @@
 	onMount(async () => {
 		haveReadHistory = await db.lastReadMangaChapter.get(manga.id.toString());
 		isFavorite = await db.favouriteManga.get(manga.id.toString());
+		console.log(haveReadHistory)
 	});
 
 	$: chapterNumbers = newChapters.chapters.map((chapter) => parseInt(chapter.chapter_number));
@@ -97,7 +98,7 @@
 								? `/manga/${manga.id}/${manga.slug}/${haveReadHistory.chapterId}/${haveReadHistory.chapterSlug}`
 								: `/manga/${manga.id}/${manga.slug}`}
 						>
-							{haveReadHistory ? 'Continue' : 'Start'} Reading {haveReadHistory
+							{haveReadHistory ? 'Continue' : 'Start Reading'} {haveReadHistory
 								? `Chapter ${haveReadHistory.chapterNumber}`
 								: ''}
 						</Button>

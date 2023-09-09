@@ -3,6 +3,7 @@ export interface lastReadMangaChapter {
 	mangaSlug: string;
 	chapterSlug: string;
 	chapterId: string;
+	chapterNumber: string;
 }
 
 export interface favouriteManga {
