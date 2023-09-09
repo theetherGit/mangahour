@@ -9,7 +9,6 @@
 	import { HomePageMangaViewCard } from '$lib/components';
 
 	export let data: PageServerData;
-	if (browser) console.log(data.home);
 </script>
 
 <section id="main">

@@ -25,11 +25,7 @@
 </script>
 
 <svelte:head>
-	<!-- Config options -->
-	<!-- Config options -->
-	<!-- Config options -->
 	<script>
-		// Forward the necessary functions to the web worker layer
 		partytown = {
 			forward: ['dataLayer.push']
 		};

@@ -5,7 +5,6 @@
 	import { ChapterDropDown } from '$lib//components';
 	import { ArrowLeft, ArrowRight, Heart } from 'lucide-svelte';
 	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
 	import { invalidateAll } from '$app/navigation';
@@ -20,12 +19,20 @@
 	$: chapters = [];
 	let isFavorite: any = null;
 
-	$: if (browser) {
-		console.log(chapters);
-	}
-
 	onMount(async () => {
 		isFavorite = await db.favouriteManga.get(params.id.toString());
+		const chapterReadHistory = await db.mangaChapterReadHistory.get(params.id.toString());
+		if (chapterReadHistory && !chapterReadHistory.chapters.includes(chapter.id.toString())) {
+			db.mangaChapterReadHistory.put({
+				id: params.id.toString(),
+				chapters: [...chapterReadHistory.chapters, params.chapterId.toString()]
+			});
+		} else {
+			db.mangaChapterReadHistory.put({
+				id: params.id.toString(),
+				chapters: [params.chapterId.toString()]
+			});
+		}
 	});
 
 	const addToFavorites = async (e: any) => {

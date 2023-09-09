@@ -70,13 +70,16 @@
 				transition:slide={{ axis: 'y', duration: 300 }}
 				class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-h-96 gap-4
 							overflow-y-scroll px-2 py-4 scrollbar-thin scrollbar-thumb-primary
-							scrollbar-track-accent">
+							scrollbar-track-accent"
+			>
 				{#each chaptersInView as chapter}
 					{@const alreadyRead = alreadyReadChapters?.chapters.includes(chapter.id.toString())}
-					<Button href="/manga/{id}/{slug}/{chapter.id}/chapter-{chapter.slug}"
-                            variant={alreadyRead ? 'secondary' : 'default'}>
-                            Chapter {chapter.chapter_number}
-                    </Button>
+					<Button
+						href="/manga/{id}/{slug}/{chapter.id}/chapter-{chapter.slug}"
+						variant={alreadyRead ? 'secondary' : 'default'}
+					>
+						Chapter {chapter.chapter_number}
+					</Button>
 				{/each}
 			</div>
 		{/if}
