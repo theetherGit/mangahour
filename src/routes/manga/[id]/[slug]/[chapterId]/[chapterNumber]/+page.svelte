@@ -9,6 +9,7 @@
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
 	import { invalidateAll } from '$app/navigation';
+	import { slide, fly } from 'svelte/transition'
 
 	export let data: PageServerData;
 
@@ -49,7 +50,8 @@
 	<div class="grid lg:grid-cols-4 py-4 justify-items-center">
 		<div class="lg:col-span-3">
 			<div class="mb-5 space-y-5">
-				<div class="">
+				{#if chapters.length}
+					<div class="" transition:slide={{axis: 'y', duration: 500}}>
 					<Card.Root class="lg:hidden">
 						<Card.Header class="py-2.5 px-2.5">
 							<div class="grid grid-cols-4">
@@ -93,11 +95,13 @@
 							</div>
 						</Card.Header>
 					</Card.Root>
-					<a
-						href="/manga/{params.id}/{params.slug}"
-						class="hidden text-primary/90 lg:block text-center pb-2 text-xl lg:text-3xl font-semibold tracking-tight transition-colors"
-					>
-						{chapter.manga_title}
+				</div>
+				{/if}
+				<div class="w-fit mx-auto">
+					<a href="/manga/{params.id}/{params.slug}">
+						<h2 class="hidden text-primary/90 lg:block text-center pb-2 text-xl lg:text-3xl font-semibold tracking-tight transition-colors">
+							{chapter.manga_title}
+						</h2>
 					</a>
 				</div>
 				<div class="flex items-center justify-between mx-2 gap-x-3">
@@ -163,9 +167,11 @@
 			</div>
 		</div>
 		<div class="fixed right-10 w-1/5 hidden lg:block">
-			<Card.Root>
+			{#if chapters.length}
+				<div transition:fly={{x: '100%', duration: 300}}>
+					<Card.Root>
 				<Card.Header>
-					<Card.Title class="text-center leading-normal">{chapter.manga_title}</Card.Title>
+					<Card.Title class="text-center leading-normal line-clamp-1">{chapter.manga_title}</Card.Title>
 					<Card.Description>
 						<img
 							class="rounded-lg mt-4"
@@ -202,6 +208,8 @@
 					</Button>
 				</Card.Content>
 			</Card.Root>
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}

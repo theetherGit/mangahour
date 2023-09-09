@@ -14,7 +14,7 @@
 		class="fixed flex items-center space-x-2 px-2 py-2 group
 		transition duration-75 ease-in-out
 		rounded-full shadow-md active:shadow-lg
-		bottom-5 right-5 lg:right-10 {below ? '' : 'hidden'}">
+		bottom-5 right-5 md:bottom-3 lg:right-10 {below ? '' : 'hidden'}">
 	<ArrowUpFromLine />
 	<span class="hidden md:block">Back to top</span>
 </Button>
