@@ -5,7 +5,8 @@
 	import Navbar from '$lib/components/navbar.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
-	import {partytownSnippet} from "@builder.io/partytown/integration";
+	import { partytownSnippet } from '@builder.io/partytown/integration';
+	import { BackToTop } from '$lib/components';
 
 	let path: string;
 
@@ -23,23 +24,27 @@
 	});
 </script>
 
-
-
 <svelte:head>
+	<!-- Config options -->
 	<!-- Config options -->
 	<script>
 		// Forward the necessary functions to the web worker layer
 		partytown = {
 			forward: ['dataLayer.push']
-		}
+		};
 	</script>
 
 	{@html '<script>' + partytownSnippet() + '</script>'}
 
-	<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-6ESELQN018"></script>
+	<script
+		type="text/partytown"
+		src="https://www.googletagmanager.com/gtag/js?id=G-6ESELQN018"
+	></script>
 	<script type="text/partytown">
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
+		function gtag() {
+			dataLayer.push(arguments);
+		}
 		gtag('js', new Date());
 		gtag('config', 'G-6ESELQN018');
 	</script>
@@ -54,4 +59,5 @@
 			</div>
 		{/key}
 	</div>
+	<BackToTop />
 </div>

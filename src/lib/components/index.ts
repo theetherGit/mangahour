@@ -3,3 +3,4 @@ export { default as TopChaptersListViewCard } from './home-top-chapters-view.sve
 export { default as TopMangaListViewCard } from './home-top-manga-view.svelte';
 export { default as ChapterDropDown } from './chapters-dropdown.svelte';
 export { default as Navbar } from './navbar.svelte';
+export { default as BackToTop } from './back-to-top.svelte';

@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { join } from 'path'
+import { join } from 'path';
 import { defineConfig } from 'vite';
-import {partytownVite} from "@builder.io/partytown/utils";
+import { partytownVite } from '@builder.io/partytown/utils';
 
 export default defineConfig({
 	plugins: [

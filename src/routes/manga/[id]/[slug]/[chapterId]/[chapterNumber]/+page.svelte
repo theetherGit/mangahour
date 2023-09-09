@@ -63,11 +63,11 @@
 								</div>
 								<div class="col-span-3 px-2.5 space-y-2">
 									<a href="/manga/{params.id}/{params.slug}">
-									   <h2
-										class="text-center text-primary pb-2 truncate text-xl lg:text-3xl font-semibold tracking-tight transition-colors"
-									>
-										{chapter.manga_title}
-									   </h2>
+										<h2
+											class="text-center text-primary pb-2 truncate text-xl lg:text-3xl font-semibold tracking-tight transition-colors"
+										>
+											{chapter.manga_title}
+										</h2>
 									</a>
 									{#if chapters.length}
 										<Button variant="outline" class="w-full flex items-center justify-between">
@@ -93,7 +93,8 @@
 							</div>
 						</Card.Header>
 					</Card.Root>
-					<a href="/manga/{params.id}/{params.slug}"
+					<a
+						href="/manga/{params.id}/{params.slug}"
 						class="hidden text-primary/90 lg:block text-center pb-2 text-xl lg:text-3xl font-semibold tracking-tight transition-colors"
 					>
 						{chapter.manga_title}
@@ -141,22 +142,22 @@
 			<div class="flex items-center justify-between mx-2 gap-x-3 mt-5">
 				{#if prevChapter !== null}
 					<Button
-							href="/manga/{params?.id}/{params?.slug}/{prevChapter?.id}/chapter-{prevChapter?.slug}"
-							variant="secondary"><ArrowLeft class="w-4 mr-2" /> Previous</Button
+						href="/manga/{params?.id}/{params?.slug}/{prevChapter?.id}/chapter-{prevChapter?.slug}"
+						variant="secondary"><ArrowLeft class="w-4 mr-2" /> Previous</Button
 					>
 				{:else}
 					<Button disabled={prevChapter === null} variant="outline"
-					><ArrowLeft class="w-4 mr-2" /> Previous</Button
+						><ArrowLeft class="w-4 mr-2" /> Previous</Button
 					>
 				{/if}
 				{#if nextChapter !== null}
 					<Button
-							href="/manga/{params?.id}/{params?.slug}/{nextChapter?.id}/chapter-{nextChapter?.slug}"
-							variant="secondary">Next <ArrowRight class="w-4 ml-2" /></Button
+						href="/manga/{params?.id}/{params?.slug}/{nextChapter?.id}/chapter-{nextChapter?.slug}"
+						variant="secondary">Next <ArrowRight class="w-4 ml-2" /></Button
 					>
 				{:else}
 					<Button disabled={nextChapter === null} variant="outline"
-					>Next <ArrowRight class="w-4 ml-2" /></Button
+						>Next <ArrowRight class="w-4 ml-2" /></Button
 					>
 				{/if}
 			</div>
