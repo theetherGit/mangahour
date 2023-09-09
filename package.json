@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@orama/orama": "^1.2.3",
 		"bits-ui": "^0.5.7",
 		"clsx": "^2.0.0",
 		"date-fns": "^2.30.0",

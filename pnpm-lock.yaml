@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@orama/orama':
+    specifier: ^1.2.3
+    version: 1.2.3
   bits-ui:
     specifier: ^0.5.7
     version: 0.5.7(svelte@4.2.0)
@@ -464,6 +467,11 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+
+  /@orama/orama@1.2.3:
+    resolution: {integrity: sha512-KJ4lzTDluQOJu6l2xsmDjKdhU6EvldmshvsQgAvDORn/Db+EXaWOKSK4XdvUNIcpUeSbFAdkRB26NLlfSpWRGg==}
+    engines: {node: '>= 16.0.0'}
+    dev: false
 
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
