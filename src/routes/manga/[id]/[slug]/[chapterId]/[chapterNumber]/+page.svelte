@@ -57,7 +57,7 @@
 									<img
 										class="rounded-lg"
 										loading="lazy"
-										src="/images?type=covers&id=manga_{chapter.manga_id}&slug={chapter.manga_cover}"
+										src="/images?type=covers_optimized_home_main&id=manga_{chapter.manga_id}&slug={chapter.manga_cover}"
 										alt="Read {chapter.manga_title}"
 									/>
 								</div>
