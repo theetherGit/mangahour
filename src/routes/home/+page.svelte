@@ -6,7 +6,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
 	import {
-		HomePageMangaViewCard,
+		HomePageMangaViewCard, MangaSearch,
 		TopChaptersListViewCard,
 		TopMangaListViewCard
 	} from '$lib/components';
@@ -41,7 +41,7 @@
 <section id="main">
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 relative">
 		<div class="col-span-3 md:col-span-2 space-y-4 pb-4">
-			<Input type="search" placeholder="Search Manga..." />
+			<MangaSearch />
 			<Card.Root>
 				<Card.Header>
 					<Card.Title>

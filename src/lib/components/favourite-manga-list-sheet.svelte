@@ -11,7 +11,7 @@
     import {db} from "$lib/db";
     import {liveQuery} from "dexie";
     import {create, insertMultiple, search} from "@orama/orama";
-    import favouriteUpdateCheckerWorker from "$lib/workers/favoriteUpdateChecker?worker"
+    import favouriteUpdateCheckerWorker from "$lib/workers/favoriteUpdateChecker?worker";
 
     let favouriteManga = liveQuery( async () => {
         return db.favouriteManga.orderBy('lastUpdated').reverse().toArray();
