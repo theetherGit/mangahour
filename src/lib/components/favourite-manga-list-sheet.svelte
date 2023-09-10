@@ -3,6 +3,7 @@
     import * as Card from "$lib/components/ui/card";
     import { Button } from "$lib/components/ui/button";
     import { Input } from "$lib/components/ui/input";
+    import { formatDistanceToNowStrict } from 'date-fns';
     import {Heart} from "lucide-svelte";
     import {onMount} from "svelte";
     import {browser} from "$app/environment";
@@ -61,7 +62,7 @@
             <Heart class="h-6 w-6 md:h-4 md:w-4"/> Favourites
         </Button>
     </Sheet.Trigger>
-    <Sheet.Content side="right" class="overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary scrollbar-thumb-rounded">
+    <Sheet.Content side="right" class="overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary scrollbar-thumb-rounded min-w-full md:min-w-[33%]">
         <Sheet.Header>
             <Sheet.Title class="text-left">Your Favourites</Sheet.Title>
             <Sheet.Description class="text-left">
@@ -74,8 +75,19 @@
                 {#if mangaInView.length}
                     {#each mangaInView as manga}
                         <Card.Root>
-                            <div class="px-4 py-2">
-                                {manga.name}
+                            <div class="grid grid-cols-3 px-4 py-2 gap-x-2.5">
+                                <div class="col-span-1">
+                                    <img class="rounded-lg" src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}" alt="Read {manga.name} on Manga Hour">
+                                </div>
+                                <div class="col-span-2">
+                                    <h2 class="text-lg font-semibold tracking-tight">{manga.name}</h2>
+                                    <div class="pt-4 space-y-2">
+                                        <Button variant="outline" class="w-full flex space-x-2 items-center justify-between">
+                                            Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
+                                        </Button>
+                                        <Button variant="destructive" class="w-full">Remove from Favorites</Button>
+                                    </div>
+                                </div>
                             </div>
                         </Card.Root>
                     {/each}
