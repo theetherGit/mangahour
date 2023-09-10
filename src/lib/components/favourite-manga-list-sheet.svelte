@@ -86,7 +86,9 @@
                                         <img class="rounded-lg" src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}" alt="Read {manga.name} on Manga Hour">
                                     </div>
                                     <div class="col-span-2">
-                                        <h2 class="text-lg font-semibold tracking-tight">{manga.name}</h2>
+                                        <a href="/manga/{manga.id}/{manga.slug}">
+                                            <h2 class="text-lg font-semibold tracking-tight">{manga.name}</h2>
+                                        </a>
                                         <div class="pt-4 space-y-2">
                                             <Button variant="outline" class="w-full flex space-x-2 items-center justify-between">
                                                 Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
