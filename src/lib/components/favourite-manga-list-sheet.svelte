@@ -4,6 +4,7 @@
     import { Button } from "$lib/components/ui/button";
     import { Input } from "$lib/components/ui/input";
     import { formatDistanceToNowStrict } from 'date-fns';
+    import {fade, fly} from "svelte/transition";
     import {Heart} from "lucide-svelte";
     import {onMount} from "svelte";
     import {browser} from "$app/environment";
@@ -54,6 +55,10 @@
         }
     };
 
+    async function removeFavorite(id: string) {
+        await db.favouriteManga.delete(id)
+    }
+
 </script>
 
 <Sheet.Root>
@@ -74,22 +79,26 @@
             <div class="grid mt-5 gap-y-4">
                 {#if mangaInView.length}
                     {#each mangaInView as manga}
-                        <Card.Root>
-                            <div class="grid grid-cols-3 px-4 py-2 gap-x-2.5">
-                                <div class="col-span-1">
-                                    <img class="rounded-lg" src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}" alt="Read {manga.name} on Manga Hour">
-                                </div>
-                                <div class="col-span-2">
-                                    <h2 class="text-lg font-semibold tracking-tight">{manga.name}</h2>
-                                    <div class="pt-4 space-y-2">
-                                        <Button variant="outline" class="w-full flex space-x-2 items-center justify-between">
-                                            Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
-                                        </Button>
-                                        <Button variant="destructive" class="w-full">Remove from Favorites</Button>
+                        <div in:fly out:fade>
+                            <Card.Root>
+                                <div class="grid grid-cols-3 px-4 py-2 gap-x-2.5">
+                                    <div class="col-span-1">
+                                        <img class="rounded-lg" src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}" alt="Read {manga.name} on Manga Hour">
+                                    </div>
+                                    <div class="col-span-2">
+                                        <h2 class="text-lg font-semibold tracking-tight">{manga.name}</h2>
+                                        <div class="pt-4 space-y-2">
+                                            <Button variant="outline" class="w-full flex space-x-2 items-center justify-between">
+                                                Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
+                                            </Button>
+                                            <Button variant="destructive" class="w-full" on:click={async () => {
+                                                await removeFavorite(manga.id);
+                                            }}>Remove from Favorites</Button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Card.Root>
+                            </Card.Root>
+                        </div>
                     {/each}
                 {/if}
             </div>
