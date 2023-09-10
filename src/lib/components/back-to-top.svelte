@@ -13,13 +13,13 @@
 <Button
 	variant="outline"
 	on:click={scrollUp}
-	class="fixed flex items-center space-x-2 px-2 py-2 group
+	class="fixed flex items-center space-x-4 px-2 py-2 group
 		transition duration-75 ease-in-out
 		rounded-full shadow-md active:shadow-lg
 		bottom-5 right-5 md:bottom-3 lg:right-10 {below ? '' : 'hidden'}"
 >
 	<ArrowUpFromLine />
-	<span class="hidden md:block">Back to top</span>
+	<span class="hidden md:block tracking-wide md:py-2">Back To Top</span>
 </Button>
 
 <svelte:window bind:innerWidth bind:scrollY={y} />
