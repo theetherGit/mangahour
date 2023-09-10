@@ -12,9 +12,9 @@ export class MyMangaDB extends Dexie {
 
 	constructor() {
 		super('myMangaHistory.db');
-		this.version(3).stores({
+		this.version(4).stores({
 			lastReadMangaChapter: '&id, mangaSlug, chapterSlug, chapterId, chapterNumber',
-			favouriteManga: '&id, name, image, description, slug',
+			favouriteManga: '&id, name, image, description, slug, lastUpdated',
 			mangaChapterReadHistory: '&id, *chapters'
 		});
 	}

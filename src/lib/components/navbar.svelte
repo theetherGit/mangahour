@@ -1,14 +1,14 @@
 <script lang="ts">
 	import NoBgLogo from '$lib/images/noBgLogo.png';
+	import {Button} from "$lib/components/ui/button";
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
+	import FavouriteSheet from './favourite-manga-list-sheet.svelte'
 	let show = false;
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
 		{ title: 'Hot Mangas', link: '/hot-mangas', active: 'hot-mangas' },
-		{ title: 'Favourites', link: '/favourite', active: 'favourite' },
-		{ title: 'About', link: '/about', active: 'about' }
 	];
 
 	let path;
@@ -70,7 +70,7 @@
 				<div
 					class="{show
 						? 'block transition delay-75 duration-500 ease-in-out'
-						: 'hidden'} mx-6 mb-16 w-full flex-wrap items-center justify-end space-y-20 rounded-xl bg-accent p-6 shadow-lg md:flex-nowrap lg:m-0 lg:flex lg:w-7/12 lg:space-y-0 lg:bg-transparent lg:p-0 lg:shadow-none"
+						: 'hidden'} mx-6 mb-16 w-full flex-wrap items-center justify-end space-y-10 rounded-xl bg-accent p-6 shadow-lg md:flex-nowrap lg:m-0 lg:flex lg:w-7/12 lg:space-y-0 lg:bg-transparent lg:p-0 lg:shadow-none"
 				>
 					<div class="text-foreground lg:pr-4">
 						<ul class="space-y-6 text-lg font-medium tracking-wide lg:flex lg:space-y-0 lg:text-sm">
@@ -86,6 +86,11 @@
 								</li>
 							{/each}
 						</ul>
+					</div>
+					<div
+							class="flex w-full flex-col sm:flex-row md:w-max lg:space-y-0 lg:space-x-2"
+					>
+						<FavouriteSheet />
 					</div>
 				</div>
 			</div>

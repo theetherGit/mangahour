@@ -12,6 +12,7 @@ export interface favouriteManga {
 	image: string;
 	description: string;
 	slug: string;
+	lastUpdated: Date;
 }
 
 export interface mangaChapterReadHistory {

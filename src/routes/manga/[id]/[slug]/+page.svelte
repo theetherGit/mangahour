@@ -44,7 +44,8 @@
 				image: currentManga.cover,
 				name: currentManga.title,
 				description: currentManga.description,
-				slug: currentManga.slug
+				slug: currentManga.slug,
+				lastUpdated: new Date(currentManga['last_chapter_created_at'])
 			});
 		}
 		isFavorite = await db.favouriteManga.get(currentManga.id.toString());

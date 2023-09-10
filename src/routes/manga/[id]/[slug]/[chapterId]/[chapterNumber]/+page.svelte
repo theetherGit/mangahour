@@ -52,7 +52,9 @@
 				image: chapter.manga_cover,
 				name: chapter.manga_title,
 				description: '',
-				slug: chapter.manga_slug
+				slug: chapter.manga_slug,
+				lastUpdated: new Date()
+
 			});
 		}
 		isFavorite = await db.favouriteManga.get(params.id.toString());
@@ -182,9 +184,9 @@
 							<Card.Title class="text-center leading-normal line-clamp-1"
 								>{chapter.manga_title}</Card.Title
 							>
-							<Card.Description>
+							<Card.Description class="">
 								<img
-									class="rounded-lg mt-4"
+									class="rounded-lg mt-4 mx-auto"
 									loading="lazy"
 									src="/images?type=covers&id=manga_{chapter.manga_id}&slug={chapter.manga_cover}"
 									alt="Read {chapter.manga_title}"

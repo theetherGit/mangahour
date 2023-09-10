@@ -19,8 +19,7 @@
 		chapterSearchDB = await create({
 			schema: {
 				chapter_number: 'string'
-			},
-			components: {}
+			}
 		});
 		const chapterResponse = await fetch(`/chapters?id=${id}&slug=${slug}`);
 		if (chapterResponse.ok) {

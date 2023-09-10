@@ -9,22 +9,21 @@
 	import { db } from '$lib/db';
 	import { invalidateAll } from '$app/navigation';
 
-	export let manga;
-	export let newChapters;
+	export let manga: any;
+	export let newChapters: any;
 
-	let haveReadHistory;
+	let haveReadHistory: any;
 	let isFavorite: any = false;
 
 	onMount(async () => {
 		haveReadHistory = await db.lastReadMangaChapter.get(manga.id.toString());
 		isFavorite = await db.favouriteManga.get(manga.id.toString());
-		console.log(haveReadHistory)
 	});
 
-	$: chapterNumbers = newChapters.chapters.map((chapter) => parseInt(chapter.chapter_number));
+	$: chapterNumbers = newChapters.chapters.map((chapter: any) => parseInt(chapter.chapter_number));
 	$: mainBorder = isFavorite ? 'border-rose-800' : haveReadHistory ? 'border-green-500' : '';
 
-	const addToFavorites = async (e) => {
+	const addToFavorites = async (e: any) => {
 		e.preventDefault();
 		if (isFavorite) {
 			await db.favouriteManga.delete(manga.id.toString());
@@ -34,7 +33,8 @@
 				image: manga.cover,
 				name: manga.title,
 				description: manga.description,
-				slug: manga.slug
+				slug: manga.slug,
+				lastUpdated: new Date(manga['last_chapter_created_at'])
 			});
 		}
 		isFavorite = await db.favouriteManga.get(manga.id.toString());
