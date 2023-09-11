@@ -23,7 +23,6 @@
     } else if (inputValue.length === 0) {
         showSearchResults = false
     }
-    $: console.log(inputValue)
 </script>
 
 <div class="w-full relative space-y-3">

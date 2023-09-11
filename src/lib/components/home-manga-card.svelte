@@ -1,24 +1,54 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
-	import * as Card from '$lib/components/ui/card';
 	import { Clock3, Heart } from 'lucide-svelte';
+	import * as Card from '$lib/components/ui/card';
 	import { Badge } from '$lib/components/ui/badge';
-	import { formatDistanceToNowStrict } from 'date-fns';
 	import { Button } from '$lib//components/ui/button';
-	import { db } from '$lib/db';
-	import { invalidateAll } from '$app/navigation';
+	import { formatDistanceToNowStrict } from 'date-fns';
+	import FavMangaDBWorker from "$lib/workers/favouriteManga?worker"
+	import LastReadChapterDBWorker from "$lib/workers/lastReadMangaChapter?worker"
 
 	export let manga: any;
 	export let newChapters: any;
+	let favMangaWorker: Worker;
+	let lastReadChapterWorker: Worker;
 
 	let haveReadHistory: any;
-	let isFavorite: any = false;
+	let isFavorite: any;
 
 	onMount(async () => {
-		haveReadHistory = await db.lastReadMangaChapter.get(manga.id.toString());
-		isFavorite = await db.favouriteManga.get(manga.id.toString());
+		favMangaWorker = new FavMangaDBWorker();
+		lastReadChapterWorker = new LastReadChapterDBWorker();
+		favMangaWorker.postMessage({
+			type: 'get',
+			payload: {
+				id: manga.id.toString()
+			}
+		});
+
+		lastReadChapterWorker.postMessage({
+			type: 'get',
+			payload: {
+				id: manga.id.toString()
+			}
+		});
+
+		favMangaWorker.onmessage = (e: any) => {
+			const {type, payload} = e.data;
+			if (type === 'get') {
+				isFavorite = payload.manga
+			}
+		};
+
+		lastReadChapterWorker.onmessage = (e: any) => {
+			const {type, payload} = e.data;
+			if (type === 'get') {
+				haveReadHistory = payload.manga
+			}
+		}
 	});
+
 
 	$: chapterNumbers = newChapters.chapters.map((chapter: any) => parseInt(chapter.chapter_number));
 	$: mainBorder = isFavorite ? 'border-rose-800' : haveReadHistory ? 'border-green-500' : '';
@@ -26,19 +56,31 @@
 	const addToFavorites = async (e: any) => {
 		e.preventDefault();
 		if (isFavorite) {
-			await db.favouriteManga.delete(manga.id.toString());
+			favMangaWorker.postMessage({
+				type: 'delete',
+				payload: {
+					id: manga.id.toString()
+				}
+			});
 		} else {
-			await db.favouriteManga.put({
-				id: manga.id.toString(),
-				image: manga.cover,
-				name: manga.title,
-				description: manga.description,
-				slug: manga.slug,
-				lastUpdated: new Date(manga['last_chapter_created_at'])
+			favMangaWorker.postMessage({
+				type: 'add',
+				payload: {
+					id: manga.id.toString(),
+					image: manga.cover,
+					name: manga.title,
+					description: manga.description,
+					slug: manga.slug,
+					lastUpdated: new Date(manga['last_chapter_created_at'])
+				}
 			});
 		}
-		isFavorite = await db.favouriteManga.get(manga.id.toString());
-		await invalidateAll();
+		favMangaWorker.postMessage({
+			type: 'get',
+			payload: {
+				id: manga.id.toString()
+			}
+		});
 	};
 </script>
 

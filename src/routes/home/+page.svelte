@@ -3,7 +3,6 @@
 	import type { PageServerData } from './$types';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
 	import {
 		HomePageMangaViewCard, MangaSearch,
