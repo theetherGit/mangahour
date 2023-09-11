@@ -12,6 +12,7 @@
     import {liveQuery} from "dexie";
     import {create, insertMultiple, search} from "@orama/orama";
     import favouriteUpdateCheckerWorker from "$lib/workers/favoriteUpdateChecker?worker";
+    import {goto} from "$app/navigation";
 
     let favouriteManga = liveQuery( async () => {
         return db.favouriteManga.orderBy('lastUpdated').reverse().toArray();
@@ -20,6 +21,7 @@
     let favouriteUpdateChecker: any;
 
     let favouriteMangaSearchDB: any = null;
+    let isFavSheetOpen = false;
 
     onMount(async () => {
         favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
@@ -61,7 +63,7 @@
 
 </script>
 
-<Sheet.Root>
+<Sheet.Root bind:open={isFavSheetOpen}>
     <Sheet.Trigger asChild let:builder>
         <Button builders={[builder]} variant="outline" class="flex items-center gap-x-2 text-rose-500 border-rose-500 hover:bg-rose-500 transition-colors duration-500 text-xl md:text-sm">
             <Heart class="h-6 w-6 md:h-4 md:w-4"/> Favourites
@@ -86,9 +88,12 @@
                                         <img class="rounded-lg" src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}" alt="Read {manga.name} on Manga Hour">
                                     </div>
                                     <div class="col-span-2">
-                                        <a href="/manga/{manga.id}/{manga.slug}">
+                                        <Button variant="ghost" href="/manga/{manga.id}/{manga.slug}" on:click={ async () => {
+											isFavSheetOpen = false;
+											await goto(`/manga/${manga.id}/${manga.slug}`)
+                                        }}>
                                             <h2 class="text-lg font-semibold tracking-tight">{manga.name}</h2>
-                                        </a>
+                                        </Button>
                                         <div class="pt-4 space-y-2">
                                             <Button variant="outline" class="w-full flex space-x-2 items-center justify-between">
                                                 Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
