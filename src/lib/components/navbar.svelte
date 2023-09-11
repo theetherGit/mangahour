@@ -1,5 +1,5 @@
 <script lang="ts">
-	import NoBgLogo from '$lib/images/noBgLogo.png';
+	import NoBgLogo from '$lib/images/noBgLogo.webp';
 	import {Button} from "$lib/components/ui/button";
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
