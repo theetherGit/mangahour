@@ -1,5 +1,6 @@
+import {db} from "$lib/db";
+
 onmessage = async (e) => {
-    const {db} = await import("$lib/db");
     const {type, payload} = e.data;
 
     if (type === 'add') {
