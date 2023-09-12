@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="flex flex-col items-start md:mt-2 py-1 md:px-1 border-b md:border-b-0">
-                <h3 class="text-xl font-semibold tracking-tight md:border-b md:pb-1">Main</h3>
+                <h3 class="text-xl font-semibold tracking-tight md:border-b md:pb-1">Connect</h3>
                 <div class="flex flex-col space-y-2 mt-2">
                     <a href="/about">About</a>
                     <a href="/blog">Blog</a>
@@ -46,5 +46,13 @@
                 </div>
             </div>
         </div>
+        <blockquote class="mt-6 border-l-2 pl-6 italic">
+            "We/Mangahour," does not store any files on our server, we only linked to the media which is hosted on 3rd party services.
+        </blockquote>
+
+        <p class="text-base text-muted-foreground mt-6">
+            © MangaHour.Com. All rights reserved.
+        </p>
+
     </Card.Root>
 </div>
