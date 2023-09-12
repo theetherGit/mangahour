@@ -20,26 +20,26 @@
             </a>
             <p class="leading-7">Made with &#10084;</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3">
-            <div class="flex flex-col items-start md:mt-2 py-1 md:px-1 border-b md:border-b-0">
-                <h3 class="text-xl font-semibold tracking-tight md:border-b md:pb-1">Main</h3>
-                <div class="flex flex-col space-y-2 mt-2">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-2.5 gap-y-2.5">
+            <div class="flex flex-col items-start md:mt-2 py-1 md:px-1">
+                <h3 class="text-xl font-bold tracking-tight md:border-b md:pb-1 italic">Main</h3>
+                <div class="flex flex-col space-y-4 mt-2">
                     <a href="/">Home</a>
                     <a href="/manga">All Mangas</a>
                     <a href="/hot-mangas">Hot Mangas</a>
                 </div>
             </div>
-            <div class="flex flex-col items-start md:mt-2 py-1 md:px-1 border-b md:border-b-0">
-                <h3 class="text-xl font-semibold tracking-tight md:border-b md:pb-1">Connect</h3>
-                <div class="flex flex-col space-y-2 mt-2">
+            <div class="flex flex-col items-start md:mt-2 py-1 md:px-1">
+                <h3 class="text-xl font-bold tracking-tight md:border-b md:pb-1 italic">Connect</h3>
+                <div class="flex flex-col space-y-4 mt-2">
                     <a href="/about">About</a>
                     <a href="/blog">Blog</a>
                     <a href="/contact">Contact</a>
                 </div>
             </div>
-            <div class="flex flex-col items-start md:mt-2 py-1 md:px-1 border-b md:border-b-0">
-                <h3 class="text-xl font-semibold tracking-tight md:border-b md:pb-1">References</h3>
-                <div class="flex flex-col space-y-2 mt-2">
+            <div class="flex flex-col items-start md:mt-2 py-1 md:px-1">
+                <h3 class="text-xl font-bold tracking-tight md:border-b md:pb-1 italic">References</h3>
+                <div class="flex flex-col space-y-4 mt-2">
                     <a href="/sitemap.xml">Sitemap.xml</a>
                     <a href="/robots.txt">Robots.txt</a>
                     <a href="/contact">Report an Issue</a>
