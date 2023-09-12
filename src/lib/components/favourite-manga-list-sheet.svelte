@@ -18,6 +18,8 @@
         return db.favouriteManga.orderBy('lastUpdated').reverse().toArray();
     });
 
+    export let favouriteInTopNav = false;
+
     let favouriteUpdateChecker: any;
 
     let favouriteMangaSearchDB: any = null;
@@ -65,9 +67,15 @@
 
 <Sheet.Root bind:open={isFavSheetOpen}>
     <Sheet.Trigger asChild let:builder>
-        <Button builders={[builder]} variant="outline" class="flex items-center gap-x-2 text-rose-500 border-rose-500 hover:bg-rose-500 transition-colors duration-500 text-xl md:text-sm">
-            <Heart class="h-6 w-6 md:h-4 md:w-4"/> My Favourites
+        {#if favouriteInTopNav}
+        <Button builders={[builder]} variant="outline" class="flex items-center gap-x-1 text-rose-500 border-rose-500 hover:bg-rose-500 transition-colors duration-500 px-2.5 text-sm">
+            <Heart class="h-4 w-6 md:h-4 md:w-4"/>  My Favourites
         </Button>
+        {:else}
+            <Button builders={[builder]} variant="outline" class="flex items-center gap-x-2 text-rose-500 border-rose-500 hover:bg-rose-500 transition-colors duration-500 text-xl md:text-sm">
+                <Heart class="h-4 w-6 md:h-4 md:w-4"/> My Favourites
+            </Button>
+        {/if}
     </Sheet.Trigger>
     <Sheet.Content side="right" class="overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary scrollbar-thumb-rounded min-w-full md:min-w-[33%]">
         <Sheet.Header>

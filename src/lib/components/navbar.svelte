@@ -39,33 +39,36 @@
             						text-2xl font-bold text-transparent md:text-2xl">MangaHour</span
 						>
 					</a>
-					<button
-						class="relative -mr-6 h-8 w-10 p-6 lg:hidden"
-						on:click={() => {
+					<div class="flex items-center lg:hidden">
+						<FavouriteSheet favouriteInTopNav={true}/>
+						<button
+								class="relative -mr-6 h-8 w-10 p-6"
+								on:click={() => {
 							show = !show;
 						}}
-					>
-						<span class="sr-only">Open main menu</span>
-						<div
-							class="absolute left-1/2 top-1/2 block w-5 -translate-x-1/2 -translate-y-1/2 transform"
 						>
+							<span class="sr-only">Open main menu</span>
+							<div
+									class="absolute left-1/2 top-1/2 block w-5 -translate-x-1/2 -translate-y-1/2 transform"
+							>
 							<span
-								aria-hidden="true"
-								class="hamburger-line {show === true ? 'rotate-45' : '-translate-y-1.5'}"
+									aria-hidden="true"
+									class="hamburger-line {show === true ? 'rotate-45' : '-translate-y-1.5'}"
 							/>
-							<span
-								aria-hidden="true"
-								class="absolute block h-0.5 w-3 transform rounded bg-primary/70 transition duration-500 ease-in-out {show ===
+								<span
+										aria-hidden="true"
+										class="absolute block h-0.5 w-3 transform rounded bg-primary/70 transition duration-500 ease-in-out {show ===
 								true
 									? 'opacity-0'
 									: ''}"
-							/>
-							<span
-								aria-hidden="true"
-								class="hamburger-line {show === true ? '-rotate-45' : 'translate-y-1.5'}"
-							/>
-						</div>
-					</button>
+								/>
+								<span
+										aria-hidden="true"
+										class="hamburger-line {show === true ? '-rotate-45' : 'translate-y-1.5'}"
+								/>
+							</div>
+						</button>
+					</div>
 				</div>
 				<div
 					class="{show
@@ -88,7 +91,7 @@
 						</ul>
 					</div>
 					<div
-							class="flex w-full flex-col sm:flex-row md:w-max lg:space-y-0 lg:space-x-2"
+							class="hidden md:block flex w-full flex-col sm:flex-row md:w-max lg:space-y-0 lg:space-x-2"
 					>
 						<FavouriteSheet />
 					</div>
