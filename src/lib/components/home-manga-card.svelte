@@ -1,56 +1,31 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { slide } from 'svelte/transition';
-	import { Clock3, Heart } from 'lucide-svelte';
-	import * as Card from '$lib/components/ui/card';
-	import { Badge } from '$lib/components/ui/badge';
-	import { Button } from '$lib//components/ui/button';
-	import { formatDistanceToNowStrict } from 'date-fns';
 	import FavMangaDBWorker from "$lib/workers/favouriteManga?worker"
-	import LastReadChapterDBWorker from "$lib/workers/lastReadMangaChapter?worker"
+	import { formatDistanceToNowStrict } from 'date-fns';
+	import { Button } from '$lib//components/ui/button';
+	import { Badge } from '$lib/components/ui/badge';
+	import * as Card from '$lib/components/ui/card';
+	import { Clock3, Heart } from 'lucide-svelte';
+	import { slide } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	export let manga: any;
 	export let newChapters: any;
-	let favMangaWorker: Worker;
-	let lastReadChapterWorker: Worker;
+	export let haveReadHistory: any;
+	export let isFavorite: any;
 
-	let haveReadHistory: any;
-	let isFavorite: any;
+	let favMangaWorker: Worker;
 
 	onMount(async () => {
 		favMangaWorker = new FavMangaDBWorker();
-		lastReadChapterWorker = new LastReadChapterDBWorker();
-		favMangaWorker.postMessage({
-			type: 'get',
-			payload: {
-				id: manga.id.toString()
-			}
-		});
-
-		lastReadChapterWorker.postMessage({
-			type: 'get',
-			payload: {
-				id: manga.id.toString()
-			}
-		});
 
 		favMangaWorker.onmessage = (e: any) => {
 			const {type, payload} = e.data;
 			if (type === 'get') {
 				isFavorite = payload.manga
 			}
-		};
-
-		lastReadChapterWorker.onmessage = (e: any) => {
-			const {type, payload} = e.data;
-			if (type === 'get') {
-				haveReadHistory = payload.manga
-			}
 		}
 	});
 
-
-	$: chapterNumbers = newChapters.chapters.map((chapter: any) => parseInt(chapter.chapter_number));
 	$: mainBorder = isFavorite ? 'border-rose-800' : haveReadHistory ? 'border-green-500' : '';
 
 	const addToFavorites = async (e: any) => {

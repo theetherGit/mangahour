@@ -6,7 +6,7 @@
 	import { fade, fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { partytownSnippet } from '@builder.io/partytown/integration';
-	import { BackToTop } from '$lib/components';
+	import {BackToTop, Footer} from '$lib/components';
 
 	let path: string;
 
@@ -56,5 +56,6 @@
 			</div>
 		{/key}
 	</div>
+	<Footer />
 	<BackToTop />
 </div>

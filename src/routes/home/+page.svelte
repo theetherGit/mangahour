@@ -1,9 +1,12 @@
 <script lang="ts">
+	import LastReadChapterDBWorker from "$lib/workers/lastReadMangaChapter?worker"
 	import { Squirrel, ArrowDownToLine, Loader, ShieldCheck } from 'lucide-svelte';
-	import type { PageServerData } from './$types';
+	import FavMangaDBWorker from "$lib/workers/favouriteManga?worker"
+	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import { Button } from '$lib/components/ui/button';
+	import type { PageServerData } from './$types';
+	import {onMount} from "svelte";
 	import {
 		HomePageMangaViewCard, MangaSearch,
 		TopChaptersListViewCard,
@@ -11,11 +14,46 @@
 	} from '$lib/components';
 
 	export let data: PageServerData;
+
+	let favMangaWorker: Worker;
+	let lastReadChapterWorker: Worker;
+	let favMangas: Map<string, any>;
+	let userReadHistory: Map<string, any>;
+
 	let loadingMoreLatestManga = false;
 
 	let latestMangaList = data.home.latest;
 	let currentMangaList = latestMangaList.slice(0, 30);
 	let remainingMangaList = latestMangaList.slice(30);
+
+	onMount(async () => {
+		favMangaWorker = new FavMangaDBWorker();
+		lastReadChapterWorker = new LastReadChapterDBWorker();
+
+		favMangaWorker.postMessage({
+			type: 'bulk',
+			payload: {}
+		});
+
+		lastReadChapterWorker.postMessage({
+			type: 'bulk',
+			payload: {}
+		});
+
+		favMangaWorker.onmessage = (e: any) => {
+			const {type, payload} = e.data;
+			if (type === 'bulk') {
+				favMangas = payload
+			}
+		};
+
+		lastReadChapterWorker.onmessage = (e: any) => {
+			const {type, payload} = e.data;
+			if (type === 'bulk') {
+				userReadHistory = payload
+			}
+		};
+	});
 
 	const loadMoreLatestManga = async () => {
 		loadingMoreLatestManga = true;
@@ -65,7 +103,9 @@
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 							{#each currentMangaList as manga}
 								{@const newChapters = JSON.parse(manga['new_chapters'])}
-								<HomePageMangaViewCard {manga} {newChapters} />
+								{@const isFavorite = favMangas ? favMangas.get(manga['id'].toString()) : false}
+								{@const haveReadHistory = userReadHistory ? userReadHistory.get(manga['id'].toString()): false}
+								<HomePageMangaViewCard {haveReadHistory} {isFavorite} {manga} {newChapters} />
 							{/each}
 						</div>
 					{/if}

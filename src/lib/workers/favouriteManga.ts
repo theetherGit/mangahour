@@ -3,14 +3,6 @@ import {db} from "$lib/db";
 onmessage = async (e) => {
     const {type, payload} = e.data;
 
-    if (type === 'add') {
-        db.favouriteManga.add(payload)
-    }
-
-    if (type === 'put') {
-        db.favouriteManga.put(payload)
-    }
-
     if (type === 'get') {
         const payloadData = await db.favouriteManga.get(payload.id);
         postMessage({
@@ -19,7 +11,27 @@ onmessage = async (e) => {
         })
     }
 
+    if ( type === 'bulk' ) {
+        const payloadData = new Map()
+        const allFavManga = await db.favouriteManga.each( (manga) => {
+            payloadData.set(manga.id, manga)
+        });
+
+        postMessage({
+            type,
+            payload: payloadData
+        })
+    }
+
+    if (type === 'add') {
+        db.favouriteManga.add(payload)
+    }
+
+    if (type === 'put') {
+        db.favouriteManga.put(payload)
+    }
+
     if (type === 'delete') {
-        await db.favouriteManga.delete(payload.id)
+        db.favouriteManga.delete(payload.id)
     }
 };
