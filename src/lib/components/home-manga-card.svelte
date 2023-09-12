@@ -39,7 +39,7 @@
 			});
 		} else {
 			favMangaWorker.postMessage({
-				type: 'add',
+				type: 'put',
 				payload: {
 					id: manga.id.toString(),
 					image: manga.cover,
