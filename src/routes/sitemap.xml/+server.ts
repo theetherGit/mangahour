@@ -1,6 +1,7 @@
 import { getTotalMangaPageCount } from '$lib/server/sitemap';
+import type {RequestHandler} from "@sveltejs/kit";
 
-export async function GET() {
+export const GET:RequestHandler = async ({url}) => {
 	const headers = {
 		'Content-Type': 'application/xml',
 		'Cache-Control': `public, max-age=0, s-maxage=${60 * 60 * 24 * 3}`
@@ -20,7 +21,7 @@ export async function GET() {
 			.map((page) => {
 				return `
         <sitemap>
-            <loc>https://mangahour.com${page}</loc>
+            <loc>${url.origin}${page}</loc>
             <lastmod>${new Date().toISOString()}</lastmod>
         </sitemap>`;
 			})

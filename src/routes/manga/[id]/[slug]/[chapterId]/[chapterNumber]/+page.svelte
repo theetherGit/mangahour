@@ -67,7 +67,7 @@
 		<div class="lg:col-span-3">
 			<div class="mb-5">
 				{#if chapters.length}
-					<div class="" transition:slide={{ axis: 'y', duration: 500 }}>
+					<div class="pb-4 md:pb-0" transition:slide={{ axis: 'y', duration: 500 }}>
 						<Card.Root class="lg:hidden">
 							<Card.Header class="py-2.5 px-2.5">
 								<div class="grid grid-cols-4">
