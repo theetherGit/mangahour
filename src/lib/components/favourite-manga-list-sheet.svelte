@@ -68,8 +68,8 @@
 <Sheet.Root bind:open={isFavSheetOpen}>
     <Sheet.Trigger asChild let:builder>
         {#if favouriteInTopNav}
-        <Button builders={[builder]} variant="outline" class="flex items-center gap-x-1 text-rose-500 border-rose-500 hover:bg-rose-500 transition-colors duration-500 px-2.5 text-sm">
-            <Heart class="h-4 w-6 md:h-4 md:w-4"/>  My Favourites
+        <Button builders={[builder]} variant="outline" class="flex items-center gap-x-1 text-rose-500 border-rose-500 hover:bg-rose-500 transition-colors duration-500 px-2.5 text-sm bg-transparent">
+            <Heart class="h-4 w-6 md:h-4 md:w-4"/> <span class=""> My Favourites </span>
         </Button>
         {:else}
             <Button builders={[builder]} variant="outline" class="flex items-center gap-x-2 text-rose-500 border-rose-500 hover:bg-rose-500 transition-colors duration-500 text-xl md:text-sm">

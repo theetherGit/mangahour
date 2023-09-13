@@ -1,5 +1,5 @@
 export interface lastReadMangaChapter {
-	id: number; // Manga Id
+	id: string; // Manga Id
 	mangaSlug: string;
 	chapterSlug: string;
 	chapterId: string;
