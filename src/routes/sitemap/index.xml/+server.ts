@@ -4,15 +4,15 @@ import type {RequestHandler} from "@sveltejs/kit";
 export const GET:RequestHandler = async ({url}) => {
 	const headers = {
 		'Content-Type': 'application/xml',
-		'Cache-Control': `public, max-age=0, s-maxage=${60 * 60 * 24 * 3}`
+		'Cache-Control': `public, s-maxage=${60 * 60 * 24 * 2}`
 	};
 
 	const pageCount = await getTotalMangaPageCount();
 
-	const sitemapIndexPages = ['/sitemap.xml/static.xml'];
+	const sitemapIndexPages = ['/sitemap/static.xml'];
 
 	for (let i = 1; i <= pageCount; i++) {
-		sitemapIndexPages.push(`/sitemap.xml/manga-list/${i}.xml`);
+		sitemapIndexPages.push(`/sitemap/mangas/page-${i}-index.xml`);
 	}
 
 	const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>

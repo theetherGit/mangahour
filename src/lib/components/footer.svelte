@@ -40,7 +40,7 @@
             <div class="flex flex-col items-start md:mt-2 py-1 md:px-1">
                 <h3 class="text-xl font-bold tracking-tight md:border-b md:pb-1 italic">References</h3>
                 <div class="flex flex-col space-y-4 mt-2">
-                    <a href="/sitemap.xml">Sitemap.xml</a>
+                    <a href="/sitemap/index.xml">Sitemap.xml</a>
                     <a href="/robots.txt">Robots.txt</a>
                     <a href="/contact">Report an Issue</a>
                 </div>

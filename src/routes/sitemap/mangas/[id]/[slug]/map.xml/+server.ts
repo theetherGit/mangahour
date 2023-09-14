@@ -1,23 +1,18 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { getMangaListPageData } from '$lib/server/sitemap';
 import { getMangaChapters } from '$lib/server/manga.api';
 
 export const GET: RequestHandler = async ({ params, url }) => {
-	const sitemapItems = [];
-	const headers = {
-		'Content-Type': 'application/xml',
-		'Cache-Control': `public, max-age=0, s-maxage=${60 * 60 * 24}`
-	};
-	const mangaList = await getMangaListPageData(parseInt(params.id as string));
+    const sitemapItems = [`/manga/${params.id}/${params.slug}`];
+    const headers = {
+        'Content-Type': 'application/xml',
+        'Cache-Control': `public, s-maxage=${60 * 60 * 4}`
+    };
 
-	for (const manga of mangaList) {
-		sitemapItems.push(`/manga/${manga.id}/${manga.slug}`);
-		const chapters = await getMangaChapters(manga.id, manga.slug);
-		chapters.forEach((chapter: any) => {
-			sitemapItems.push(`/manga/${manga.id}/${manga.slug}/${chapter.id}/chapter-${chapter.slug}`);
-		});
-	}
-	const sitemap = `
+    const chapters = await getMangaChapters(params.id as string, params.slug as string);
+    chapters.forEach((chapter: any) => {
+        sitemapItems.push(`/manga/${params.id}/${params.slug}/${chapter.id}/chapter-${chapter.slug}`);
+    });
+    const sitemap = `
     <?xml version="1.0" encoding="UTF-8" ?>
     <urlset
       xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
@@ -28,14 +23,14 @@ export const GET: RequestHandler = async ({ params, url }) => {
       xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
     >
     ${sitemapItems
-			.map((path) => {
-				return `<url>
+        .map((path) => {
+            return `<url>
             <loc>${url.origin}${path}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         </url>`;
-			})
-			.join('')}
+        })
+        .join('')}
     </urlset>`.trim();
 
-	return new Response(sitemap, { headers });
+    return new Response(sitemap, { headers });
 };
