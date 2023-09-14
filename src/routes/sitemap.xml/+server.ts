@@ -16,7 +16,7 @@ export const GET:RequestHandler = async ({url}) => {
 	}
 
 	const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
-    <sitemapindex xmlns="http://www.w3.org/2001/XMLSchema-instance">
+    <sitemapindex xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" targetNamespace="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${sitemapIndexPages
 			.map((page) => {
 				return `
