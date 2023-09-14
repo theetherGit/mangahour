@@ -6,13 +6,15 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import type { PageServerData } from './$types';
+	import SvelteSeo from "svelte-seo";
 	import {onMount} from "svelte";
+
 	import {
 		HomePageMangaViewCard, MangaSearch,
 		TopChaptersListViewCard,
 		TopMangaListViewCard
 	} from '$lib/components';
-
+	import {page} from "$app/stores";
 	export let data: PageServerData;
 
 	let favMangaWorker: Worker;
@@ -74,6 +76,44 @@
 		loadingMoreLatestManga = false;
 	};
 </script>
+
+<SvelteSeo
+		title="Mangahour | Home"
+		description="Read all latest updated mangas, manwha and manhua only on mangahour. Here read updated mangas, top chapter and top mangas."
+		canonical="{$page.url.href}"
+		keywords="Read Manga on Mangahour, mangahour home, mangahour latest mangas"
+		applicationName="MangaHour"
+		openGraph={{
+			title: "Mangahour | Home",
+			description: "Read all latest updated mangas, manwha and manhua only on mangahour. Here read updated mangas, top chapter and top mangas.",
+			url: `${$page.url.href}`,
+			type: "website",
+			images: [
+			  {
+				url: `${$page.url.origin}/og/home`,
+				width: 800,
+				height: 600,
+				alt: "Read manga, manwha and manhua on mangahour",
+			  }
+			],
+			site_name: "MangaHour",
+		}}
+		twitter={{
+			card: "summary",
+			site: "@mangahour",
+			title: "Mangahour | Home",
+			description: "Read all latest updated mangas, manwha and manhua only on mangahour. Here read updated mangas, top chapter and top mangas.",
+			image: `${$page.url.origin}/og/home`,
+		}}
+		jsonLd={{
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			name: "Mangahour | Home",
+			description:
+			"Read all latest updated mangas, manwha and manhua only on mangahour. Here read updated mangas, top chapter and top mangas.",
+			url: `${$page.url.href}`
+		}}
+/>
 
 <section id="main">
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 relative">
