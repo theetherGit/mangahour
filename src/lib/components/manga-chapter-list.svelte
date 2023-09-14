@@ -53,7 +53,8 @@
 	};
 </script>
 
-<Card.Root class="mt-5 col-span-1 md:col-span-2">
+{#if chaptersInView && chaptersInView.length}
+	<Card.Root class="mt-5 col-span-1 md:col-span-2">
 	<Card.Header>
 		<Card.Title class="text-center">Chapter List</Card.Title>
 	</Card.Header>
@@ -84,3 +85,4 @@
 		{/if}
 	</Card.Content>
 </Card.Root>
+{/if}

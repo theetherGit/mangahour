@@ -50,6 +50,10 @@
 		isFavorite = await db.favouriteManga.get(currentManga.id.toString());
 		await invalidateAll();
 	};
+
+	$: console.log(
+			currentManga, firstChapter
+	)
 </script>
 
 <SvelteSeo
@@ -242,9 +246,9 @@
 						<StepForward class="w-5 mr-2" /> Continue Reading
 					</span>
 				</Button>
-			{:else}
+			{:else if firstChapter}
 				<Button
-					href="/manga/{currentManga.id}/{currentManga.slug}/{firstChapter.id}/chapter-{firstChapter.slug}"
+					href="/manga/{currentManga.id}/{currentManga.slug}/{firstChapter?.id}/chapter-{firstChapter?.slug}"
 					variant="secondary"
 					class="w-full h-12 flex items-center"
 				>
@@ -256,10 +260,9 @@
 			{/if}
 		</div>
 	</div>
-	<div class="grid grid-cols-1 md:grid-cols-3">
-		<MangaChapterList id={currentManga.id} slug={currentManga.slug} />
-	</div>
+	{#if currentManga?.id && currentManga.slug}
+		<div class="grid grid-cols-1 md:grid-cols-3">
+			<MangaChapterList id={currentManga.id} slug={currentManga.slug} />
+		</div>
+	{/if}
 </section>
-
-<style>
-</style>
