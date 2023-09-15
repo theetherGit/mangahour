@@ -6,6 +6,7 @@
 	import { slide } from 'svelte/transition';
 	import { create, insertMultiple, search } from '@orama/orama';
 	import { db } from '$lib/db';
+	import { formatDistanceToNowStrict} from "date-fns";
 
 	export let id: string;
 	export let slug: string;
@@ -25,6 +26,7 @@
 		if (chapterResponse.ok) {
 			const chaptersResponseJson = await chapterResponse.json();
 			allChapters = chaptersInView = chaptersResponseJson.chapters;
+			console.log(allChapters)
 			const validSearchData = allChapters.map((chapter: any) => {
 				return {
 					...chapter,
@@ -68,17 +70,17 @@
 		{#if chaptersInView}
 			<div
 				transition:slide={{ axis: 'y', duration: 300 }}
-				class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-h-96 gap-4
+				class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 max-h-96 gap-4
 							overflow-y-scroll px-2 py-4 scrollbar-thin scrollbar-thumb-primary
 							scrollbar-track-accent"
 			>
 				{#each chaptersInView as chapter}
 					{@const alreadyRead = alreadyReadChapters?.chapters.includes(chapter.id.toString())}
-					<Button
+					<Button class="flex items-center justify-between"
 						href="/manga/{id}/{slug}/{chapter.id}/chapter-{chapter.slug}"
 						variant={alreadyRead ? 'secondary' : 'default'}
 					>
-						Chapter {chapter.chapter_number}
+						Chapter {chapter.chapter_number}<span>{formatDistanceToNowStrict(new Date(chapter['updated_at']))}</span>
 					</Button>
 				{/each}
 			</div>

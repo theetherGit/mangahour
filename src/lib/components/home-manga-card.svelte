@@ -70,7 +70,7 @@
 						</div>
 					{/if}
 					<img
-						loading="eager"
+						loading="lazy"
 						class="rounded-lg w-[122px] h-[173px]"
 						src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.cover}"
 						alt="Read {manga.title}"

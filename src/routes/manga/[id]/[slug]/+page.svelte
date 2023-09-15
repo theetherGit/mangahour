@@ -51,9 +51,6 @@
 		await invalidateAll();
 	};
 
-	$: console.log(
-			currentManga, firstChapter
-	)
 </script>
 
 <SvelteSeo
@@ -95,12 +92,12 @@
 />
 
 <section id={currentManga.title} class="pb-5">
-	<div class="grid grid-cols-1 md:grid-cols-3 space-y-4 md:space-y-0 md:space-x-5">
+	<div class="grid grid-cols-1 lg:grid-cols-3 space-y-4 lg:space-y-0 lg:space-x-5">
 		<div class="col-span-2">
 			<Card.Root>
-				<Card.Content class="p-2 md:p-6 grid grid-cols-1 md:grid-cols-3 md:space-x-4">
+				<Card.Content class="p-2 lg:p-6 grid grid-cols-1 md:grid-cols-3 md:space-x-4">
 					<div class="w-full">
-						<img loading="eager"
+						<img loading="lazy"
 							 class="bg-auto rounded-lg"
 							src="/images?type=covers&id=manga_{currentManga.id}&slug={currentManga.cover}"
 							alt="Read {currentManga.title}"
@@ -261,8 +258,10 @@
 		</div>
 	</div>
 	{#if currentManga?.id && currentManga.slug}
-		<div class="grid grid-cols-1 md:grid-cols-3">
+		<div class="grid grid-cols-1 lg:grid-cols-3">
 			<MangaChapterList id={currentManga.id} slug={currentManga.slug} />
 		</div>
 	{/if}
 </section>
+
+
