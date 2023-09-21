@@ -9,7 +9,7 @@
 	import { db } from '$lib/db';
 	import { invalidateAll } from '$app/navigation';
 	import { slide, fly } from 'svelte/transition';
-	import SvelteSeo from "svelte-seo";
+	import SvelteSeo from 'svelte-seo';
 
 	export let data: PageServerData;
 
@@ -40,7 +40,7 @@
 			chapterId: params.chapterId,
 			chapterSlug: params.chapterNumber,
 			chapterNumber: data.chapter.chapter_number.toString()
-		})
+		});
 	});
 
 	const addToFavorites = async (e: any) => {
@@ -55,7 +55,6 @@
 				description: '',
 				slug: chapter.manga_slug,
 				lastUpdated: new Date()
-
 			});
 		}
 		isFavorite = await db.favouriteManga.get(params.id.toString());
@@ -64,38 +63,38 @@
 </script>
 
 <SvelteSeo
-		title="Mangahour | {chapter.manga_title} | Chapter {chapter.chapter_number}"
-		description="Reading {chapter.manga_title} - Chapter {chapter.chapter_number}"
-		canonical="{$page.url.href}"
-		keywords="Read {chapter.manga_title} - {chapter.chapter_number}, Reading {chapter.manga_title} - {chapter.chapter_number}"
-		applicationName="MangaHour"
-		openGraph={{
-			title: `Mangahour | Reading ${chapter.manga_title} | Chapter ${chapter.chapter_number}`,
-			description: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`,
-			url: `${$page.url.href}`,
-			type: "website",
-			images: [
-			  {
+	title="Mangahour | {chapter.manga_title} | Chapter {chapter.chapter_number}"
+	description="Reading {chapter.manga_title} - Chapter {chapter.chapter_number}"
+	canonical={$page.url.href}
+	keywords="Read {chapter.manga_title} - {chapter.chapter_number}, Reading {chapter.manga_title} - {chapter.chapter_number}"
+	applicationName="MangaHour"
+	openGraph={{
+		title: `Mangahour | Reading ${chapter.manga_title} | Chapter ${chapter.chapter_number}`,
+		description: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`,
+		url: `${$page.url.href}`,
+		type: 'website',
+		images: [
+			{
 				url: `${$page.url.origin}/og/chapter?mangaId=${params.id}&mangaSlug=${params.slug}&id=${params.chapterId}&slug=${params.chapterNumber}`,
 				alt: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`
-			  }
-			],
-			site_name: "MangaHour",
-		}}
-		twitter={{
-			card: "summary_large_image",
-			site: "@mangahour",
-			title: `Mangahour | Reading ${chapter.manga_title}'s chapter ${chapter.chapter_number}`,
-			description: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`,
-			image: `${$page.url.origin}/og/chapter?mangaId=${params.id}&mangaSlug=${params.slug}&id=${params.chapterId}&slug=${params.chapterNumber}`,
-		}}
-		jsonLd={{
-			"@context": "https://schema.org",
-			"@type": "WebSite",
-			name: `Mangahour | Reading ${chapter.manga_title}'s chapter ${chapter.chapter_number}`,
-			description: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`,
-			url: `${$page.url.href}`
-		}}
+			}
+		],
+		site_name: 'MangaHour'
+	}}
+	twitter={{
+		card: 'summary_large_image',
+		site: '@mangahour',
+		title: `Mangahour | Reading ${chapter.manga_title}'s chapter ${chapter.chapter_number}`,
+		description: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`,
+		image: `${$page.url.origin}/og/chapter?mangaId=${params.id}&mangaSlug=${params.slug}&id=${params.chapterId}&slug=${params.chapterNumber}`
+	}}
+	jsonLd={{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: `Mangahour | Reading ${chapter.manga_title}'s chapter ${chapter.chapter_number}`,
+		description: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`,
+		url: `${$page.url.href}`
+	}}
 />
 
 {#if chapter}

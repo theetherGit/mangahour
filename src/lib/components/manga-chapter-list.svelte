@@ -6,7 +6,7 @@
 	import { slide } from 'svelte/transition';
 	import { create, insertMultiple, search } from '@orama/orama';
 	import { db } from '$lib/db';
-	import { formatDistanceToNowStrict} from "date-fns";
+	import { formatDistanceToNowStrict } from 'date-fns';
 
 	export let id: string;
 	export let slug: string;
@@ -26,7 +26,7 @@
 		if (chapterResponse.ok) {
 			const chaptersResponseJson = await chapterResponse.json();
 			allChapters = chaptersInView = chaptersResponseJson.chapters;
-			console.log(allChapters)
+			console.log(allChapters);
 			const validSearchData = allChapters.map((chapter: any) => {
 				return {
 					...chapter,
@@ -57,34 +57,37 @@
 
 {#if chaptersInView && chaptersInView.length}
 	<Card.Root class="mt-5 col-span-1 md:col-span-2">
-	<Card.Header>
-		<Card.Title class="text-center">Chapter List</Card.Title>
-	</Card.Header>
-	<Card.Content>
-		<Input
-			on:input={(e) => searchChapter(e?.target?.value)}
-			type="text"
-			placeholder="Search chapter..."
-			class="mb-2"
-		/>
-		{#if chaptersInView}
-			<div
-				transition:slide={{ axis: 'y', duration: 300 }}
-				class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 max-h-96 gap-4
+		<Card.Header>
+			<Card.Title class="text-center">Chapter List</Card.Title>
+		</Card.Header>
+		<Card.Content>
+			<Input
+				on:input={(e) => searchChapter(e?.target?.value)}
+				type="text"
+				placeholder="Search chapter..."
+				class="mb-2"
+			/>
+			{#if chaptersInView}
+				<div
+					transition:slide={{ axis: 'y', duration: 300 }}
+					class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 max-h-96 gap-4
 							overflow-y-scroll px-2 py-4 scrollbar-thin scrollbar-thumb-primary
 							scrollbar-track-accent"
-			>
-				{#each chaptersInView as chapter}
-					{@const alreadyRead = alreadyReadChapters?.chapters.includes(chapter.id.toString())}
-					<Button class="flex items-center justify-between"
-						href="/manga/{id}/{slug}/{chapter.id}/chapter-{chapter.slug}"
-						variant={alreadyRead ? 'secondary' : 'default'}
-					>
-						Chapter {chapter.chapter_number}<span>{formatDistanceToNowStrict(new Date(chapter['updated_at']))}</span>
-					</Button>
-				{/each}
-			</div>
-		{/if}
-	</Card.Content>
-</Card.Root>
+				>
+					{#each chaptersInView as chapter}
+						{@const alreadyRead = alreadyReadChapters?.chapters.includes(chapter.id.toString())}
+						<Button
+							class="flex items-center justify-between"
+							href="/manga/{id}/{slug}/{chapter.id}/chapter-{chapter.slug}"
+							variant={alreadyRead ? 'secondary' : 'default'}
+						>
+							Chapter {chapter.chapter_number}<span
+								>{formatDistanceToNowStrict(new Date(chapter['updated_at']))}</span
+							>
+						</Button>
+					{/each}
+				</div>
+			{/if}
+		</Card.Content>
+	</Card.Root>
 {/if}

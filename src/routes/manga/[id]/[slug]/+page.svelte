@@ -18,8 +18,8 @@
 	import { db } from '$lib/db';
 	import { invalidateAll } from '$app/navigation';
 	import { MangaChapterList } from '$lib/components';
-	import {page} from "$app/stores";
-	import SvelteSeo from "svelte-seo";
+	import { page } from '$app/stores';
+	import SvelteSeo from 'svelte-seo';
 
 	export let data: PageServerData;
 	const currentManga = data.manga.real;
@@ -50,45 +50,49 @@
 		isFavorite = await db.favouriteManga.get(currentManga.id.toString());
 		await invalidateAll();
 	};
-
 </script>
 
 <SvelteSeo
-		title="Mangahour | Read {currentManga.title}"
-		description="{currentManga.desc}"
-		canonical="{$page.url.href}"
-		keywords="{currentManga.title}, {currentManga.alt_titles.map(manga => {
-			return `Read ${manga.name} on mangahour`
-		}).join(', ')}"
-		applicationName="MangaHour"
-		openGraph={{
-			title: `Mangahour | Read ${currentManga.title}`,
-			description: `${currentManga.desc}`,
-			url: `${$page.url.href}`,
-			type: "website",
-			images: [
-			  {
+	title="Mangahour | Read {currentManga.title}"
+	description={currentManga.desc}
+	canonical={$page.url.href}
+	keywords="{currentManga.title}, {currentManga.alt_titles
+		.map((manga) => {
+			return `Read ${manga.name} on mangahour`;
+		})
+		.join(', ')}"
+	applicationName="MangaHour"
+	openGraph={{
+		title: `Mangahour | Read ${currentManga.title}`,
+		description: `${currentManga.desc}`,
+		url: `${$page.url.href}`,
+		type: 'website',
+		images: [
+			{
 				url: `${$page.url.origin}/og/manga?id=${currentManga.id}&slug=${currentManga.slug}`,
-				alt: `${currentManga.title}, ${currentManga.alt_titles.map(manga => {
-					return `Read ${manga.name} on mangahour`}).join(', ')}`
-			  }
-			],
-			site_name: "MangaHour",
-		}}
-		twitter={{
-			card: "summary_large_image",
-			site: "@mangahour",
-			title: `Mangahour | Read ${currentManga.title}`,
-			description: `${currentManga.desc}`,
-			image: `${$page.url.origin}/og/manga?id=${currentManga.id}&slug=${currentManga.slug}`,
-		}}
-		jsonLd={{
-			"@context": "https://schema.org",
-			"@type": "WebSite",
-			name: `Mangahour | Read ${currentManga.title}`,
-			description: `${currentManga.desc}`,
-			url: `${$page.url.href}`
-		}}
+				alt: `${currentManga.title}, ${currentManga.alt_titles
+					.map((manga) => {
+						return `Read ${manga.name} on mangahour`;
+					})
+					.join(', ')}`
+			}
+		],
+		site_name: 'MangaHour'
+	}}
+	twitter={{
+		card: 'summary_large_image',
+		site: '@mangahour',
+		title: `Mangahour | Read ${currentManga.title}`,
+		description: `${currentManga.desc}`,
+		image: `${$page.url.origin}/og/manga?id=${currentManga.id}&slug=${currentManga.slug}`
+	}}
+	jsonLd={{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: `Mangahour | Read ${currentManga.title}`,
+		description: `${currentManga.desc}`,
+		url: `${$page.url.href}`
+	}}
 />
 
 <section id={currentManga.title} class="pb-5">
@@ -97,8 +101,9 @@
 			<Card.Root>
 				<Card.Content class="p-2 lg:p-6 grid grid-cols-1 md:grid-cols-3 md:space-x-4">
 					<div class="w-full">
-						<img loading="lazy"
-							 class="bg-auto rounded-lg"
+						<img
+							loading="lazy"
+							class="bg-auto rounded-lg"
 							src="/images?type=covers&id=manga_{currentManga.id}&slug={currentManga.cover}"
 							alt="Read {currentManga.title}"
 						/>
@@ -263,5 +268,3 @@
 		</div>
 	{/if}
 </section>
-
-

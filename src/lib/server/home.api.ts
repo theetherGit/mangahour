@@ -4,20 +4,22 @@ export const getHomeApi = async () => {
 	const homePage = await extendedFetch('/home');
 	if (homePage) {
 		return {
-			latest: homePage.latestUpdates,
-			topChaptersToday: homePage.topChaptersLast_24hr,
-			topChaptersLastSixHours: homePage.topChaptersLast_6hr,
-			topChaptersWeekly: homePage.topChaptersLast_7d,
-			topMangaByBookmarks: homePage.topManga_bookmarks,
-			topMangaByViews: homePage.topManga_views
+			latest: homePage.latestUpdates
 		};
 	}
 	return {
-		latest: false,
-		topChaptersToday: false,
-		topChaptersLastSixHours: false,
-		topChaptersWeekly: false,
-		topMangaByBookmarks: false,
-		topMangaByViews: false
+		latest: homePage.latestUpdates
+	};
+};
+
+export const getLatestChapters = async () => {
+	const homePage = await extendedFetch('/home');
+	if (homePage) {
+		return {
+			latest: homePage.latestUpdates
+		};
+	}
+	return {
+		latest: false
 	};
 };

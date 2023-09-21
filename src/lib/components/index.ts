@@ -5,5 +5,6 @@ export { default as ChapterDropDown } from './chapters-dropdown.svelte';
 export { default as Navbar } from './navbar.svelte';
 export { default as BackToTop } from './back-to-top.svelte';
 export { default as MangaChapterList } from './manga-chapter-list.svelte';
-export {default as MangaSearch} from './home-search-component.svelte'
-export {default as Footer } from './footer.svelte'
+export { default as MangaSearch } from './home-search-component.svelte';
+export { default as Footer } from './footer.svelte';
+export { default as FavouriteMangaPage } from "./favourite-manga-card.svelte"

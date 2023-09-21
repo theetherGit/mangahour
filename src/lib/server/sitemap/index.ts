@@ -16,10 +16,10 @@ export async function getTotalMangaPageCount() {
 	if (response.ok) {
 		const jsonResponse = await response.json();
 		if (jsonResponse) {
-			return jsonResponse.meta['last_page']
+			return jsonResponse.meta['last_page'];
 		}
 	}
-	return  99
+	return 99;
 }
 
 export async function getMangaListPageData(page: number) {

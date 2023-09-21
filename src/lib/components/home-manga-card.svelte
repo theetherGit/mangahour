@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FavMangaDBWorker from "$lib/workers/favouriteManga?worker"
+	import FavMangaDBWorker from '$lib/workers/favouriteManga?worker';
 	import { formatDistanceToNowStrict } from 'date-fns';
 	import { Button } from '$lib//components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
@@ -19,11 +19,11 @@
 		favMangaWorker = new FavMangaDBWorker();
 
 		favMangaWorker.onmessage = (e: any) => {
-			const {type, payload} = e.data;
+			const { type, payload } = e.data;
 			if (type === 'get') {
-				isFavorite = payload.manga
+				isFavorite = payload.manga;
 			}
-		}
+		};
 	});
 
 	$: mainBorder = isFavorite ? 'border-rose-800' : haveReadHistory ? 'border-green-500' : '';
@@ -115,9 +115,8 @@
 								? `/manga/${manga.id}/${manga.slug}/${haveReadHistory.chapterId}/${haveReadHistory.chapterSlug}`
 								: `/manga/${manga.id}/${manga.slug}`}
 						>
-							{haveReadHistory ? 'Continue' : 'Start Reading'} {haveReadHistory
-								? `Chapter ${haveReadHistory.chapterNumber}`
-								: ''}
+							{haveReadHistory ? 'Continue' : 'Start Reading'}
+							{haveReadHistory ? `Chapter ${haveReadHistory.chapterNumber}` : ''}
 						</Button>
 					</div>
 				</div>

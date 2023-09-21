@@ -1,7 +1,7 @@
 import { getTotalMangaPageCount } from '$lib/server/sitemap';
-import type {RequestHandler} from "@sveltejs/kit";
+import type { RequestHandler } from '@sveltejs/kit';
 
-export const GET:RequestHandler = async ({url}) => {
+export const GET: RequestHandler = async ({ url }) => {
 	const headers = {
 		'Content-Type': 'application/xml',
 		'Cache-Control': `public, s-maxage=${60 * 60 * 24 * 2}`
@@ -28,4 +28,4 @@ export const GET:RequestHandler = async ({url}) => {
 			.join('')}
     </sitemapindex>`.trim();
 	return new Response(sitemapIndex, { headers });
-}
+};

@@ -1,14 +1,13 @@
 <script lang="ts">
+	import FavouriteSheet from './favourite-manga-list-sheet.svelte';
 	import NoBgLogo from '$lib/images/noBgLogo.webp';
-	import {Button} from "$lib/components/ui/button";
-	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
-	import FavouriteSheet from './favourite-manga-list-sheet.svelte'
+	import { page } from '$app/stores';
 	let show = false;
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
-		{ title: 'Hot Mangas', link: '/hot-mangas', active: 'hot-mangas' },
+		{ title: 'Hot Mangas', link: '/hot-mangas', active: 'hot-mangas' }
 	];
 
 	let path;
@@ -16,10 +15,6 @@
 		path = $page.url.pathname;
 	}
 </script>
-
-<svelte:head>
-	<meta name="theme-color" content="/DCF2F1" />
-</svelte:head>
 
 <header class="flex flex-wrap justify-center">
 	<nav class="fixed z-10 w-full border-b bg-opacity-70 backdrop-blur">
@@ -40,31 +35,30 @@
 						>
 					</a>
 					<div class="flex items-center lg:hidden">
-						<FavouriteSheet favouriteInTopNav={true}/>
 						<button
-								class="relative -mr-6 h-8 w-10 p-6"
-								on:click={() => {
-							show = !show;
-						}}
+							class="relative -mr-6 h-8 w-10 p-6"
+							on:click={() => {
+								show = !show;
+							}}
 						>
 							<span class="sr-only">Open main menu</span>
 							<div
-									class="absolute left-1/2 top-1/2 block w-5 -translate-x-1/2 -translate-y-1/2 transform"
+								class="absolute left-1/2 top-1/2 block w-5 -translate-x-1/2 -translate-y-1/2 transform"
 							>
-							<span
+								<span
 									aria-hidden="true"
 									class="hamburger-line {show === true ? 'rotate-45' : '-translate-y-1.5'}"
-							/>
-								<span
-										aria-hidden="true"
-										class="absolute block h-0.5 w-3 transform rounded bg-primary/70 transition duration-500 ease-in-out {show ===
-								true
-									? 'opacity-0'
-									: ''}"
 								/>
 								<span
-										aria-hidden="true"
-										class="hamburger-line {show === true ? '-rotate-45' : 'translate-y-1.5'}"
+									aria-hidden="true"
+									class="absolute block h-0.5 w-3 transform rounded bg-primary/70 transition duration-500 ease-in-out {show ===
+									true
+										? 'opacity-0'
+										: ''}"
+								/>
+								<span
+									aria-hidden="true"
+									class="hamburger-line {show === true ? '-rotate-45' : 'translate-y-1.5'}"
 								/>
 							</div>
 						</button>
@@ -91,9 +85,8 @@
 						</ul>
 					</div>
 					<div
-							class="hidden md:block flex w-full flex-col sm:flex-row md:w-max lg:space-y-0 lg:space-x-2"
+						class="hidden md:block flex w-full flex-col sm:flex-row md:w-max lg:space-y-0 lg:space-x-2"
 					>
-						<FavouriteSheet />
 					</div>
 				</div>
 			</div>
