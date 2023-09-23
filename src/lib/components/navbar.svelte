@@ -1,14 +1,18 @@
 <script lang="ts">
-	import FavouriteSheet from './favourite-manga-list-sheet.svelte';
 	import NoBgLogo from '$lib/images/noBgLogo.webp';
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
+	import {beforeNavigate} from "$app/navigation";
 	let show = false;
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
 		{ title: 'Favourites', link: '/favourite', active: 'favourite' },
 	];
+
+	beforeNavigate(() => {
+		if (show) show = false
+	});
 
 	let path;
 	$: if (browser) {

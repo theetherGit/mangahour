@@ -103,7 +103,7 @@
 					<div class="w-full">
 						<img
 							loading="lazy"
-							class="bg-auto rounded-lg"
+							class="bg-auto rounded-lg mx-auto"
 							src="/images?type=covers&id=manga_{currentManga.id}&slug={currentManga.cover}"
 							alt="Read {currentManga.title}"
 						/>

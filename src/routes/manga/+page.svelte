@@ -1,7 +1,7 @@
 <script lang="ts">
     import {TopChaptersListViewCard, TopMangaListViewCard} from '$lib/components';
+    import * as RadioGroup from "$lib/components/ui/radio-group";
     import * as Accordion from "$lib/components/ui/accordion";
-    import {Label} from "$lib/components/ui/label";
     import { Skeleton } from "$lib/components/ui/skeleton";
     import { Checkbox } from "$lib/components/ui/checkbox";
     import * as Tooltip from "$lib/components/ui/tooltip";
@@ -10,6 +10,7 @@
     import * as Card from '$lib/components/ui/card';
     import * as Tabs from '$lib/components/ui/tabs';
     import {Input} from "$lib/components/ui/input";
+    import {Label} from "$lib/components/ui/label";
     import {Filter, FilterX} from "lucide-svelte";
     import type {PageServerData} from "./$types";
     import SvelteSeo from "svelte-seo";
@@ -32,7 +33,7 @@
         includedLanguages: [],
         includedPubstatus: [],
         list_order: 'desc',
-        list_type: 'added date',
+        list_type: 'Added Date',
         term: searchTerm
     };
 
@@ -43,7 +44,7 @@
             includedLanguages: [],
             includedPubstatus: [],
             list_order: 'desc',
-            list_type: 'added date',
+            list_type: 'Added Date',
             term: searchTerm
         };
         mangasInView = data.result.data
@@ -197,7 +198,7 @@
                         </Tooltip.Content>
                     </Tooltip.Root>
                 </Sheet.Trigger>
-                <Sheet.Content side="right">
+                <Sheet.Content side="right" class="overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary scrollbar-thumb-rounded">
                     <Sheet.Header>
                         <Sheet.Title>Advanced Search Filters</Sheet.Title>
                         <Sheet.Description>
@@ -206,7 +207,74 @@
                     </Sheet.Header>
                     <div class="grid gap-4 py-4">
                         <Input class="" type="search" placeholder="Search manga..." bind:value={searchTerm} />
-                        <Accordion.Root class="w-full" value="genre">
+                        <Accordion.Root class="w-full" value="sort">
+                            <Accordion.Item value="sort">
+                                <Accordion.Trigger class="hover:no-underline">Sort</Accordion.Trigger>
+                                <Accordion.Content>
+                                    <div class="grid grid-cols-2 gap-y-2">
+                                        <div class="space-y-3">
+                                            <h4>By</h4>
+                                            <RadioGroup.Root value={searchBodyData.list_type} onValueChange={(value) => {searchBodyData.list_type = value; loadNextPageManga(true)}}>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="Added Date" id="Added Date" />
+                                                    <Label for="Added Date">Added Date</Label>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="Updated date" id="Updated date" />
+                                                    <Label for="Updated date">Updated date</Label>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="Views" id="Views" />
+                                                    <Label for="Views">Views</Label>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="Bookmarks" id="Bookmarks" />
+                                                    <Label for="Bookmarks">Bookmarks</Label>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="Number of chapters" id="Number of chapters" />
+                                                    <Label for="Number of chapters"> Chapters</Label>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="Rating" id="Rating" />
+                                                    <Label for="Rating">Rating</Label>
+                                                </div>
+                                            </RadioGroup.Root>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <h4> Order</h4>
+                                            <RadioGroup.Root value={searchBodyData.list_order} onValueChange={(value) => {searchBodyData.list_order = value; loadNextPageManga(true)}}>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="asc" id="asc" />
+                                                    <Label for="asc">Ascending</Label>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <RadioGroup.Item value="desc" id="desc" />
+                                                    <Label for="desc">Descending</Label>
+                                                </div>
+                                            </RadioGroup.Root>
+                                        </div>
+                                    </div>
+                                </Accordion.Content>
+                            </Accordion.Item>
+                            <Accordion.Item value="status">
+                                <Accordion.Trigger class="hover:no-underline">Status</Accordion.Trigger>
+                                <Accordion.Content>
+                                    <div class="grid grid-cols-2 gap-y-2">
+                                        {#each data.filters.pubstatus as status}
+                                            <div class="flex items-center space-x-2">
+                                                <Checkbox checked={searchBodyData.includedLanguages.includes(status.name)} id={status.name} onCheckedChange={(state) => handleStatusFilter(state, status.name)}/>
+                                                <Label
+                                                        for={status.name}
+                                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                                >
+                                                    {status.name}
+                                                </Label>
+                                            </div>
+                                        {/each}
+                                    </div>
+                                </Accordion.Content>
+                            </Accordion.Item>
                             <Accordion.Item value="genre">
                                 <Accordion.Trigger class="hover:no-underline">Genre</Accordion.Trigger>
                                 <Accordion.Content>
@@ -255,24 +323,6 @@
                                                         class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                                 >
                                                     {lang.name}
-                                                </Label>
-                                            </div>
-                                        {/each}
-                                    </div>
-                                </Accordion.Content>
-                            </Accordion.Item>
-                            <Accordion.Item value="status">
-                                <Accordion.Trigger class="hover:no-underline">Status</Accordion.Trigger>
-                                <Accordion.Content>
-                                    <div class="grid grid-cols-2 gap-y-2">
-                                        {#each data.filters.pubstatus as status}
-                                            <div class="flex items-center space-x-2">
-                                                <Checkbox checked={searchBodyData.includedLanguages.includes(status.name)} id={status.name} onCheckedChange={(state) => handleStatusFilter(state, status.name)}/>
-                                                <Label
-                                                        for={status.name}
-                                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                                >
-                                                    {status.name}
                                                 </Label>
                                             </div>
                                         {/each}
