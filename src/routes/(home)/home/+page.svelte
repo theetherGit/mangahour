@@ -125,7 +125,7 @@
 			</div>
 		{/if}
 		<Button
-			class="w-full flex items-center space-x-2"
+			class="w-full flex items-center space-x-2 mt-5"
 			disabled={remainingMangaList.length === 0}
 			on:click={() => {
 				loadMoreLatestManga();
