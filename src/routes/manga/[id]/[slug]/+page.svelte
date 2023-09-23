@@ -1,7 +1,14 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card';
+	import { MangaChapterList } from '$lib/components';
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
+	import * as Card from '$lib/components/ui/card';
+	import { invalidateAll } from '$app/navigation';
+	import type { PageServerData } from './$types';
+	import { page } from '$app/stores';
+	import SvelteSeo from 'svelte-seo';
+	import { onMount } from 'svelte';
+	import { db } from '$lib/db';
 	import {
 		PieChart,
 		Book,
@@ -13,15 +20,9 @@
 		Star,
 		Heart
 	} from 'lucide-svelte';
-	import type { PageServerData } from './$types';
-	import { onMount } from 'svelte';
-	import { db } from '$lib/db';
-	import { invalidateAll } from '$app/navigation';
-	import { MangaChapterList } from '$lib/components';
-	import { page } from '$app/stores';
-	import SvelteSeo from 'svelte-seo';
 
 	export let data: PageServerData;
+
 	const currentManga = data.manga.real;
 	let readHistory: any = null;
 	let isFavorite: any = null;

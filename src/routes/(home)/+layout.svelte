@@ -1,18 +1,18 @@
 <script lang="ts">
+	import { MangaSearch, TopChaptersListViewCard, TopMangaListViewCard } from '$lib/components';
 	import LastReadChapterDBWorker from '$lib/workers/lastReadMangaChapter?worker';
 	import FavMangaDBWorker from '$lib/workers/favouriteManga?worker';
 	import { Button } from '$lib/components/ui/button';
 	import * as Alert from '$lib/components/ui/alert';
+	import type { LayoutServerData } from './$types';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import type { LayoutServerData } from './$types';
 	import { AlertTriangle } from 'lucide-svelte';
 	import { fly, fade } from 'svelte/transition';
+	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
 	import { onMount } from 'svelte';
 
-	import { MangaSearch, TopChaptersListViewCard, TopMangaListViewCard } from '$lib/components';
-	import { page } from '$app/stores';
 	export let data: LayoutServerData;
 
 	let favMangaWorker: Worker;

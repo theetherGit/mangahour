@@ -1,8 +1,8 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { json } from '@sveltejs/kit';
 import { getManga } from '$lib/server/manga.api';
+import { json } from '@sveltejs/kit';
 
-export const GET: RequestHandler = async ({ url, setHeaders }) => {
+export const GET: RequestHandler = async ({ url }) => {
 	const data = await getManga(
 		url.searchParams.get('id') as string,
 		url.searchParams.get('slug') as string

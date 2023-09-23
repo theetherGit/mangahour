@@ -28,13 +28,13 @@ export const GET: RequestHandler = async ({ params, url }) => {
       xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
     >
     ${sitemapItems
-		.map((path) => {
-			return `<url>
+			.map((path) => {
+				return `<url>
             <loc>${url.origin}${path}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         </url>`;
-		})
-		.join('')}
+			})
+			.join('')}
     </urlset>`.trim();
 
 	return new Response(sitemap, { headers });

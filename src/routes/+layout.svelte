@@ -1,26 +1,14 @@
 <script lang="ts">
-	import '../app.postcss';
-	import { onNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
-	import Navbar from '$lib/components/navbar.svelte';
 	import { partytownSnippet } from '@builder.io/partytown/integration';
 	import { BackToTop, Footer } from '$lib/components';
+	import { Navbar } from '$lib/components';
+	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
+	import '../app.postcss';
 
 	let path: string;
 
 	$: path = $page.url.pathname.split('/').pop() as string;
-
-	// onNavigate((navigation) => {
-	// 	if (!document?.startViewTransition) return;
-	//
-	// 	return new Promise((resolve) => {
-	// 		document.startViewTransition(async () => {
-	// 			resolve();
-	// 			await navigation.complete;
-	// 		});
-	// 	});
-	// });
 </script>
 
 <svelte:head>

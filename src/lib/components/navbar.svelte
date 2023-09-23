@@ -2,16 +2,16 @@
 	import NoBgLogo from '$lib/images/noBgLogo.webp';
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
-	import {beforeNavigate} from "$app/navigation";
+	import { beforeNavigate } from '$app/navigation';
 	let show = false;
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
-		{ title: 'Favourites', link: '/favourite', active: 'favourite' },
+		{ title: 'Favourites', link: '/favourite', active: 'favourite' }
 	];
 
 	beforeNavigate(() => {
-		if (show) show = false
+		if (show) show = false;
 	});
 
 	let path;
@@ -90,8 +90,7 @@
 					</div>
 					<div
 						class="hidden md:block flex w-full flex-col sm:flex-row md:w-max lg:space-y-0 lg:space-x-2"
-					>
-					</div>
+					/>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { json } from '@sveltejs/kit';
 import { extendedFetch } from '$lib/server/utils';
+import { json } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ url }) => {
 	const term = url.searchParams.get('query');

@@ -1,5 +1,5 @@
 import { BASE_API } from '$env/static/private';
-import {initialSearchParams} from "$lib/server/mangaSearch.api";
+import { initialSearchParams } from '$lib/server/mangaSearch.api';
 
 export async function getTotalMangaPageCount() {
 	const response = await fetch(`${BASE_API}/search/advanced/post?page=1`, {

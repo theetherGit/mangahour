@@ -1,15 +1,15 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card';
-	import type { PageServerData } from './$types';
+	import { ArrowLeft, ArrowRight, Heart } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { ChapterDropDown } from '$lib//components';
-	import { ArrowLeft, ArrowRight, Heart } from 'lucide-svelte';
+	import * as Card from '$lib/components/ui/card';
+	import { invalidateAll } from '$app/navigation';
+	import type { PageServerData } from './$types';
+	import { slide, fly } from 'svelte/transition';
 	import { page } from '$app/stores';
+	import SvelteSeo from 'svelte-seo';
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
-	import { invalidateAll } from '$app/navigation';
-	import { slide, fly } from 'svelte/transition';
-	import SvelteSeo from 'svelte-seo';
 
 	export let data: PageServerData;
 
