@@ -11,15 +11,3 @@ export const getHomeApi = async () => {
 		latest: homePage.latestUpdates
 	};
 };
-
-export const getLatestChapters = async () => {
-	const homePage = await extendedFetch('/home');
-	if (homePage) {
-		return {
-			latest: homePage.latestUpdates
-		};
-	}
-	return {
-		latest: false
-	};
-};
