@@ -7,7 +7,8 @@
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
-		{ title: 'Hot Mangas', link: '/hot-mangas', active: 'hot-mangas' }
+		{ title: 'Hot Mangas', link: '/hot-mangas', active: 'hot-mangas' },
+		{ title: 'Favourites', link: '/favourite', active: 'favourite' },
 	];
 
 	let path;
