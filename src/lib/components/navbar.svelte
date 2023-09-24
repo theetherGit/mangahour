@@ -7,7 +7,8 @@
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
-		{ title: 'Favourites', link: '/favourite', active: 'favourite' }
+		{ title: 'Favourites', link: '/favourite', active: 'favourite' },
+		{ title: 'Your Data', link: '/data', active: 'data' }
 	];
 
 	beforeNavigate(() => {

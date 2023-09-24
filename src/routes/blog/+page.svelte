@@ -17,7 +17,7 @@
                 </div>
                 <p class="leading-relaxed">
                     - Indexed DB <br />
-                    - We use `Indexed DB` which is inbuilt in every browsers. Which remove the tracking dependency of your data on server.
+                    - We use `Indexed DB` which is inbuilt in every browsers. Which remove the tracking dependency of your data on server.<br />
                     - Drawback is it's not synced with other devices and browsers. It saves data in same browser. E.g. If you have Brave and Chrome in same device and you save data in chrome, you can't use same data in brave.
                 </p>
             </div>
