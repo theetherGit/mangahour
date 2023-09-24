@@ -66,7 +66,7 @@ export class LiveReaders {
 		server.addEventListener('close', async () => {
 			// Remove the session from the Set
 			this.conns.delete(server);
-
+			await this.decrement();
 			if (this.conns.size === 0) {
 				// When the client disconnects, we can delete all the data in Durable Object
 				// Deleting all data automatically discards the Durable Object instance

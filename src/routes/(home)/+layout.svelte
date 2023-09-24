@@ -3,11 +3,9 @@
 	import LastReadChapterDBWorker from '$lib/workers/lastReadMangaChapter?worker';
 	import FavMangaDBWorker from '$lib/workers/favouriteManga?worker';
 	import { Button } from '$lib/components/ui/button';
-	import * as Alert from '$lib/components/ui/alert';
 	import type { LayoutServerData } from './$types';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import { AlertTriangle } from 'lucide-svelte';
 	import { fly, fade } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
@@ -83,16 +81,6 @@
 />
 
 <section id="main">
-	<Alert.Root class="mb-5 text-amber-600 border-amber-500">
-		<AlertTriangle class="h-4 w-4" color="rgb(217 119 6)" />
-		<Alert.Title>Work in Progress</Alert.Title>
-		<Alert.Description>
-			MangaHour currently work in progress, if you find any issues please let use know by mail <a
-				href="mailto:contact@mangahour.com"
-				class="italic">contact@mangahour.com</a
-			>
-		</Alert.Description>
-	</Alert.Root>
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 relative">
 		<div class="col-span-3 md:col-span-2 space-y-4 pb-4">
 			<MangaSearch />
