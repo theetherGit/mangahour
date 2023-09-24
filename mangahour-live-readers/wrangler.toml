@@ -2,6 +2,10 @@ name = "mangahour-live-readers"
 main = "src/index.ts"
 compatibility_date = "2023-09-18"
 
+routes = [
+	{ pattern = "live-readers.mangahour.com", custom_domain = true }
+]
+
 # Bind a Durable Object. Durable objects are a scale-to-zero compute primitive based on the actor model.
 # Durable Objects can live for as long as needed. Use these when you need a long-running "server", such as in realtime apps.
 # Docs: https://developers.cloudflare.com/workers/runtime-apis/durable-objects

@@ -5,10 +5,37 @@
 	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
 	import '../app.postcss';
+	import {onMount} from "svelte";
+	import {liveReaders} from "$lib/utils";
 
+	let liveReaderSocket: WebSocket;
 	let path: string;
 
+
+	onMount(async () => {
+		liveReaderSocket = new WebSocket(`wss://live-readers.mangahour.com`);
+
+		liveReaderSocket.onopen = (e) => {
+			liveReaderSocket.send(JSON.stringify({
+				type: 'increment'
+			}))
+		};
+
+		liveReaderSocket.onclose = (e) => {
+			liveReaderSocket.send(JSON.stringify({
+				type: 'decrement'
+			}))
+		};
+
+		liveReaderSocket.addEventListener('message', (e) => {
+			const data = JSON.parse(e.data)
+			if (data.type === 'update/count') {
+				liveReaders.set(data.count as number)
+			}
+		})
+	});
 	$: path = $page.url.pathname.split('/').pop() as string;
+
 </script>
 
 <svelte:head>

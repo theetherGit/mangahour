@@ -1,5 +1,6 @@
 <script>
 	import * as Card from '$lib/components/ui/card';
+	import {liveReaders} from "$lib/utils";
 </script>
 
 <div class="m-auto px-2 md:px-12 lg:px-14">
@@ -41,7 +42,7 @@
 			<div class="flex flex-col items-start md:mt-2 py-1 md:px-1">
 				<h3 class="text-xl font-bold tracking-tight md:border-b md:pb-1 italic">Live</h3>
 				<div class="flex flex-col space-y-4 mt-2">
-					<button>Readers: </button>
+					<button>Readers: {$liveReaders}</button>
 					<a href="/data">Your Data</a>
 				</div>
 			</div>
