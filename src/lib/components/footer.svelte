@@ -13,7 +13,7 @@
 			</a>
 			<p class="leading-7">Made with &#10084;</p>
 		</div>
-		<div class="grid grid-cols-2 md:grid-cols-3 gap-x-2.5 gap-y-2.5">
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-x-2.5 gap-y-2.5">
 			<div class="flex flex-col items-start md:mt-2 py-1 md:px-1">
 				<h3 class="text-xl font-bold tracking-tight md:border-b md:pb-1 italic">Main</h3>
 				<div class="flex flex-col space-y-4 mt-2">
@@ -36,6 +36,13 @@
 					<a href="/sitemap/index.xml">Sitemap.xml</a>
 					<a href="/robots.txt">Robots.txt</a>
 					<a href="/contact">Report an Issue</a>
+				</div>
+			</div>
+			<div class="flex flex-col items-start md:mt-2 py-1 md:px-1">
+				<h3 class="text-xl font-bold tracking-tight md:border-b md:pb-1 italic">Live</h3>
+				<div class="flex flex-col space-y-4 mt-2">
+					<button>Readers: </button>
+					<a href="/data">Your Data</a>
 				</div>
 			</div>
 		</div>

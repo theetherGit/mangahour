@@ -26,7 +26,6 @@
 		if (chapterResponse.ok) {
 			const chaptersResponseJson = await chapterResponse.json();
 			allChapters = chaptersInView = chaptersResponseJson.chapters;
-			console.log(allChapters);
 			const validSearchData = allChapters.map((chapter: any) => {
 				return {
 					...chapter,

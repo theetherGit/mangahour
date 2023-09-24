@@ -46,7 +46,6 @@
 
 	const searchFavManga = async (value: string) => {
 		if (value && favouriteMangaSearchDB) {
-			console.log(favouriteMangaSearchDB, value);
 			const results = await search(favouriteMangaSearchDB, {
 				term: value,
 				properties: '*',
