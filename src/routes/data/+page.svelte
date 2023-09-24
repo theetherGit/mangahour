@@ -1,6 +1,7 @@
 <script lang="ts">
     import LastReadChapterDBWorker from '$lib/workers/lastReadMangaChapter?worker';
     import * as Alert from "$lib/components/ui/alert";
+    import {formatDistanceToNowStrict} from "date-fns";
     import {Button} from "$lib/components/ui/button";
     import * as Card from "$lib/components/ui/card";
     import { fade, fly } from 'svelte/transition';
@@ -9,7 +10,6 @@
     import {onMount} from "svelte";
     import {db} from "$lib/db";
     import {goto} from "$app/navigation";
-    import {formatDistanceToNowStrict} from "date-fns";
 
     let lastReadChapterWorker: Worker;
     let userReadHistory: Map<string, any>;
