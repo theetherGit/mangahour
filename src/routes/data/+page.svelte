@@ -133,12 +133,12 @@
                                         <h2 class="text-lg font-semibold tracking-tight truncate">{manga.name}</h2>
                                     </Button>
                                     <div class="pt-4 space-y-2">
-                                        <Button
-                                                variant="outline"
-                                                class="w-full flex space-x-2 items-center justify-between"
-                                        >
-                                            Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
-                                        </Button>
+<!--                                        <Button-->
+<!--                                                variant="outline"-->
+<!--                                                class="w-full flex space-x-2 items-center justify-between"-->
+<!--                                        >-->
+<!--                                            Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>-->
+<!--                                        </Button>-->
                                         <Button
                                                 variant="destructive"
                                                 class="w-full"
