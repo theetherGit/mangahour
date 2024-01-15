@@ -17,6 +17,8 @@ jobs:
           secrets: |
             BASE_API
             BASE_STORAGE_ENDPOINT
+            CHAPTER_IMAGES_ENDPOINT
         env:
           BASE_API: ${{ secrets.BASE_API}}
           BASE_STORAGE_ENDPOINT: ${{ secrets.BASE_STORAGE_ENDPOINT}}
+          CHAPTER_IMAGES_ENDPOINT: ${{ secrets.CHAPTER_IMAGES_ENDPOINT}}
