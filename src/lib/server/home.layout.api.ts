@@ -1,7 +1,7 @@
 import { extendedFetch } from '$lib/server/utils';
 
-export const getHomeLayoutApi = async () => {
-	const homePage = await extendedFetch('/home');
+export const getHomeLayoutApi = async (fetch: any) => {
+	const homePage = await extendedFetch(fetch,'/home');
 	if (homePage) {
 		return {
 			topChaptersToday: homePage.topChaptersLast_24hr,

@@ -2,7 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { getMangaListPageData } from '$lib/server/sitemap';
 import { getMangaChapters } from '$lib/server/manga.api';
 
-export const GET: RequestHandler = async ({ params, url }) => {
+export const GET: RequestHandler = async ({ params, url, fetch }) => {
 	const sitemapItems = [];
 	const headers = {
 		'Content-Type': 'application/xml',
@@ -12,7 +12,7 @@ export const GET: RequestHandler = async ({ params, url }) => {
 
 	for (const manga of mangaList) {
 		sitemapItems.push(`/manga/${manga.id}/${manga.slug}`);
-		const chapters = await getMangaChapters(manga.id, manga.slug);
+		const chapters = await getMangaChapters(fetch, manga.id, manga.slug);
 		chapters.forEach((chapter: any) => {
 			sitemapItems.push(`/manga/${manga.id}/${manga.slug}/${chapter.id}/chapter-${chapter.slug}`);
 		});

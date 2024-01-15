@@ -176,14 +176,14 @@
 					<Globe2 class="w-5 mr-2 " />
 					Origin
 				</span>
-				<span>{currentManga.language.name}</span>
+				<span>{currentManga.lang_name}</span>
 			</Button>
 			<Button variant="secondary" class="w-full h-12 flex items-center justify-between">
 				<span class="flex items-center text-lg">
 					<PieChart class="w-5 mr-2" />
 					Status
 				</span>
-				<span>{currentManga.pubstatus[0].name}</span>
+				<span>{currentManga.pubstatus[0]?.name ?? ''}</span>
 			</Button>
 			<Button variant="secondary" class="w-full h-12 flex items-center justify-between">
 				<span class="flex items-center text-lg">
@@ -192,7 +192,7 @@
 				</span>
 				<span
 					>{new Intl.NumberFormat('en', { notation: 'compact' }).format(
-						currentManga.chapters_count
+						currentManga.chapters_count ?? 0
 					)}</span
 				>
 			</Button>

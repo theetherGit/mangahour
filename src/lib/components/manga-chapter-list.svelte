@@ -63,7 +63,7 @@
 			<Input
 				on:input={(e) => searchChapter(e?.target?.value)}
 				type="text"
-				placeholder="Search chapter..."
+				placeholder="Search chapter e.g. 61, ..."
 				class="mb-2"
 			/>
 			{#if chaptersInView}
@@ -81,7 +81,7 @@
 							variant={alreadyRead ? 'secondary' : 'default'}
 						>
 							Chapter {chapter.chapter_number}<span
-								>{formatDistanceToNowStrict(new Date(chapter['updated_at']))}</span
+								>{formatDistanceToNowStrict(new Date(chapter['created_at']))}</span
 							>
 						</Button>
 					{/each}
@@ -89,4 +89,8 @@
 			{/if}
 		</Card.Content>
 	</Card.Root>
+{:else }
+	<div class="flex min-w-full min-h-96 gap-4 px-2 py-4">
+
+	</div>
 {/if}

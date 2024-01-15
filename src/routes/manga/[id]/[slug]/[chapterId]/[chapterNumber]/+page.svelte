@@ -183,7 +183,7 @@
 					<img
 						loading="lazy"
 						class="first:rounded-lg last:rounded-lg self-center mx-auto"
-						src="/images?type=manga&id=manga_{chapter.manga_id}/chapter_{chapter.slug}&slug={image}"
+						src="/images/chapter?type=manga&id=manga_{chapter.manga_id}/chapter_{chapter.slug}&slug={image}"
 						alt="Read {chapter.manga_title}'s page {i}"
 					/>
 				{/each}

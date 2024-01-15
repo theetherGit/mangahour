@@ -3,10 +3,10 @@ import { getAllFilters } from '$lib/server/availableFilters.api';
 import { getHomeLayoutApi } from '$lib/server/home.layout.api';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({fetch}) => {
 	return {
-		trending: getHomeLayoutApi(),
+		trending: getHomeLayoutApi(fetch),
 		result: advanceSearchManga(1),
-		filters: getAllFilters()
+		filters: getAllFilters(fetch)
 	};
 };

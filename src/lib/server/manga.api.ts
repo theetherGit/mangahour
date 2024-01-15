@@ -1,7 +1,7 @@
 import { extendedFetch } from '$lib/server/utils';
 
-export const getManga = async (id: string, slug: string) => {
-	const mangaData = await extendedFetch(`/manga/${id}/${slug}`);
+export const getManga = async (fetch: any, id: string, slug: string) => {
+	const mangaData = await extendedFetch(fetch,`/manga/${id}/${slug}`);
 	if (mangaData) {
 		return {
 			suggestion: mangaData.best_to_read_next.manga,
@@ -14,8 +14,8 @@ export const getManga = async (id: string, slug: string) => {
 	};
 };
 
-export const getMangaChapters = async (id: string, slug: string) => {
-	const mangaChapterList = await extendedFetch(`/manga/${id}/${slug}/chapterlist`);
+export const getMangaChapters = async (fetchid: any, id: string, slug: string) => {
+	const mangaChapterList = await extendedFetch(fetch,`/manga/${id}/${slug}/chapterlist`);
 	if (mangaChapterList) {
 		return mangaChapterList;
 	}
