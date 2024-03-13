@@ -1,6 +1,6 @@
 <script>
 	import * as Card from '$lib/components/ui/card';
-	import {liveReaders} from "$lib/utils";
+	import { liveReaders } from '$lib/utils';
 </script>
 
 <div class="m-auto px-2 md:px-12 lg:px-14">

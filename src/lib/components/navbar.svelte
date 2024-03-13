@@ -16,6 +16,7 @@
 	});
 
 	let path;
+
 	$: if (browser) {
 		path = $page.url.pathname;
 	}

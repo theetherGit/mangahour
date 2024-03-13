@@ -1,12 +1,14 @@
 import { extendedFetch } from '$lib/server/utils';
 
-export const getMangaChapter = async (fetch: any,
+export const getMangaChapter = async (
+	fetch: any,
 	mangaId: string,
 	mangaSlug: string,
 	chapterId: string,
 	chapterSlug: string
 ) => {
-	const chapterData = await extendedFetch(fetch,
+	const chapterData = await extendedFetch(
+		fetch,
 		`/manga/${mangaId}/${mangaSlug}/${chapterId}/${chapterSlug}`
 	);
 	if (chapterData) {

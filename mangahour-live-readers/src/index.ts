@@ -35,7 +35,7 @@ export class LiveReaders {
 		let newCount = 0;
 		if (count >= 0) {
 			newCount = count - 1;
-			await this.state.storage.put( 'count', newCount );
+			await this.state.storage.put('count', newCount);
 		}
 		// Broadcast the new count to all connected clients
 		this.broadcast(JSON.stringify({ type: 'update/count', count: newCount }));
@@ -48,7 +48,7 @@ export class LiveReaders {
 		const client = webSocketPair[0];
 		const server = webSocketPair[1];
 
-		server.addEventListener('message', async event => {
+		server.addEventListener('message', async (event) => {
 			// Messages are received/sent as strings, so we need to parse it into JSON
 			// to use it as an object
 			const action = JSON.parse(event.data as string);
@@ -81,11 +81,10 @@ export class LiveReaders {
 
 		return new Response(null, {
 			status: 101,
-			webSocket: client
+			webSocket: client,
 		});
 	}
 }
-
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {

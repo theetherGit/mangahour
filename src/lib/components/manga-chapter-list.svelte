@@ -89,8 +89,6 @@
 			{/if}
 		</Card.Content>
 	</Card.Root>
-{:else }
-	<div class="flex min-w-full min-h-96 gap-4 px-2 py-4">
-
-	</div>
+{:else}
+	<div class="flex min-w-full min-h-96 gap-4 px-2 py-4" />
 {/if}

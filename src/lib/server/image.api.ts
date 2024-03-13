@@ -1,4 +1,4 @@
-import {BASE_STORAGE_ENDPOINT, CHAPTER_IMAGES_ENDPOINT} from '$env/static/private';
+import { BASE_STORAGE_ENDPOINT, CHAPTER_IMAGES_ENDPOINT } from '$env/static/private';
 
 export const getImage = async (fetch: any, type: string, id: string, slug: string) => {
 	const imageEndpoint = `/uploads/${type}/${id}/${slug}`;

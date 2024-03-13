@@ -57,6 +57,7 @@
 			}
 		});
 	}
+
 	function createObserver(target: HTMLElement, callback: any) {
 		const options = {
 			root: null,
@@ -98,6 +99,7 @@
 		}
 		loadingMoreData = false;
 	}
+
 	$: if (searchTerm && searchTerm.length > 2) {
 		loadNextPageManga(true);
 	}

@@ -4,12 +4,12 @@
 	import { formatDistanceToNowStrict } from 'date-fns';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
-	import * as Alert from "$lib/components/ui/alert";
+	import * as Alert from '$lib/components/ui/alert';
 	import * as Card from '$lib/components/ui/card';
 	import { fade, fly } from 'svelte/transition';
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
-	import { Heart } from "lucide-svelte";
+	import { Heart } from 'lucide-svelte';
 	import { liveQuery } from 'dexie';
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
@@ -72,8 +72,8 @@
 		}}
 		placeholder="Search from favorites.."
 	/>
-		{#if mangaInView && mangaInView.length}
-			<div class="grid md:grid-cols-2 mt-3 gap-4">
+	{#if mangaInView && mangaInView.length}
+		<div class="grid md:grid-cols-2 mt-3 gap-4">
 			{#each mangaInView as manga}
 				<div in:fly out:fade>
 					<Card.Root>
@@ -117,15 +117,12 @@
 					</Card.Root>
 				</div>
 			{/each}
-			</div>
-
-		{:else }
-				<Alert.Root class="mt-5 text-rose-500 border-rose-500">
-					<Heart class="h-4 w-4" color="rgb(244 63 94)"/>
-					<Alert.Title>No Favourite Manga</Alert.Title>
-					<Alert.Description>
-						Read some & add some in favourites on mangahour.
-					</Alert.Description>
-				</Alert.Root>
-		{/if}
+		</div>
+	{:else}
+		<Alert.Root class="mt-5 text-rose-500 border-rose-500">
+			<Heart class="h-4 w-4" color="rgb(244 63 94)" />
+			<Alert.Title>No Favourite Manga</Alert.Title>
+			<Alert.Description>Read some & add some in favourites on mangahour.</Alert.Description>
+		</Alert.Root>
+	{/if}
 </div>
