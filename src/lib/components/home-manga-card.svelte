@@ -1,5 +1,4 @@
 <script lang="ts">
-	import FavMangaDBWorker from '$lib/workers/favouriteManga?worker';
 	import { formatDistanceToNowStrict } from 'date-fns';
 	import { Button } from '$lib//components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
@@ -16,6 +15,7 @@
 	let favMangaWorker: Worker;
 
 	onMount(async () => {
+		const FavMangaDBWorker = (await import('$lib/workers/favouriteManga?worker')).default;
 		favMangaWorker = new FavMangaDBWorker();
 
 		favMangaWorker.onmessage = (e: any) => {

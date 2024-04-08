@@ -1,5 +1,4 @@
 <script lang="ts">
-	import favouriteUpdateCheckerWorker from '$lib/workers/favoriteUpdateChecker?worker';
 	import { create, insertMultiple, search } from '@orama/orama';
 	import { formatDistanceToNowStrict } from 'date-fns';
 	import { Button } from '$lib/components/ui/button';
@@ -22,6 +21,9 @@
 	});
 
 	onMount(async () => {
+		const favouriteUpdateCheckerWorker = (await import('$lib/workers/favoriteUpdateChecker?worker'))
+			.default;
+
 		favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
 		favouriteUpdateChecker.postMessage({});
 		favouriteMangaSearchDB = await create({

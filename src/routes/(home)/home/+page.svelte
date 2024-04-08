@@ -1,7 +1,7 @@
 <script lang="ts">
-	import LastReadChapterDBWorker from '$lib/workers/lastReadMangaChapter?worker';
+	// import LastReadChapterDBWorker from '$lib/workers/lastReadMangaChapter?worker';
 	import { ArrowDownToLine, Loader, ShieldCheck } from 'lucide-svelte';
-	import FavMangaDBWorker from '$lib/workers/favouriteManga?worker';
+	// import FavMangaDBWorker from '$lib/workers/favouriteManga?worker';
 	import { HomePageMangaViewCard } from '$lib/components';
 	import { Button } from '$lib/components/ui/button';
 	import * as Alert from '$lib/components/ui/alert';
@@ -25,6 +25,10 @@
 	let remainingMangaList = data.latest.slice(30);
 
 	onMount(async () => {
+		const LastReadChapterDBWorker = (await import('$lib/workers/lastReadMangaChapter?worker'))
+			.default;
+		const FavMangaDBWorker = (await import('$lib/workers/favouriteManga?worker')).default;
+
 		favMangaWorker = new FavMangaDBWorker();
 		lastReadChapterWorker = new LastReadChapterDBWorker();
 

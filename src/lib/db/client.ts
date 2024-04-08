@@ -21,7 +21,3 @@ export class MyMangaDB extends Dexie {
 }
 
 export const db = new MyMangaDB();
-
-db.open().catch(function (err) {
-	console.error(err.stack || err);
-});

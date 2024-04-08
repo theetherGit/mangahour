@@ -7,11 +7,15 @@
 	import '../app.postcss';
 	import { onMount } from 'svelte';
 	import { liveReaders } from '$lib/utils';
+	import { db } from '$lib/db';
 
 	let liveReaderSocket: WebSocket;
 	let path: string;
 
 	onMount(async () => {
+		db.open().catch(function (err) {
+			console.error(err.stack || err);
+		});
 		liveReaderSocket = new WebSocket(`wss://live-readers.mangahour.com`);
 
 		liveReaderSocket.onopen = (e) => {

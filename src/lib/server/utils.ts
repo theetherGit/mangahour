@@ -1,6 +1,6 @@
 import { BASE_API } from '$env/static/private';
 
-export const extendedFetch = async (fetch: any, url: string, timeout = 3000) => {
+export const extendedFetch = async (fetch: any, url: string, timeout = 10000) => {
 	const controller = new AbortController();
 	const timeoutId = setTimeout(() => controller.abort(), timeout);
 

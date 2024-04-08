@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { MangaSearch, TopChaptersListViewCard, TopMangaListViewCard } from '$lib/components';
-	import LastReadChapterDBWorker from '$lib/workers/lastReadMangaChapter?worker';
-	import FavMangaDBWorker from '$lib/workers/favouriteManga?worker';
 	import { Button } from '$lib/components/ui/button';
 	import type { LayoutServerData } from './$types';
 	import * as Card from '$lib/components/ui/card';
@@ -17,6 +15,9 @@
 	let lastReadChapterWorker: Worker;
 
 	onMount(async () => {
+		const LastReadChapterDBWorker = (await import('$lib/workers/lastReadMangaChapter?worker'))
+			.default;
+		const FavMangaDBWorker = (await import('$lib/workers/favouriteManga?worker')).default;
 		favMangaWorker = new FavMangaDBWorker();
 		lastReadChapterWorker = new LastReadChapterDBWorker();
 

@@ -11,7 +11,6 @@
 	import { db } from '$lib/db';
 	import { liveQuery } from 'dexie';
 	import { create, insertMultiple, search } from '@orama/orama';
-	import favouriteUpdateCheckerWorker from '$lib/workers/favoriteUpdateChecker?worker';
 	import { goto } from '$app/navigation';
 
 	let favouriteManga = liveQuery(async () => {
@@ -26,6 +25,8 @@
 	let isFavSheetOpen = false;
 
 	onMount(async () => {
+		const favouriteUpdateCheckerWorker = (await import('$lib/workers/favoriteUpdateChecker?worker'))
+			.default;
 		favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
 		favouriteUpdateChecker.postMessage({});
 		favouriteMangaSearchDB = await create({
