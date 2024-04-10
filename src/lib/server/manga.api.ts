@@ -14,7 +14,7 @@ export const getManga = async (fetch: any, id: string, slug: string) => {
 	};
 };
 
-export const getMangaChapters = async (fetchid: any, id: string, slug: string) => {
+export const getMangaChapters = async (fetch: any, id: string, slug: string) => {
 	const mangaChapterList = await extendedFetch(fetch, `/manga/${id}/${slug}/chapterlist`);
 	if (mangaChapterList) {
 		return mangaChapterList;
