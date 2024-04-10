@@ -13,9 +13,10 @@
 	},
 	"devDependencies": {
 		"@builder.io/partytown": "^0.8.2",
-		"@sveltejs/adapter-auto": "^2.1.1",
-		"@sveltejs/adapter-cloudflare-workers": "^1.2.3",
-		"@sveltejs/kit": "^1.30.4",
+		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-cloudflare-workers": "^2.0.0",
+		"@sveltejs/kit": "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/lokijs": "^1.5.14",
 		"@types/node": "^20.11.26",
 		"@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -37,7 +38,7 @@
 		"tailwindcss": "^3.4.1",
 		"tslib": "^2.6.2",
 		"typescript": "^5.4.2",
-		"vite": "^4.5.2",
+		"vite": "^5.0.0",
 		"wrangler": "^3.48.0"
 	},
 	"type": "module",

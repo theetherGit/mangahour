@@ -12,5 +12,5 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 			},
 			manga: getManga(fetch, id, slug)
 		};
-	} else throw redirect(302, '/home');
+	} else redirect(302, '/home');
 };

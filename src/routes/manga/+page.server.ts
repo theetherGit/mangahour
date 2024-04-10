@@ -6,7 +6,7 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ fetch }) => {
 	return {
 		trending: getHomeLayoutApi(fetch),
-		result: advanceSearchManga(1),
+		result: advanceSearchManga(fetch,1),
 		filters: getAllFilters(fetch)
 	};
 };
