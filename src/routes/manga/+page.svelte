@@ -386,7 +386,7 @@
 			</Tooltip.Root>
 		</div>
 		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-			{#if mangasInView.length}
+			{#if mangasInView && mangasInView.length}
 				{#each mangasInView as manga}
 					<a href="/manga/{manga.id}/{manga.slug}">
 						<Card.Root class="hover:scale-105 transition-all duration-500">

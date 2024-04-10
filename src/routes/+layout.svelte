@@ -8,9 +8,10 @@
 	import { onMount } from 'svelte';
 	import { liveReaders } from '$lib/utils';
 	import { db } from '$lib/db';
+	import { browser } from '$app/environment';
 
 	let liveReaderSocket: WebSocket;
-	let path: string;
+	let path: string = '/';
 
 	onMount(async () => {
 		db.open().catch(function (err) {
@@ -41,7 +42,7 @@
 			}
 		});
 	});
-	$: path = $page.url.pathname.split('/').pop() as string;
+	$: if (browser) path = $page.url.pathname.split('/').pop() as string;
 </script>
 
 <svelte:head>

@@ -4,9 +4,10 @@ import { getHomeLayoutApi } from '$lib/server/home.layout.api';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	return {
-		trending: getHomeLayoutApi(fetch),
-		result: advanceSearchManga(fetch,1),
-		filters: getAllFilters(fetch)
-	};
+	const [trending, result, filters] = await Promise.all([
+		getHomeLayoutApi(fetch),
+		advanceSearchManga(fetch, 1),
+		getAllFilters(fetch)
+	]);
+	return { trending, result, filters };
 };
