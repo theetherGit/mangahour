@@ -8,7 +8,7 @@ export const GET: RequestHandler = async ({ params, url, fetch }) => {
 		'Content-Type': 'application/xml',
 		'Cache-Control': `public, max-age=0, s-maxage=${60 * 60 * 6}`
 	};
-	const mangaList = await getMangaListPageData(parseInt(params.id as string));
+	const mangaList = await getMangaListPageData(fetch, parseInt(params.id as string));
 
 	for (const manga of mangaList) {
 		sitemapItems.push(`/manga/${manga.id}/${manga.slug}`);
