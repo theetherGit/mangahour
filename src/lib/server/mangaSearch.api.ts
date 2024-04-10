@@ -18,7 +18,6 @@ export async function advanceSearchManga(page: number, params = initialSearchPar
 		body: JSON.stringify(params),
 		headers: headers
 	});
-	console.log(response);
 	if (response.ok) {
 		const jsonResponse = await response.json();
 		if (jsonResponse) {
