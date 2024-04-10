@@ -15,6 +15,7 @@ jobs:
           packageManager: npm
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          wranglerVersion: "3.49.0",
           secrets: |
             BASE_API
             BASE_STORAGE_ENDPOINT
