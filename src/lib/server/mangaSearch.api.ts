@@ -9,12 +9,16 @@ export const initialSearchParams = {
 	term: null
 };
 
+const headers = new Headers()
+headers.append('Content-Type', 'application/json')
+
 export async function advanceSearchManga(page: number, params = initialSearchParams) {
 	const response = await fetch(`${BASE_API}/search/advanced/post?page=${page}`, {
 		method: 'post',
 		body: JSON.stringify(params),
-		headers: { 'Content-Type': 'application/json' }
+		headers: headers
 	});
+	console.log(response);
 	if (response.ok) {
 		const jsonResponse = await response.json();
 		if (jsonResponse) {
