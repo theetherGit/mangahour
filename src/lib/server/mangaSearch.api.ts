@@ -12,7 +12,7 @@ export const initialSearchParams = {
 const headers = new Headers()
 headers.append('Content-Type', 'application/json')
 
-export async function advanceSearchManga(page: number, params = initialSearchParams) {
+export async function advanceSearchManga(fetch:any, page: number, params = initialSearchParams) {
 	const response = await fetch(`${BASE_API}/search/advanced/post?page=${page}`, {
 		method: 'post',
 		body: JSON.stringify(params),

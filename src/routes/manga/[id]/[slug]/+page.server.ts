@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 			streamed: {
 				chapters: getMangaChapters(fetch, id, slug)
 			},
-			manga: getManga(fetch, id, slug)
+			manga: await getManga(fetch, id, slug)
 		};
-	} else throw redirect(302, '/home');
+	} else redirect(302, '/home');
 };

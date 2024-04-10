@@ -2,7 +2,7 @@
 	import { Eye } from 'lucide-svelte';
 	import * as Card from '$lib/components/ui/card';
 
-	export let mangaList;
+	export let mangaList = [];
 </script>
 
 <div class="pt-2 space-y-4">

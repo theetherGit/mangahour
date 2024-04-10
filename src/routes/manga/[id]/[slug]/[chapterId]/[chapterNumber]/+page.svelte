@@ -149,7 +149,7 @@
 					</div>
 				{/if}
 
-				<div class="flex items-center justify-between mx-2 gap-x-3">
+				<div class="flex items-center justify-between mx-2 gap-x-3 min-w-full">
 					{#if prevChapter !== null}
 						<Button
 							href="/manga/{params?.id}/{params?.slug}/{prevChapter?.id}/chapter-{prevChapter?.slug}"
@@ -188,7 +188,7 @@
 					/>
 				{/each}
 			</div>
-			<div class="flex items-center justify-between mx-2 gap-x-3 mt-5">
+			<div class="flex items-center justify-between mx-2 gap-x-3 mt-5 w-full">
 				{#if prevChapter !== null}
 					<Button
 						href="/manga/{params?.id}/{params?.slug}/{prevChapter?.id}/chapter-{prevChapter?.slug}"
