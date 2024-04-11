@@ -1,26 +1,26 @@
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
-      - uses: actions/checkout@v4
-      - name: Deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          packageManager: npm
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          wranglerVersion: "3.49.0"
-          secrets: |
-            BASE_API
-            BASE_STORAGE_ENDPOINT
-            CHAPTER_IMAGES_ENDPOINT
-        env:
-          BASE_API: ${{ secrets.BASE_API}}
-          BASE_STORAGE_ENDPOINT: ${{ secrets.BASE_STORAGE_ENDPOINT}}
-          CHAPTER_IMAGES_ENDPOINT: ${{ secrets.CHAPTER_IMAGES_ENDPOINT}}
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#    name: Deploy
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Deploy
+#        uses: cloudflare/wrangler-action@v3
+#        with:
+#          packageManager: npm
+#          apiToken: ${{ secrets.CF_API_TOKEN }}
+#          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+#          wranglerVersion: "3.49.0"
+#          secrets: |
+#            BASE_API
+#            BASE_STORAGE_ENDPOINT
+#            CHAPTER_IMAGES_ENDPOINT
+#        env:
+#          BASE_API: ${{ secrets.BASE_API}}
+#          BASE_STORAGE_ENDPOINT: ${{ secrets.BASE_STORAGE_ENDPOINT}}
+#          CHAPTER_IMAGES_ENDPOINT: ${{ secrets.CHAPTER_IMAGES_ENDPOINT}}
