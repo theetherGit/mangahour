@@ -6,6 +6,8 @@ import { writable } from 'svelte/store';
 
 export const liveReaders = writable(0);
 
+export const isFavouriteMangaUpdateCheckInProgress = writable(false)
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }

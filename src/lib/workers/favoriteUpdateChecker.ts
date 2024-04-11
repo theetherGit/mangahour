@@ -1,4 +1,5 @@
 import { db } from '$lib/db';
+import { isFavouriteMangaUpdateCheckInProgress } from '$lib/utils';
 
 const fetchUpdate = async (manga: any) => {
 	const response = await fetch(`/api/manga?id=${manga.id}&slug=${manga.slug}`);
@@ -11,11 +12,13 @@ const fetchUpdate = async (manga: any) => {
 };
 
 onmessage = async (e) => {
+	isFavouriteMangaUpdateCheckInProgress.set(true)
 	const favManga = await db.favouriteManga.toArray();
 	if (favManga.length) {
 		for (const manga of favManga) {
-			fetchUpdate(manga);
+			await fetchUpdate(manga);
 		}
 	}
+	isFavouriteMangaUpdateCheckInProgress.set(false)
 };
 export {};

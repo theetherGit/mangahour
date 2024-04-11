@@ -5,13 +5,14 @@
 	import { Input } from '$lib/components/ui/input';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as Card from '$lib/components/ui/card';
-	import { fade, fly } from 'svelte/transition';
+	import { fade, fly, slide } from 'svelte/transition';
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
-	import { Heart } from 'lucide-svelte';
+	import { Heart, Loader } from 'lucide-svelte';
 	import { liveQuery } from 'dexie';
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
+	import { isFavouriteMangaUpdateCheckInProgress } from '$lib/utils';
 
 	let favouriteMangaSearchDB: any = null;
 	let favouriteUpdateChecker: Worker;
@@ -65,9 +66,21 @@
 	async function removeFavorite(id: string) {
 		await db.favouriteManga.delete(id);
 	}
+
 </script>
 
-<div id="favouriteMangaPage">
+<div id="favouriteMangaPage" class="space-y-4">
+	{#if $isFavouriteMangaUpdateCheckInProgress}
+		<div transition:slide >
+			<Alert.Root>
+				<Loader class="h-4 w-4 animate-spin"/>
+				<Alert.Title>Heads up!</Alert.Title>
+				<Alert.Description
+				>You can add components to your app using the cli.</Alert.Description
+				>
+			</Alert.Root>
+		</div>
+	{/if}
 	<Input
 		on:input={async (e) => {
 			await searchFavManga(e?.target?.value);
@@ -79,31 +92,31 @@
 			{#each mangaInView as manga}
 				<div in:fly out:fade>
 					<Card.Root>
-						<div class="grid grid-cols-3 px-4 py-2 gap-x-2.5">
-							<div class="col-span-1">
+						<div class="grid grid-cols-10 px-4 py-2 gap-x-2.5">
+							<div class="col-span-4">
 								<img
-									class="rounded-lg"
+									class="rounded-lg w-full h-full"
 									src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}"
 									alt="Read {manga.name} on Manga Hour"
 								/>
 							</div>
-							<div class="col-span-2">
+							<div class="col-span-6">
 								<Button
 									variant="ghost"
-									class="w-full text-center"
+									class="w-full h-auto text-left"
 									href="/manga/{manga.id}/{manga.slug}"
 									on:click={async () => {
 										await goto(`/manga/${manga.id}/${manga.slug}`);
 									}}
 								>
-									<h2 class="text-lg font-semibold tracking-tight">{manga.name}</h2>
+									<h2 class="text-lg font-semibold text-left tracking-tight line-clamp-2">{manga.name}</h2>
 								</Button>
 								<div class="pt-4 space-y-2">
 									<Button
 										variant="outline"
 										class="w-full flex space-x-2 items-center justify-between"
 									>
-										Last Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
+										Updated <spane>{formatDistanceToNowStrict(manga.lastUpdated)}</spane>
 									</Button>
 									<Button
 										variant="destructive"
@@ -112,6 +125,14 @@
 											await removeFavorite(manga.id);
 										}}
 										>Remove from Favorites
+									</Button>
+									<Button
+										variant="destructive"
+										class="w-full"
+										on:click={async () => {
+											await removeFavorite(manga.id);
+										}}
+									>Remove from Favorites
 									</Button>
 								</div>
 							</div>

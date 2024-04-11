@@ -29,7 +29,7 @@
 	</Select.Trigger>
 	{#if chapters.length}
 		<Select.Content
-			class="h-1/2 md:h-1/4 overflow-y-scroll py-4 scrollbar-thin scrollbar-thumb-primary
+			class="h-1/2 md:h-1/4 overflow-y-auto overflow-auto py-4 scrollbar-thin scrollbar-thumb-primary
 							scrollbar-track-accent"
 		>
 			<Select.Group>
