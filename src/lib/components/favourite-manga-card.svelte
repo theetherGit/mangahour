@@ -126,14 +126,6 @@
 										}}
 										>Remove from Favorites
 									</Button>
-									<Button
-										variant="destructive"
-										class="w-full"
-										on:click={async () => {
-											await removeFavorite(manga.id);
-										}}
-									>Remove from Favorites
-									</Button>
 								</div>
 							</div>
 						</div>
