@@ -7,6 +7,7 @@
 	import { create, insertMultiple, search } from '@orama/orama';
 	import { db } from '$lib/db';
 	import { formatDistanceToNowStrict } from 'date-fns';
+	import { ArrowUpDown } from 'lucide-svelte';
 
 	export let id: string;
 	export let slug: string;
@@ -52,17 +53,30 @@
 			chaptersInView = allChapters;
 		}
 	};
+	let sorting = false
+	let searchInput = '';
 </script>
 
 {#if chaptersInView && chaptersInView.length}
 	<Card.Root class="mt-5 col-span-1 md:col-span-2">
 		<Card.Header>
-			<Card.Title class="text-center">Chapter List</Card.Title>
+			<Card.Title class="flex items-center justify-between text-center">
+				Chapter List
+				<Button variant="ghost" size="icon" on:click={() => {
+					sorting = !sorting
+					allChapters.reverse()
+					chaptersInView = allChapters
+					if (searchInput) searchInput = ''
+				}}>
+					<ArrowUpDown class={sorting ? 'text-primary' : ''}/>
+				</Button>
+			</Card.Title>
 		</Card.Header>
 		<Card.Content>
 			<Input
 				on:input={(e) => searchChapter(e?.target?.value)}
 				type="text"
+				bind:value={searchInput}
 				placeholder="Search chapter e.g. 61, ..."
 				class="mb-2"
 			/>
