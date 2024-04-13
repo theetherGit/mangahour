@@ -10,16 +10,18 @@
 	import SvelteSeo from 'svelte-seo';
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
+	import { browser } from '$app/environment';
 
 	export let data: PageServerData;
 	$: chapter = data.chapter;
 	let chapters: Array<Record<string, any>> = [];
 	let isFavorite: any = null;
 
-	onMount(async () => {
-		chapters = await data.streamed.chapters
-		isFavorite = await db.favouriteManga.get(data.params.id.toString());
+	$: if (browser && chapter) {
+		updateLocalData()
+	}
 
+	async function updateLocalData() {
 		const chapterReadHistory = await db.mangaChapterReadHistory.get(data.params.id.toString());
 
 		if (chapterReadHistory && !chapterReadHistory.chapters.includes(chapter.id.toString())) {
@@ -41,6 +43,11 @@
 			chapterSlug: data.params.chapterNumber,
 			chapterNumber: data.chapter.chapter_number.toString()
 		});
+	}
+
+	onMount(async () => {
+		chapters = await data.streamed.chapters
+		isFavorite = await db.favouriteManga.get(data.params.id.toString());
 	});
 
 	const addToFavorites = async (e: any) => {
@@ -217,7 +224,12 @@
 					<Card.Root>
 						<Card.Header>
 							<Card.Title class="text-center leading-normal line-clamp-1"
-								>{chapter.manga_title}</Card.Title
+								>
+								<a class="text-center text-primary" href="/manga/{data.params.id}/{data.params.slug}">
+										{chapter.manga_title}
+								</a>
+								<!--{chapter.manga_title}-->
+							</Card.Title
 							>
 							<Card.Description class="">
 								<img
