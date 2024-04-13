@@ -27,6 +27,12 @@
 
 		favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
 		favouriteUpdateChecker.postMessage({});
+		favouriteUpdateChecker.onmessage = (e: any) => {
+			const { type, payload } = e.data;
+			if (type === 'status') {
+				isFavouriteMangaUpdateCheckInProgress.set(payload);
+			}
+		};
 		favouriteMangaSearchDB = await create({
 			schema: {
 				name: 'string'
@@ -72,11 +78,11 @@
 <div id="favouriteMangaPage" class="space-y-4">
 	{#if $isFavouriteMangaUpdateCheckInProgress}
 		<div transition:slide >
-			<Alert.Root>
-				<Loader class="h-4 w-4 animate-spin"/>
+			<Alert.Root class="text-rose-50 border-rose-400">
+				<Loader class="h-4 w-4 animate-spin" color="rgb(255 241 242 / var(--tw-text-opacity))"/>
 				<Alert.Title>Heads up!</Alert.Title>
 				<Alert.Description
-				>You can add components to your app using the cli.</Alert.Description
+				>We are updating recently updated mangas.</Alert.Description
 				>
 			</Alert.Root>
 		</div>
