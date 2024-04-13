@@ -4,11 +4,19 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Book, Bookmark, Eye } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
+	import { onNavigate } from '$app/navigation';
 
 	let searchResults: any[] = [];
 	let showSearchResults = false;
 	let inputValue = '';
 
+	onNavigate(() => {
+		if (showSearchResults) {
+			showSearchResults = false;
+			inputValue = '';
+			searchResults = [];
+		}
+	})
 	async function getSearchedManga(query: string) {
 		if (query.length < 3) return;
 		const response = await fetch(`/api/search?query=${query}`);
@@ -26,11 +34,11 @@
 </script>
 
 <div class="w-full relative space-y-3">
-	<Input type="search" placeholder="Search Manga..." bind:value={inputValue} />
+	<Input id="global-search" type="search" placeholder="Search Manga..." bind:value={inputValue} />
 	{#if showSearchResults}
 		<div transition:slide={{ axis: 'y' }}>
 			<Card.Root
-				class="px-2 py-4 space-y-4 z-10 absolute h-96 overflow-y-auto scrollbar-thin w-full scrollbar-thumb-primary scrollbar-track-rounded-lg scrollbar-track-accent"
+				class="px-2 py-4 space-y-4 z-10 absolute max-h-96 overflow-y-auto scrollbar-thin w-full scrollbar-thumb-primary scrollbar-track-rounded-lg scrollbar-track-accent"
 			>
 				{#if searchResults.length}
 					{#each searchResults as manga}

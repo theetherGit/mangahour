@@ -187,7 +187,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 relative">
 	<div class="col-span-3 md:col-span-2 space-y-4 pb-4">
 		<div class="flex items-center gap-x-2">
-			<Input class="" type="search" placeholder="Search manga..." bind:value={searchTerm} />
+			<Input id='manga-global-search' class="" type="search" placeholder="Search manga..." bind:value={searchTerm} />
 			<Sheet.Root>
 				<Sheet.Trigger asChild let:builder={sheetBuilder}>
 					<Tooltip.Root>

@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { partytownSnippet } from '@builder.io/partytown/integration';
-	import { BackToTop, Footer } from '$lib/components';
+	import { BackToTop, Footer, MangaSearch } from '$lib/components';
 	import { Navbar } from '$lib/components';
 	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
 	import '../app.postcss';
 	import { onMount } from 'svelte';
-	import { liveReaders } from '$lib/utils';
+	import { liveReaders, showSearchPanel } from '$lib/utils';
 	import { db } from '$lib/db';
 	import { browser } from '$app/environment';
+	import { slide } from 'svelte/transition';
 
 	let liveReaderSocket: WebSocket;
 	let path: string = '/';
-
 	onMount(async () => {
 		db.open().catch(function (err) {
 			console.error(err.stack || err);
@@ -111,6 +111,11 @@
 <div class="min-h-screen bg-background">
 	<Navbar />
 	<div class="pt-20 md:pt-24 m-auto px-2 md:px-12 lg:px-14">
+		{#if $showSearchPanel}
+			<div class="mb-2" transition:slide>
+				<MangaSearch />
+			</div>
+		{/if}
 		<slot />
 	</div>
 	<Footer />

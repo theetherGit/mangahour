@@ -5,7 +5,7 @@ import type { TransitionConfig } from 'svelte/transition';
 import { writable } from 'svelte/store';
 
 export const liveReaders = writable(0);
-
+export const showSearchPanel = writable(false)
 export const isFavouriteMangaUpdateCheckInProgress = writable(false)
 
 export function cn(...inputs: ClassValue[]) {

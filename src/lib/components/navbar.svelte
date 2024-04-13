@@ -3,6 +3,9 @@
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { beforeNavigate } from '$app/navigation';
+	import { Button } from '$lib/components/ui/button';
+	import { Search } from 'lucide-svelte';
+	import { showSearchPanel } from '$lib/utils';
 	let show = false;
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
@@ -15,10 +18,17 @@
 		if (show) show = false;
 	});
 
-	let path;
+	let path = '/';
 
 	$: if (browser) {
 		path = $page.url.pathname;
+	}
+
+	function addFocusToSearch(id: string) {
+		const searchEleId = document.getElementById(id)
+		if (searchEleId) {
+			searchEleId.focus()
+		}
 	}
 </script>
 
@@ -41,6 +51,24 @@
 						>
 					</a>
 					<div class="flex items-center lg:hidden">
+						<Button variant="ghost" size="icon" class="h-6 w-6 bg-transparent hover:bg-transparent" on:click={() => {
+							switch (path) {
+								case '/home':
+								case '/favourite':
+									addFocusToSearch('global-search')
+									break;
+								case '/manga':
+									addFocusToSearch('manga-global-search')
+									break;
+								default:
+									showSearchPanel.set(!$showSearchPanel);
+									setTimeout(() => {
+										addFocusToSearch('global-search')
+									}, 500)
+							}
+						}}>
+							<Search class="text-primary/70"/>
+						</Button>
 						<button
 							class="relative -mr-6 h-8 w-10 p-6"
 							on:click={() => {
