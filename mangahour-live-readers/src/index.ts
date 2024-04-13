@@ -3,18 +3,18 @@ export interface Env {
 }
 
 export class LiveReaders {
-	private conns = new Set<WebSocket>();
+	private connectionManager = new Set<WebSocket>();
 
 	constructor(private state: DurableObjectState, private env: Env) {}
 
 	private broadcast(message: string) {
-		for (const conn of this.conns) {
+		for (const conn of this.connectionManager) {
 			// Check if the connection is still alive
 			try {
 				conn.send(message);
 			} catch {
 				// If the connection is closed, remove it from the Set
-				this.conns.delete(conn);
+				this.connectionManager.delete(conn);
 			}
 		}
 	}
@@ -65,9 +65,9 @@ export class LiveReaders {
 
 		server.addEventListener('close', async () => {
 			// Remove the session from the Set
-			this.conns.delete(server);
+			this.connectionManager.delete(server);
 			await this.decrement();
-			if (this.conns.size === 0) {
+			if (this.connectionManager.size === 0) {
 				// When the client disconnects, we can delete all the data in Durable Object
 				// Deleting all data automatically discards the Durable Object instance
 				await this.state.storage.deleteAll();
@@ -77,7 +77,7 @@ export class LiveReaders {
 		server.accept();
 
 		// Add the session to the Set
-		this.conns.add(server);
+		this.connectionManager.add(server);
 
 		return new Response(null, {
 			status: 101,
