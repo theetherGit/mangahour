@@ -57,7 +57,7 @@
 	let searchInput = '';
 </script>
 
-{#if chaptersInView && chaptersInView.length}
+{#if allChapters && allChapters.length}
 	<Card.Root class="mt-5 col-span-1 md:col-span-2">
 		<Card.Header>
 			<Card.Title class="flex items-center justify-between text-center">
@@ -80,7 +80,7 @@
 				placeholder="Search chapter e.g. 61, ..."
 				class="mb-2"
 			/>
-			{#if chaptersInView}
+			{#if chaptersInView && chaptersInView.length}
 				<div
 					transition:slide={{ axis: 'y', duration: 300 }}
 					class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 max-h-96 gap-4
