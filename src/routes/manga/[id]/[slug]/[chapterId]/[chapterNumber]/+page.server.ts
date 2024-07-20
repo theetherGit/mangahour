@@ -6,5 +6,12 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 	const streamed = {
 		chapters: getMangaChapters(fetch, params.id, params.slug)
 	}
-	return { streamed, ...chapterData, params };
+	return {
+		streamed,
+		...chapterData,
+		mangaId: params.id,
+		mangaSlug: params.slug,
+		chapterId: params.chapterId,
+		chapterNumber: params.chapterNumber,
+	};
 };

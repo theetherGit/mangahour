@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { ChapterDropDown } from '$lib/components';
 	import * as Card from '$lib/components/ui/card';
-	import { invalidateAll } from '$app/navigation';
+	import { afterNavigate, beforeNavigate, invalidateAll } from '$app/navigation';
 	import type { PageServerData } from './$types';
 	import { slide, fly } from 'svelte/transition';
 	import { page } from '$app/stores';
@@ -11,9 +11,10 @@
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
 	import { browser } from '$app/environment';
-
+	
 	export let data: PageServerData;
 	$: chapter = data.chapter;
+
 	let chapters: Array<Record<string, any>> = [];
 	let isFavorite: any = null;
 
@@ -22,41 +23,41 @@
 	}
 
 	async function updateLocalData() {
-		const chapterReadHistory = await db.mangaChapterReadHistory.get(data.params.id.toString());
+		const chapterReadHistory = await db.mangaChapterReadHistory.get(data.mangaId?.toString());
 
 		if (chapterReadHistory && !chapterReadHistory.chapters.includes(chapter.id.toString())) {
 			db.mangaChapterReadHistory.put({
-				id: data.params.id.toString(),
-				chapters: [...chapterReadHistory.chapters, data.params.chapterId.toString()]
+				id: data.mangaId?.toString(),
+				chapters: [...chapterReadHistory.chapters, data.chapterId?.toString()]
 			});
 		} else {
 			db.mangaChapterReadHistory.put({
-				id: data.params.id.toString(),
-				chapters: [data.params.chapterId.toString()]
+				id: data.mangaId?.toString(),
+				chapters: [data.chapterId?.toString()]
 			});
 		}
 
 		db.lastReadMangaChapter.put({
-			id: data.params.id,
-			mangaSlug: data.params.slug,
-			chapterId: data.params.chapterId,
-			chapterSlug: data.params.chapterNumber,
+			id: data.mangaId,
+			mangaSlug: data.mangaSlug,
+			chapterId: data.chapterId,
+			chapterSlug: data.chapterNumber,
 			chapterNumber: data.chapter.chapter_number.toString()
 		});
 	}
 
 	onMount(async () => {
 		chapters = await data.streamed.chapters
-		isFavorite = await db.favouriteManga.get(data.params.id.toString());
+		isFavorite = await db.favouriteManga.get(data.mangaId?.toString());
 	});
 
 	const addToFavorites = async (e: any) => {
 		e.preventDefault();
 		if (isFavorite) {
-			await db.favouriteManga.delete(data.params.id.toString());
+			await db.favouriteManga.delete(data.mangaId?.toString());
 		} else {
 			await db.favouriteManga.put({
-				id: data.params.id.toString(),
+				id: data.mangaId?.toString(),
 				image: chapter.manga_cover,
 				name: chapter.manga_title,
 				description: '',
@@ -64,9 +65,17 @@
 				lastUpdated: new Date()
 			});
 		}
-		isFavorite = await db.favouriteManga.get(data.params.id.toString());
+		isFavorite = await db.favouriteManga.get(data.mangaId?.toString());
 		await invalidateAll();
 	};
+
+	beforeNavigate(() => {
+		console.log('hi');
+	})
+
+	afterNavigate(() => {
+		console.log('k');
+	})
 </script>
 
 <SvelteSeo
@@ -82,7 +91,7 @@
 		type: 'website',
 		images: [
 			{
-				url: `${$page.url.origin}/og/chapter?mangaId=${data.params.id}&mangaSlug=${data.params.slug}&id=${data.params.chapterId}&slug=${data.params.chapterNumber}`,
+				url: `${$page.url.origin}/og/chapter?mangaId=${data.mangaId}&mangaSlug=${data.mangaSlug}&id=${data.chapterId}&slug=${data.chapterNumber}`,
 				alt: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`
 			}
 		],
@@ -93,7 +102,7 @@
 		site: '@mangahour',
 		title: `Mangahour | Reading ${chapter.manga_title}'s chapter ${chapter.chapter_number}`,
 		description: `Reding ${chapter.manga_title} - ${chapter.chapter_number}`,
-		image: `${$page.url.origin}/og/chapter?mangaId=${data.params.id}&mangaSlug=${data.params.slug}&id=${data.params.chapterId}&slug=${data.params.chapterNumber}`
+		image: `${$page.url.origin}/og/chapter?mangaId=${data.mangaId}&mangaSlug=${data.mangaSlug}&id=${data.chapterId}&slug=${data.chapterNumber}`
 	}}
 	jsonLd={{
 		'@context': 'https://schema.org',
@@ -122,7 +131,7 @@
 										/>
 									</div>
 									<div class="col-span-3 px-2.5 space-y-2">
-										<a href="/manga/{data.params.id}/{data.params.slug}">
+										<a href="/manga/{data.mangaId}/{data.mangaSlug}">
 											<h2
 												class="text-center text-primary pb-2 truncate text-xl lg:text-3xl font-semibold tracking-tight transition-colors"
 											>
@@ -159,7 +168,7 @@
 				<div class="flex items-center justify-between mx-2 gap-x-3 min-w-full">
 					{#if data.prevChapter !== null}
 						<Button
-							href="/manga/{data.params?.id}/{data.params?.slug}/{data.prevChapter?.id}/chapter-{data.prevChapter?.slug}"
+							href="/manga/{data.mangaId}/{data.mangaSlug}/{data.prevChapter?.id}/chapter-{data.prevChapter?.slug}"
 							variant="secondary"><ArrowLeft class="w-4 mr-2" /> Previous</Button
 						>
 					{:else}
@@ -169,13 +178,13 @@
 					{/if}
 					<ChapterDropDown
 						{chapters}
-						id={data.params.id}
-						slug={data.params?.slug}
+						id={data.mangaId}
+						slug={data.mangaSlug}
 						currentChapter={chapter.chapter_number}
 					/>
 					{#if data.nextChapter !== null}
 						<Button
-							href="/manga/{data.params?.id}/{data.params?.slug}/{data.nextChapter?.id}/chapter-{data.nextChapter?.slug}"
+							href="/manga/{data.mangaId}/{data.mangaSlug}/{data.nextChapter?.id}/chapter-{data.nextChapter?.slug}"
 							variant="secondary">Next <ArrowRight class="w-4 ml-2" /></Button
 						>
 					{:else}
@@ -186,7 +195,7 @@
 				</div>
 			</div>
 			<div class="px-1 w-full place-self-center">
-				{#each chapter.images as image, i}
+				{#each data.chapter.images as image, i}
 					<img
 						loading="lazy"
 						class="first:rounded-t-lg last:rounded-b-lg self-center mx-auto"
@@ -198,7 +207,7 @@
 			<div class="flex items-center justify-between mx-2 gap-x-3 mt-5 w-full">
 				{#if data.prevChapter !== null}
 					<Button
-						href="/manga/{data.params?.id}/{data.params?.slug}/{data.prevChapter?.id}/chapter-{data.prevChapter?.slug}"
+						href="/manga/{data.mangaId}/{data.mangaSlug}/{data.prevChapter?.id}/chapter-{data.prevChapter?.slug}"
 						variant="secondary"><ArrowLeft class="w-4 mr-2" /> Previous</Button
 					>
 				{:else}
@@ -208,7 +217,7 @@
 				{/if}
 				{#if data.nextChapter !== null}
 					<Button
-						href="/manga/{data.params?.id}/{data.params?.slug}/{data.nextChapter?.id}/chapter-{data.nextChapter?.slug}"
+						href="/manga/{data.mangaId}/{data.mangaSlug}/{data.nextChapter?.id}/chapter-{data.nextChapter?.slug}"
 						variant="secondary">Next <ArrowRight class="w-4 ml-2" /></Button
 					>
 				{:else}
@@ -225,7 +234,7 @@
 						<Card.Header>
 							<Card.Title class="text-center leading-normal line-clamp-1"
 								>
-								<a class="text-center text-primary" href="/manga/{data.params.id}/{data.params.slug}">
+								<a class="text-center text-primary" href="/manga/{data.mangaId}/{data.mangaSlug}">
 										{chapter.manga_title}
 								</a>
 								<!--{chapter.manga_title}-->
@@ -247,8 +256,8 @@
 								>
 							{/if}
 							<ChapterDropDown
-								id={data.params.id}
-								slug={data.params?.slug}
+								id={data.mangaId}
+								slug={data.mangaSlug}
 								currentChapter={chapter.chapter_number}
 								{chapters}
 							/>
