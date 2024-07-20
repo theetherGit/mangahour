@@ -12,30 +12,33 @@
 	export let id: string;
 	export let slug: string;
 
-	let allChapters: any = [];
+	export let chapters: Array<any> = []
+
 	let chaptersInView: any = [];
 	let chapterSearchDB: any = null;
 	let alreadyReadChapters: any = null;
 
 	onMount(async () => {
+
+		if (chapters.length) {
+			console.log('c', chapters);
+		}
+
 		chapterSearchDB = await create({
 			schema: {
 				chapter_number: 'string'
 			}
 		});
-		const chapterResponse = await fetch(`/chapters?id=${id}&slug=${slug}`);
-		if (chapterResponse.ok) {
-			const chaptersResponseJson = await chapterResponse.json();
-			allChapters = chaptersInView = chaptersResponseJson.chapters;
-			const validSearchData = allChapters.map((chapter: any) => {
+
+		chaptersInView = chapters;
+			const validSearchData = chapters.map((chapter: any) => {
 				return {
 					...chapter,
 					id: chapter.id.toString()
 				};
 			});
 			await insertMultiple(chapterSearchDB, validSearchData, validSearchData.length);
-		}
-		alreadyReadChapters = await db.mangaChapterReadHistory.get(id.toString());
+			alreadyReadChapters = await db.mangaChapterReadHistory.get(id.toString());
 	});
 
 	const searchChapter = async (value: string) => {
@@ -50,22 +53,22 @@
 			});
 			chaptersInView = searchResultChapters;
 		} else {
-			chaptersInView = allChapters;
+			chaptersInView = chapters;
 		}
 	};
 	let sorting = false
 	let searchInput = '';
 </script>
 
-{#if allChapters && allChapters.length}
+{#if chapters && chapters.length}
 	<Card.Root class="mt-5 col-span-1 md:col-span-2">
 		<Card.Header>
 			<Card.Title class="flex items-center justify-between text-center">
 				Chapter List
 				<Button variant="ghost" size="icon" on:click={() => {
 					sorting = !sorting
-					allChapters.reverse()
-					chaptersInView = allChapters
+					chapters.reverse()
+					chaptersInView = chapters
 					if (searchInput) searchInput = ''
 				}}>
 					<ArrowUpDown class={sorting ? 'text-primary' : ''}/>

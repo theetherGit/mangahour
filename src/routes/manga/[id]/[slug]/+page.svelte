@@ -265,7 +265,7 @@
 	</div>
 	{#if currentManga?.id && currentManga.slug}
 		<div class="grid grid-cols-1 lg:grid-cols-3">
-			<MangaChapterList id={currentManga.id} slug={currentManga.slug} />
+			<MangaChapterList id={currentManga.id} slug={currentManga.slug} chapters={data.chapters}/>
 		</div>
 	{/if}
 </section>

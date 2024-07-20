@@ -15,7 +15,6 @@
 	export let data: PageServerData;
 	$: chapter = data.chapter;
 
-	let chapters: Array<Record<string, any>> = [];
 	let isFavorite: any = null;
 
 	$: if (browser && chapter) {
@@ -47,7 +46,6 @@
 	}
 
 	onMount(async () => {
-		chapters = await data.streamed.chapters
 		isFavorite = await db.favouriteManga.get(data.mangaId?.toString());
 	});
 
@@ -117,7 +115,7 @@
 	<div class="grid lg:grid-cols-4 py-4 justify-items-center">
 		<div class="lg:col-span-3">
 			<div class="mb-5">
-				{#if chapters.length}
+				{#if data.chapters.length}
 					<div class="pb-4 md:pb-0" transition:slide={{ axis: 'y', duration: 500 }}>
 						<Card.Root class="lg:hidden">
 							<Card.Header class="py-2.5 px-2.5">
@@ -138,10 +136,10 @@
 												{chapter.manga_title}
 											</h2>
 										</a>
-										{#if chapters.length}
+										{#if data.chapters.length}
 											<Button variant="outline" class="w-full flex items-center justify-between">
 												Total Chapters
-												<span>{chapters.length}</span>
+												<span>{data.chapters.length}</span>
 											</Button>
 										{/if}
 										<Button
@@ -177,7 +175,7 @@
 						>
 					{/if}
 					<ChapterDropDown
-						{chapters}
+						chapters={data.chapters}
 						id={data.mangaId}
 						slug={data.mangaSlug}
 						currentChapter={chapter.chapter_number}
@@ -228,7 +226,7 @@
 			</div>
 		</div>
 		<div class="fixed right-10 w-1/5 hidden lg:block">
-			{#if chapters.length}
+			{#if data.chapters.length}
 				<div transition:fly={{ x: '100%', duration: 300 }}>
 					<Card.Root>
 						<Card.Header>
@@ -250,16 +248,16 @@
 							</Card.Description>
 						</Card.Header>
 						<Card.Content class="grid place-items-center gap-y-4">
-							{#if chapters.length}
+							{#if data.chapters.length}
 								<Button variant="outline" class="w-full flex items-center justify-between"
-									>Total Chapters <span>{chapters.length}</span></Button
+									>Total Chapters <span>{data.chapters.length}</span></Button
 								>
 							{/if}
 							<ChapterDropDown
 								id={data.mangaId}
 								slug={data.mangaSlug}
 								currentChapter={chapter.chapter_number}
-								{chapters}
+								chapters={data.chapters}
 							/>
 							<Button
 								variant="outline"
