@@ -8,7 +8,7 @@
 	import { onMount } from 'svelte';
 	import { liveReaders, showSearchPanel } from '$lib/utils';
 	import { db } from '$lib/db';
-	import { browser } from '$app/environment';
+	import { browser, dev } from '$app/environment';
 	import { slide } from 'svelte/transition';
 
 	let liveReaderSocket: WebSocket;
@@ -17,30 +17,32 @@
 		db.open().catch(function (err) {
 			console.error(err.stack || err);
 		});
-		liveReaderSocket = new WebSocket(`wss://live-readers.mangahour.com`);
+		if (!dev) {
+			liveReaderSocket = new WebSocket(`wss://live-readers.mangahour.com`);
 
-		liveReaderSocket.onopen = (e) => {
-			liveReaderSocket.send(
-				JSON.stringify({
-					type: 'increment'
-				})
-			);
-		};
+			liveReaderSocket.onopen = (e) => {
+				liveReaderSocket.send(
+					JSON.stringify({
+						type: 'increment'
+					})
+				);
+			};
 
-		liveReaderSocket.onclose = (e) => {
-			liveReaderSocket.send(
-				JSON.stringify({
-					type: 'decrement'
-				})
-			);
-		};
+			liveReaderSocket.onclose = (e) => {
+				liveReaderSocket.send(
+					JSON.stringify({
+						type: 'decrement'
+					})
+				);
+			};
 
-		liveReaderSocket.addEventListener('message', (e) => {
-			const data = JSON.parse(e.data);
-			if (data.type === 'update/count') {
-				liveReaders.set(data.count as number);
-			}
-		});
+			liveReaderSocket.addEventListener('message', (e) => {
+				const data = JSON.parse(e.data);
+				if (data.type === 'update/count') {
+					liveReaders.set(data.count as number);
+				}
+			});
+		}
 	});
 	$: if (browser) path = $page.url.pathname.split('/').pop() as string;
 </script>

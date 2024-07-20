@@ -22,17 +22,26 @@
 	});
 
 	onMount(async () => {
-		const favouriteUpdateCheckerWorker = (await import('$lib/workers/favoriteUpdateChecker?worker'))
-			.default;
+		const lastFavCheckTimeStamp = localStorage.getItem('last_fav_check_timestamp')
+		if (lastFavCheckTimeStamp === null || (parseInt(lastFavCheckTimeStamp as string) + 180000) < Date.now()) {
+			const favouriteUpdateCheckerWorker = (await import('$lib/workers/favoriteUpdateChecker?worker'))
+				.default;
 
-		favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
-		favouriteUpdateChecker.postMessage({});
-		favouriteUpdateChecker.onmessage = (e: any) => {
-			const { type, payload } = e.data;
-			if (type === 'status') {
-				isFavouriteMangaUpdateCheckInProgress.set(payload);
-			}
-		};
+			favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
+			favouriteUpdateChecker.postMessage({});
+			favouriteUpdateChecker.onmessage = (e: any) => {
+				const { type, payload } = e.data;
+				switch (type) {
+					case 'status':
+						isFavouriteMangaUpdateCheckInProgress.set(payload);
+						break;
+					case 'last_fav_check_timestamp':
+						localStorage.setItem('last_fav_check_timestamp', Date.now().toString())
+						break;
+				}
+			};
+		}
+
 		favouriteMangaSearchDB = await create({
 			schema: {
 				name: 'string'
@@ -81,9 +90,7 @@
 			<Alert.Root class="text-rose-50 border-rose-400">
 				<Loader class="h-4 w-4 animate-spin" color="rgb(255 241 242 / var(--tw-text-opacity))"/>
 				<Alert.Title>Heads up!</Alert.Title>
-				<Alert.Description
-				>We are updating recently updated mangas.</Alert.Description
-				>
+				<Alert.Description>We are updating recently updated mangas.</Alert.Description>
 			</Alert.Root>
 		</div>
 	{/if}
@@ -94,19 +101,19 @@
 		placeholder="Search from favorites.."
 	/>
 	{#if mangaInView && mangaInView.length}
-		<div class="grid md:grid-cols-2 mt-3 gap-4">
+		<div class="grid lg:grid-cols-2 2xl:grid-cols-4 mt-3 gap-4">
 			{#each mangaInView as manga}
 				<div in:fly out:fade>
-					<Card.Root>
+					<Card.Root class="h-full">
 						<div class="grid grid-cols-10 px-4 py-2 gap-x-2.5">
-							<div class="col-span-4">
+							<div class="col-span-4 md:col-span-2 lg:col-span-4 m-auto">
 								<img
-									class="rounded-lg w-full h-full"
+									class="rounded-lg w-32 h-44 md:h-36"
 									src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}"
-									alt="Read {manga.name} on Manga Hour"
+									alt="Read {manga.name} on Mangahour"
 								/>
 							</div>
-							<div class="col-span-6">
+							<div class="col-span-6 md:col-span-8 lg:col-span-6">
 								<Button
 									variant="ghost"
 									class="w-full h-auto text-left"

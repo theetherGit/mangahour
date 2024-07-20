@@ -118,7 +118,7 @@
 										<img
 											class="rounded-lg"
 											src="/images?type=covers_optimized_home_main&id=manga_{manga.id}&slug={manga.image}"
-											alt="Read {manga.name} on Manga Hour"
+											alt="Read {manga.name} on Mangahour"
 										/>
 									</div>
 									<div class="col-span-2">

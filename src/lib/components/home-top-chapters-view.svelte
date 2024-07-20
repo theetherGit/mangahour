@@ -5,20 +5,20 @@
 	export let mangaList = [];
 </script>
 
-<div class="pt-2 space-y-4">
+<div class="grid md:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2 gap-y-3 md:gap-3">
 	{#each mangaList as manga}
 		<div class="group">
-			<Card.Root class="group-hover:scale-105 transition-all duration-300 ">
+			<Card.Root class="group-hover:scale-105 transition-all duration-300 h-full">
 				<Card.Content class="pt-2 pb-1.5 px-2.5">
-					<div class="grid grid-cols-3">
+					<div class="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-3">
 						<div class="col-span-1">
 							<img
-								class="w-20 bg-cover rounded-lg"
+								class="w-20 h-28 bg-cover rounded-lg"
 								src="/images?type=covers_optimized_home_main&id=manga_{manga.manga_id}&slug={manga.manga_cover}"
 								alt="Read {manga.manga_title}"
 							/>
 						</div>
-						<div class="col-span-2">
+						<div class="col-span-2 md:col-span-3 xl:col-span-2 md:pl-3 xl:pl-0">
 							<a href="/manga/{manga.manga_id}/{manga.manga_slug}">
 								<div class="flex items-center gap-x-1 pb-1 border-b">
 									<h3 class="text-lg font-semibold tracking-tight truncate">{manga.manga_title}</h3>

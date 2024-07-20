@@ -117,7 +117,7 @@
 <Tabs.Content value="home" class="space-y-4">
 	<section id="main">
 		{#if currentMangaList}
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+			<div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
 				{#each currentMangaList as manga}
 					{@const newChapters = JSON.parse(manga['new_chapters'])}
 					{@const isFavorite = favMangas ? favMangas.get(manga['id'].toString()) : false}

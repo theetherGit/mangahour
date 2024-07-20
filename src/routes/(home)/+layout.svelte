@@ -82,7 +82,7 @@
 />
 
 <section id="main">
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 relative">
+	<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-4 md:gap-x-4 relative">
 		<div class="col-span-3 md:col-span-2 space-y-4 pb-4">
 			<MangaSearch />
 			<Card.Root>
@@ -118,7 +118,7 @@
 				</Tabs.Root>
 			</Card.Root>
 		</div>
-		<div class="pb-2 space-y-4">
+		<div class="pb-2 space-y-4 col-span-3 xl:col-span-1">
 			<Card.Root>
 				<Card.Header class="text-center font-bold pt-3">Trending Chapters</Card.Header>
 				<Card.Content>
@@ -140,7 +140,6 @@
 					</Tabs.Root>
 				</Card.Content>
 			</Card.Root>
-
 			<Card.Root>
 				<Card.Header class="text-center font-bold pt-3">Trending Manga</Card.Header>
 				<Card.Content>

@@ -2,7 +2,7 @@ import { db } from '$lib/db';
 import { isFavouriteMangaUpdateCheckInProgress } from '$lib/utils';
 import { get } from 'svelte/store';
 
-const fetchUpdate = async (manga: any, totalFavManga: number, currentIndex: number) => {
+const fetchUpdate = async (manga: any, currentIndex: number) => {
 	const response = await fetch(`/api/manga?id=${manga.id}&slug=${manga.slug}`);
 	if (response.ok) {
 		const manga = (await response.json()).manga;
@@ -10,17 +10,21 @@ const fetchUpdate = async (manga: any, totalFavManga: number, currentIndex: numb
 			lastUpdated: new Date(manga['last_chapter_created_at'])
 		});
 	}
-	postMessage({type: 'status', payload: totalFavManga - currentIndex - 1 !== 0})
+	return currentIndex
 };
 
 onmessage = async (e) => {
 	const favManga = await db.favouriteManga.toArray();
 	const totalFavManga = favManga.length
 	if (totalFavManga) {
+		const updateGroup = []
 		postMessage({type: 'status', payload: true})
 		for (const [index, manga] of favManga.entries()) {
-			await fetchUpdate(manga, totalFavManga, index);
+			 updateGroup.push(fetchUpdate(manga, index));
 		}
+		const resolved = await Promise.all(updateGroup); // check what to do with resolved
+		postMessage({type: 'status', payload: false})
+		postMessage({type: 'last_fav_check_timestamp', payload: 'IDC'})
 	}
 };
 export {};

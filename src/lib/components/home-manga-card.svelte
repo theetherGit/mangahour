@@ -61,7 +61,7 @@
 
 <div class="group" transition:slide={{ axis: 'y' }}>
 	<Card.Root class="group-hover:scale-105 transition-all duration-300 {mainBorder}">
-		<Card.Content class="pt-3 px-2.5">
+		<Card.Content class="py-3 px-2.5">
 			<div class="grid grid-cols-3 gap-x-2">
 				<div class="col-span-1 relative">
 					{#if manga.is_new}
@@ -122,8 +122,8 @@
 				</div>
 			</div>
 		</Card.Content>
-		<Card.Footer class="pb-3 px-2.5 flex items-center justify-between">
-			<p class="text-lg tracking-tight">Last Updated</p>
+		<Card.Footer class="px-2.5 flex items-center justify-between border-t py-1.5">
+			<p class="text-lg tracking-tight">Update</p>
 			<div class="flex items-center gap-x-2">
 				<Clock3 class="h-4 w-4" />
 				<span class="capitalize"
