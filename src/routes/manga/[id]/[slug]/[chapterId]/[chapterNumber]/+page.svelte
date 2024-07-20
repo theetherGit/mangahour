@@ -112,7 +112,7 @@
 />
 
 {#if chapter}
-	<div class="grid lg:grid-cols-4 py-4 justify-items-center">
+	<div class="grid lg:grid-cols-4 pb-4 justify-items-center">
 		<div class="lg:col-span-3">
 			<div class="mb-5">
 				{#if data.chapters.length}
