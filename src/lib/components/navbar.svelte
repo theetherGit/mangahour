@@ -6,12 +6,14 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Search } from 'lucide-svelte';
 	import { showSearchPanel } from '$lib/utils';
+	import { onMount } from 'svelte';
 	let show = false;
 	let navItems = [
 		{ title: 'Home', link: '/home', active: '/' },
 		{ title: 'All Mangas', link: '/manga', active: 'manga' },
 		{ title: 'Favourites', link: '/favourite', active: 'favourite' },
-		{ title: 'Your Data', link: '/data', active: 'data' }
+		{ title: 'Your Data', link: '/data', active: 'data' },
+		{ title: 'Anime News', link: 'https://newzertainment.com/category/anime-nw?ref=https://mangahour.com', active: 'anime-news' }
 	];
 
 	beforeNavigate(() => {
@@ -30,6 +32,13 @@
 			searchEleId.focus()
 		}
 	}
+
+	onMount(() => {
+		const animeNewsLink = document.getElementById('nav-anime-news') as HTMLAnchorElement
+		animeNewsLink.rel='external'
+		animeNewsLink.target='_blank'
+		animeNewsLink.referrerPolicy='origin'
+	})
 </script>
 
 <header class="flex flex-wrap justify-center">
@@ -107,7 +116,7 @@
 						<ul class="space-y-6 text-lg font-medium tracking-wide xl:flex xl:space-y-0 xl:text-sm">
 							{#each navItems as item}
 								<li>
-									<a
+									<a id="nav-{item.active}"
 										href={item.link}
 										class:active={$page.url.pathname.includes(item.link)}
 										class="block transition hover:text-primary md:px-4"
