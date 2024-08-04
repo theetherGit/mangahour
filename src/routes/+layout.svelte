@@ -68,6 +68,19 @@
 		gtag('js', new Date());
 		gtag('config', 'G-6ESELQN018');
 	</script>
+
+	<script>
+		(function () {
+			window.counterscale = {
+				q: [["set", "siteId", "mangahour.com"], ["trackPageview"]],
+			};
+		})();
+	</script>
+	<script
+		id="counterscale-script"
+		src="https://analytics.ethercorps.io/tracker.js"
+		defer
+	></script>
 </svelte:head>
 
 <SvelteSeo
