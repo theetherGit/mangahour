@@ -56,6 +56,7 @@
 					- Dexie JS with Indexed DB<br />
 					- Orama Search <br />
 					- HonoJs <br />
+					- Giscus <br />
 					- Cloudflare Workers <br />
 				</p>
 			</div>

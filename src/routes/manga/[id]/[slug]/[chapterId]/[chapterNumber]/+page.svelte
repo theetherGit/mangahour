@@ -3,14 +3,14 @@
 	import { Button } from '$lib/components/ui/button';
 	import { ChapterDropDown } from '$lib/components';
 	import * as Card from '$lib/components/ui/card';
-	import { afterNavigate, beforeNavigate, invalidateAll } from '$app/navigation';
+	import { invalidateAll } from '$app/navigation';
 	import type { PageServerData } from './$types';
 	import { slide, fly } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
-	import { dev, browser } from '$app/environment';
+	import { browser } from '$app/environment';
 	
 	export let data: PageServerData;
 	$: chapter = data.chapter;
@@ -133,7 +133,6 @@
 									<div class="col-span-1 md:w-1/3 lg:w-1/2">
 										<img
 											class="rounded-lg"
-											loading="lazy"
 											src="/images?type=covers_optimized_home_main&id=manga_{chapter.manga_id}&slug={chapter.manga_cover}"
 											alt="Read {chapter.manga_title}"
 										/>
