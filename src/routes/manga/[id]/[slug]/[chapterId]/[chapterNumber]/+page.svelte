@@ -10,7 +10,7 @@
 	import SvelteSeo from 'svelte-seo';
 	import { onMount } from 'svelte';
 	import { db } from '$lib/db';
-	import { browser } from '$app/environment';
+	import { dev, browser } from '$app/environment';
 	
 	export let data: PageServerData;
 	$: chapter = data.chapter;
@@ -66,15 +66,25 @@
 		isFavorite = await db.favouriteManga.get(data.mangaId?.toString());
 		await invalidateAll();
 	};
-
-	beforeNavigate(() => {
-		console.log('hi');
-	})
-
-	afterNavigate(() => {
-		console.log('k');
-	})
 </script>
+
+<svelte:head>
+	<script src="https://giscus.app/client.js"
+					data-repo="theetherGit/mangahour"
+					data-repo-id="R_kgDOKOIUpA"
+					data-category="Announcements"
+					data-category-id="DIC_kwDOKOIUpM4ChY1k"
+					data-mapping="url"
+					data-strict="0"
+					data-reactions-enabled="1"
+					data-emit-metadata="0"
+					data-input-position="top"
+					data-theme="preferred_color_scheme"
+					data-lang="en"
+					crossorigin="anonymous"
+					async>
+	</script>
+</svelte:head>
 
 <SvelteSeo
 	title="Mangahour | {chapter.manga_title} | Chapter {chapter.chapter_number}"
@@ -223,6 +233,9 @@
 						>Next <ArrowRight class="w-4 ml-2" /></Button
 					>
 				{/if}
+			</div>
+			<div class="giscus">
+
 			</div>
 		</div>
 		<div class="fixed right-10 w-1/5 hidden lg:block">
