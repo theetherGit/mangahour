@@ -78,7 +78,7 @@
 	</script>
 	<script
 		id="counterscale-script"
-		src="https://analytics.ethercorps.io/tracker.js"
+		src="https://counterscale-5to.pages.dev/tracker.js"
 		defer
 	></script>
 </svelte:head>
