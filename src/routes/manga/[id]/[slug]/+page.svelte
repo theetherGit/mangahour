@@ -3,6 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Card from '$lib/components/ui/card';
+	import { ScrollArea } from "$lib/components/ui/scroll-area";
 	import { invalidateAll } from '$app/navigation';
 	import type { PageServerData } from './$types';
 	import { page } from '$app/stores';
@@ -116,9 +117,11 @@
 							>
 								{currentManga.title}
 							</h2>
-							<p class="leading-7 [&:not(:first-child)]:mt-4 text-justify line-clamp-5">
+							<ScrollArea class="w-full rounded-md h-48 [&:not(:first-child)]:mt-4">
+								<p class="leading-7 text-justify pr-3">
 								{@html currentManga.desc}
-							</p>
+								</p>
+							</ScrollArea>
 							<div class="space-y-4">
 								{#if currentManga.authors.length}
 									<div class="space-y-2">
