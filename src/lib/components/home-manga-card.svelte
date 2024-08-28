@@ -59,7 +59,8 @@
 	};
 </script>
 
-<div class="group" transition:slide={{ axis: 'y' }}>
+{#if newChapters?.chapters}
+	<div class="group" transition:slide={{ axis: 'y' }}>
 	<Card.Root class="group-hover:scale-105 transition-all duration-300 {mainBorder}">
 		<Card.Content class="py-3 px-2.5">
 			<div class="grid grid-cols-3 gap-x-2">
@@ -137,3 +138,4 @@
 		</Card.Footer>
 	</Card.Root>
 </div>
+{/if}

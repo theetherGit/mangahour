@@ -8,6 +8,8 @@
 	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
 	import { onMount } from 'svelte';
+	import { toast } from "svelte-sonner";
+	import { differenceInDays } from 'date-fns';
 
 	export let data: LayoutServerData;
 
@@ -15,6 +17,13 @@
 	let lastReadChapterWorker: Worker;
 
 	onMount(async () => {
+		if (differenceInDays(new Date(), new Date(1724828633067)) < 1.5) {
+			toast.success('Final Update on app crash', {
+				description: 'We were testing a new way to avoid crawlers and bots which added lots of requests on our server.',
+				duration: 10000,
+			})
+		}
+
 		const LastReadChapterDBWorker = (await import('$lib/workers/lastReadMangaChapter?worker'))
 			.default;
 		const FavMangaDBWorker = (await import('$lib/workers/favouriteManga?worker')).default;

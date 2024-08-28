@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { partytownSnippet } from '@builder.io/partytown/integration';
 	import { BackToTop, Footer, MangaSearch } from '$lib/components';
+	import { Toaster } from "$lib/components/ui/sonner";
 	import { Navbar } from '$lib/components';
 	import { page } from '$app/stores';
 	import SvelteSeo from 'svelte-seo';
@@ -124,6 +125,7 @@
 />
 
 <div class="min-h-screen bg-background">
+	<Toaster richColors position="bottom-center" closeButton theme="dark"/>
 	<Navbar />
 	<div class="pt-20 md:pt-24 m-auto px-2 md:px-12 lg:px-14">
 		{#if $showSearchPanel}
