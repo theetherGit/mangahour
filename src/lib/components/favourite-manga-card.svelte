@@ -22,25 +22,25 @@
 	});
 
 	onMount(async () => {
-		const lastFavCheckTimeStamp = localStorage.getItem('last_fav_check_timestamp')
-		if (lastFavCheckTimeStamp === null || (parseInt(lastFavCheckTimeStamp as string) + 180000) < Date.now()) {
-			const favouriteUpdateCheckerWorker = (await import('$lib/workers/favoriteUpdateChecker?worker'))
-				.default;
-
-			favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
-			favouriteUpdateChecker.postMessage({});
-			favouriteUpdateChecker.onmessage = (e: any) => {
-				const { type, payload } = e.data;
-				switch (type) {
-					case 'status':
-						isFavouriteMangaUpdateCheckInProgress.set(payload);
-						break;
-					case 'last_fav_check_timestamp':
-						localStorage.setItem('last_fav_check_timestamp', Date.now().toString())
-						break;
-				}
-			};
-		}
+		// const lastFavCheckTimeStamp = localStorage.getItem('last_fav_check_timestamp')
+		// if (lastFavCheckTimeStamp === null || (parseInt(lastFavCheckTimeStamp as string) + 180000) < Date.now()) {
+		// 	const favouriteUpdateCheckerWorker = (await import('$lib/workers/favoriteUpdateChecker?worker'))
+		// 		.default;
+		//
+		// 	favouriteUpdateChecker = new favouriteUpdateCheckerWorker();
+		// 	favouriteUpdateChecker.postMessage({});
+		// 	favouriteUpdateChecker.onmessage = (e: any) => {
+		// 		const { type, payload } = e.data;
+		// 		switch (type) {
+		// 			case 'status':
+		// 				isFavouriteMangaUpdateCheckInProgress.set(payload);
+		// 				break;
+		// 			case 'last_fav_check_timestamp':
+		// 				localStorage.setItem('last_fav_check_timestamp', Date.now().toString())
+		// 				break;
+		// 		}
+		// 	};
+		// }
 
 		favouriteMangaSearchDB = await create({
 			schema: {
@@ -79,7 +79,7 @@
 	};
 
 	async function removeFavorite(id: string) {
-		await db.favouriteManga.delete(id);
+		// await db.favouriteManga.delete(id);
 	}
 
 </script>

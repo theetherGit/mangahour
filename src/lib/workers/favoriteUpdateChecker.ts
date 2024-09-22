@@ -1,6 +1,4 @@
 import { db } from '$lib/db';
-import { isFavouriteMangaUpdateCheckInProgress } from '$lib/utils';
-import { get } from 'svelte/store';
 
 const fetchUpdate = async (manga: any, currentIndex: number) => {
 	const response = await fetch(`/api/manga?id=${manga.id}&slug=${manga.slug}`);

@@ -126,15 +126,15 @@
 
 <div class="min-h-screen bg-background">
 	<Toaster richColors position="bottom-center" closeButton theme="dark"/>
-	<Navbar />
-	<div class="pt-20 md:pt-24 m-auto px-2 md:px-12 lg:px-14">
-		{#if $showSearchPanel}
-			<div class="mb-2" transition:slide>
-				<MangaSearch />
-			</div>
-		{/if}
+<!--	<Navbar />-->
+<!--	<div class="pt-20 md:pt-24 m-auto px-2 md:px-12 lg:px-14">-->
+<!--		{#if $showSearchPanel}-->
+<!--			<div class="mb-2" transition:slide>-->
+<!--				<MangaSearch />-->
+<!--			</div>-->
+<!--		{/if}-->
 		<slot />
-	</div>
-	<Footer />
-	<BackToTop />
+<!--	</div>-->
+<!--	<Footer />-->
+<!--	<BackToTop />-->
 </div>
